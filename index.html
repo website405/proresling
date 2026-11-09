@@ -179,7 +179,7 @@ return `<section class="band b-sur"><button class="back" onclick="go('${t.id}')"
 <div class="tabs"><button class="tb a" onclick="tab(1)">توضیحات تکمیلی</button><button class="tb" onclick="tab(2)">نظرات</button></div>
 <div class="pn glass" id="p1"><p>${t.x}</p><table class="sp"><tr><td>مدل</td><td>${m[0]}</td></tr><tr><td>نوع</td><td>${t.n}</td></tr><tr><td>بازه قیمت</td><td>${m[1]}</td></tr><tr><td>زمان تحویل</td><td>${t.t}</td></tr><tr><td>استاندارد</td><td>کلاس‌شده طبق IACS و قوانین IMO</td></tr></table></div>
 <div class="pn glass" id="p2" style="display:none"><div id="rl"></div><h4 style="margin-top:18px">نظر خودت را بنویس</h4><label>نام</label><input id="rn" placeholder="نام شما"><label>امتیاز</label><select id="rs"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select><label>نظر</label><textarea id="rt" rows="3"></textarea><button class="btn" onclick="addRev('${k}')">ثبت نظر</button></div>
-<p class="note">قیمت سبد بر پایه میانگین بازه است و نهایی نیست.</p></section>`}
+</section>`}
 let tm,qn=1;
 function render(){const id=location.hash.slice(1),[a,b]=id.split('-'),t=T.find(x=>x.id==a);qn=1;
 if(id=='checkout'){clearInterval(tm);$('#app').innerHTML=checkout();scrollTo(0,0);return}
@@ -188,7 +188,7 @@ scrollTo(0,0);clearInterval(tm);if(!t)slider();else if(b!==undefined&&t.m[b])dra
 function q(d){qn=Math.max(1,Math.min(99,qn+d));$('#qv').textContent=fa(qn)}
 function tab(n){[1,2].forEach(i=>{$('#p'+i).style.display=i==n?'':'none'});document.querySelectorAll('.tb').forEach((b,i)=>b.classList.toggle('a',i==n-1))}
 function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
-function drawRev(k){const own=ld('rv-'+k,[]);$('#rl').innerHTML=[...own,...REV].map(r=>`<div class="rv"><b>${esc(r[0])}</b><span class="st">${stars(r[1])}</span><p>${esc(r[2])}</p></div>`).join('')+'<p class="note" style="margin-top:8px">دو نظر آخر نمونه‌ی نمایشی هستند.</p>'}
+function drawRev(k){const own=ld('rv-'+k,[]);$('#rl').innerHTML=[...own,...REV].map(r=>`<div class="rv"><b>${esc(r[0])}</b><span class="st">${stars(r[1])}</span><p>${esc(r[2])}</p></div>`).join('')}
 function addRev(k){const n=$('#rn').value.trim()||'کاربر مهمان',tx=$('#rt').value.trim();if(!tx)return toast('متن نظر را بنویس');const a=ld('rv-'+k,[]);a.unshift([n,+$('#rs').value,tx]);sv('rv-'+k,a);$('#rt').value='';drawRev(k);toast('نظرت ثبت شد ✓')}
 /* سبد خرید */
 let cart=ld('cart',[]);
@@ -214,7 +214,7 @@ function checkout(){return `<section class="band b-sur"><button class="back" onc
 <label>توضیحات (اختیاری)</label><textarea id="ckt" rows="2"></textarea>
 <p id="ker" class="note" style="margin:0 0 10px;color:#c0392b"></p><button class="btn" style="width:100%" onclick="placeOrder()">ثبت سفارش</button></div>
 <div class="pn glass"><h4>خلاصه سفارش</h4><div id="sm">${sumHtml()}</div></div></div>
-<p class="note">این نسخه نمایشی است: سفارش فقط در همین مرورگر ثبت می‌شود و پرداختی انجام نمی‌شود.</p></section>`}
+</section>`}
 function placeOrder(){const v=i=>$('#'+i).value.trim(),er=m=>$('#ker').textContent=m;
 if(!cart.length)return er('سبد خرید خالی است.');
 if(!v('ckn'))return er('نام را وارد کن.');
@@ -224,7 +224,7 @@ if(!v('ckc')||v('cka').length<6)return er('کشور، شهر و آدرس را ک
 let tot=0;const items=cart.map(c=>{const i=item(c.k);tot+=i.m[2]*c.q;return[i.m[0],c.q]});
 const o={id:'OC-'+String(Date.now()).slice(-6),date:new Date().toLocaleDateString('fa-IR'),name:v('ckn'),pay:v('ckm'),items,tot};
 const a=ld('orders',[]);a.unshift(o);sv('orders',a);cart=[];saveC();
-$('#app').innerHTML=`<section class="band b-sur" style="text-align:center"><div class="pn glass" style="max-width:520px;margin:auto;padding:34px 22px"><div style="font-size:3rem">✅</div><h2>سفارش <span>ثبت شد</span></h2><p class="sub" style="margin-top:8px">${esc(o.name)} عزیز، سفارشت با کد <b dir="ltr">${o.id}</b> در تاریخ ${o.date} ثبت شد.</p><p>جمع تقریبی: <b>${fm(o.tot)}</b><br>روش پرداخت: ${esc(o.pay)}</p><p class="note">این یک نسخه نمایشی است و هنوز پرداخت یا پیگیری واقعی ندارد.</p><button class="btn" style="margin-top:16px" onclick="go('')">بازگشت به صفحه اصلی</button></div></section>`;scrollTo(0,0);toast('سفارش ثبت شد ✓')}
+$('#app').innerHTML=`<section class="band b-sur" style="text-align:center"><div class="pn glass" style="max-width:520px;margin:auto;padding:34px 22px"><div style="font-size:3rem">✅</div><h2>سفارش <span>ثبت شد</span></h2><p class="sub" style="margin-top:8px">${esc(o.name)} عزیز، سفارشت با کد <b dir="ltr">${o.id}</b> در تاریخ ${o.date} ثبت شد.</p><p>جمع تقریبی: <b>${fm(o.tot)}</b><br>روش پرداخت: ${esc(o.pay)}</p><button class="btn" style="margin-top:16px" onclick="go('')">بازگشت به صفحه اصلی</button></div></section>`;scrollTo(0,0);toast('سفارش ثبت شد ✓')}
 /* ورود / ثبت‌نام */
 let mode='in';const user=()=>ld('u',null);
 function mh(){const u=user();if(u)return `<h3 style="color:var(--acc)">خوش آمدی 👋</h3><p dir="ltr" style="text-align:right;margin:6px 0 18px">${esc(u)}</p><button class="btn" onclick="out()">خروج از حساب</button>`;
