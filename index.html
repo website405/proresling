@@ -109,3 +109,447 @@ $('#bg').onclick=()=>{dr.classList.add('o');sh.classList.add('o')};$('#x').oncli
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>sc(b.dataset.s));
 addEventListener('hashchange',render);render();
 </script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اقیانوس | دنیای کشتی‌ها</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050b17;--bg2:#0a1830;--tx:#e9eef8;--mut:#8fa3c4;--gold:#d8b45a;--line:rgba(216,180,90,.25);--card:rgba(255,255,255,.04);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#050b17}}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{background:radial-gradient(1200px 600px at 80% -10%,#12315f55,transparent),var(--bg);color:var(--tx);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9;overflow-x:hidden}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:12px 18px;padding-top:calc(12px + env(safe-area-inset-top,0px));background:rgba(5,11,23,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:1.25rem;color:var(--gold);letter-spacing:.5px;cursor:pointer}
+nav{display:flex;gap:4px;margin-inline-start:auto;overflow-x:auto}
+nav button,.burger{background:none;border:0;color:var(--tx);font:inherit;font-size:.9rem;padding:6px 12px;border-radius:20px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--card);color:var(--gold)}
+.burger{border:1px solid var(--line);font-size:1.2rem;padding:4px 12px;color:var(--gold)}
+#drawer{position:fixed;inset:0 0 0 auto;width:min(320px,86vw);background:#071126;border-inline-start:1px solid var(--line);z-index:30;transform:translateX(105%);transition:.45s cubic-bezier(.7,0,.2,1);padding:70px 22px 22px;box-shadow:-30px 0 60px #000a}
+#drawer.o{transform:none}
+#drawer h3{color:var(--gold);margin-bottom:10px}
+#drawer a{display:flex;gap:10px;align-items:center;padding:12px 14px;margin:6px 0;border:1px solid var(--line);border-radius:14px;color:var(--tx);text-decoration:none;transition:.25s}
+#drawer a:hover{background:var(--card);transform:translateX(-6px);border-color:var(--gold)}
+#x{position:absolute;top:16px;inset-inline-start:16px;background:none;border:0;color:var(--tx);font-size:1.6rem}
+section{padding:72px 20px;max-width:1100px;margin:auto}
+h2{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;margin-bottom:8px}
+h2 span{color:var(--gold)}.sub{color:var(--mut);margin-bottom:28px}
+.hero{min-height:78vh;display:flex;flex-direction:column;justify-content:center;text-align:center;position:relative}
+.hero h1{font-size:clamp(2.2rem,9vw,4.6rem);font-weight:800;line-height:1.3;background:linear-gradient(120deg,#fff,var(--gold),#fff);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200%;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:-200%}}
+.hero p{color:var(--mut);max-width:560px;margin:14px auto 26px}
+.btn{display:inline-block;background:linear-gradient(135deg,#f0d58a,#b8922f);color:#1a1405;border:0;font:inherit;font-weight:800;padding:12px 28px;border-radius:30px;cursor:pointer;box-shadow:0 10px 30px #d8b45a40;transition:.3s}
+.btn:hover{transform:translateY(-3px) scale(1.03)}
+.sea{position:absolute;inset:auto 0 0 0;height:90px;opacity:.5;pointer-events:none}
+.wave{animation:wv 9s linear infinite}@keyframes wv{to{transform:translateX(-50%)}}
+.slider{position:relative;border-radius:26px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(#0d2347,#050b17);perspective:1200px}
+.slide{display:none;padding:30px 20px 60px;text-align:center;animation:fi .8s}.slide.a{display:block}
+@keyframes fi{from{opacity:0;transform:scale(.96) translateY(10px)}}
+.slide svg{width:100%;max-width:520px;filter:drop-shadow(0 20px 20px #000a);animation:fl 5s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px) rotate(-.6deg)}}
+.slide h3{font-size:1.6rem;color:var(--gold)}.slide p{color:var(--mut);max-width:520px;margin:auto}
+.dots{position:absolute;bottom:18px;width:100%;display:flex;justify-content:center;gap:8px}
+.dots i{width:9px;height:9px;border-radius:9px;background:#fff3;cursor:pointer;transition:.3s}.dots i.a{width:28px;background:var(--gold)}
+.marq{overflow:hidden;border-block:1px solid var(--line);padding:18px 0;direction:ltr;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mt{display:flex;gap:46px;width:max-content;animation:mq 28s linear infinite}.marq:hover .mt{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mt b{font-size:1.5rem;letter-spacing:2px;color:#9fb3d6;font-weight:800;white-space:nowrap}.mt b:nth-child(3n){color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;transition:transform .15s ease-out,box-shadow .3s;transform-style:preserve-3d;will-change:transform;position:relative;overflow:hidden}
+.card:hover{box-shadow:0 30px 60px #000a,0 0 0 1px var(--gold)}
+.card>*{transform:translateZ(30px)}
+.card .n{font-size:2.2rem;font-weight:800;color:var(--gold);opacity:.8}
+.card h4{font-size:1.1rem;margin:4px 0}.card p{color:var(--mut);font-size:.92rem}
+.price{color:var(--gold);font-weight:800;font-size:1.15rem;margin:8px 0}
+.back{background:none;border:1px solid var(--line);color:var(--tx);padding:8px 18px;border-radius:20px;font:inherit;cursor:pointer;margin-bottom:20px}
+.note{color:var(--mut);font-size:.8rem;margin-top:26px;border-top:1px dashed var(--line);padding-top:12px}
+footer{text-align:center;color:var(--mut);padding:40px 20px;border-top:1px solid var(--line)}
+#shade{position:fixed;inset:0;background:#000a;z-index:25;opacity:0;pointer-events:none;transition:.3s}#shade.o{opacity:1;pointer-events:auto}
+.tag{display:inline-block;font-size:.75rem;border:1px solid var(--line);border-radius:12px;padding:0 10px;color:var(--mut);margin-top:6px}
+</style></head><body>
+<header><div class="logo" onclick="go('')">⚓ اقیانوس</div>
+<nav><button data-s="slider">تایتانیک</button><button data-s="brands">برندها</button><button data-s="tips">نکات ساخت</button><button data-s="types">انواع کشتی</button></nav>
+<button class="burger" id="bg" aria-label="منو">☰</button></header>
+<div id="shade"></div>
+<aside id="drawer"><button id="x">✕</button><h3>انواع کشتی</h3><div id="dl"></div></aside>
+<main id="app"></main>
+<footer>⚓ اقیانوس · ساخته‌شده با عشق به دریا</footer>
+<script>
+const $=s=>document.querySelector(s);
+function ship(k,c='#d8b45a'){const h=`<path d="M10 78 L290 78 L262 104 L38 104Z" fill="#14233f" stroke="${c}" stroke-width="2"/><rect x="10" y="74" width="280" height="5" fill="${c}"/>`;
+const w=`<path d="M0 108 q15 -9 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0" fill="none" stroke="#4d7bd6" stroke-width="3" opacity=".7"/>`;
+let s='';
+if(k=='cruise')s=`<rect x="40" y="52" width="220" height="24" rx="4" fill="#eaf0fa"/><rect x="70" y="32" width="150" height="22" rx="4" fill="#d5deef"/><rect x="100" y="16" width="80" height="18" rx="4" fill="#eaf0fa"/><rect x="215" y="18" width="14" height="22" fill="${c}"/>`+[...Array(12)].map((_,i)=>`<rect x="${50+i*17}" y="58" width="8" height="6" fill="#2b4a82"/>`).join('');
+else if(k=='cargo')s=[...Array(5)].map((_,i)=>[...Array(3)].map((_,j)=>`<rect x="${30+i*36}" y="${58-j*14}" width="33" height="13" fill="${['#c0392b','#2c7be5','#e8a33d','#2fa36b'][(i+j*2)%4]}"/>`).join('')).join('')+`<rect x="225" y="26" width="40" height="50" fill="#eaf0fa"/><rect x="232" y="32" width="26" height="8" fill="#2b4a82"/>`;
+else if(k=='tanker')s=`<rect x="25" y="64" width="190" height="14" fill="#b83a3a"/><path d="M50 64v-8M100 64v-8M150 64v-8M200 64v-8" stroke="#aaa" stroke-width="3"/><rect x="228" y="30" width="34" height="46" fill="#eaf0fa"/><rect x="236" y="36" width="18" height="7" fill="#2b4a82"/>`;
+else if(k=='yacht')s=`<path d="M40 78 L70 56 L230 56 L262 78Z" fill="#fff"/><rect x="95" y="38" width="100" height="19" rx="5" fill="#dfe8f6"/><rect x="120" y="22" width="48" height="17" rx="4" fill="#fff"/><path d="M144 22V6" stroke="${c}" stroke-width="3"/>`;
+else if(k=='fish')s=`<rect x="170" y="40" width="50" height="38" fill="#eaf0fa"/><rect x="178" y="46" width="34" height="9" fill="#2b4a82"/><path d="M60 78V30L140 60" stroke="#ccc" stroke-width="3" fill="none"/><path d="M60 30L30 70" stroke="#ccc" stroke-width="2"/>`;
+else s=`<path d="M60 78 L90 62 L200 62 L240 78Z" fill="#fff"/><path d="M110 62 L130 44 L170 44 L180 62Z" fill="#9fc4f5"/>`;
+return `<svg viewBox="0 0 300 120">${w}${s}${h}</svg>`}
+const T=[
+{id:'cruise',e:'🛳️',n:'کشتی کروز',d:'شهرهای شناور برای هزاران مسافر.',m:[['کلاس آیکون (۵۶۰۰ مسافر)','حدود ۲ میلیارد دلار'],['کلاس ویندجمر/متوسط','حدود ۸۰۰ تا ۱٬۲۰۰ میلیون دلار'],['کشتی اکتشافی کوچک','حدود ۱۵۰ تا ۳۰۰ میلیون دلار']]},
+{id:'cargo',e:'📦',n:'کانتینربر',d:'ستون فقرات تجارت جهانی.',m:[['۲۴٬۰۰۰ TEU','حدود ۲۲۰ تا ۲۶۰ میلیون دلار'],['۱۵٬۰۰۰ TEU','حدود ۱۴۰ تا ۱۷۰ میلیون دلار'],['فیدر ۲٬۵۰۰ TEU','حدود ۳۵ تا ۵۰ میلیون دلار']]},
+{id:'tanker',e:'🛢️',n:'نفتکش',d:'غول‌های حمل نفت خام و فرآورده.',m:[['VLCC (۳۰۰٬۰۰۰ تن)','حدود ۱۲۰ تا ۱۳۵ میلیون دلار'],['سوئزمکس','حدود ۸۰ تا ۹۰ میلیون دلار'],['آفرامکس','حدود ۶۵ تا ۷۵ میلیون دلار']]},
+{id:'yacht',e:'⛵',n:'یات لوکس',d:'اوج تجمل روی آب.',m:[['سوپر‌یات ۱۰۰ متری','حدود ۲۰۰ تا ۳۰۰ میلیون دلار'],['یات ۵۰ متری','حدود ۳۰ تا ۴۵ میلیون دلار'],['یات ۲۵ متری','حدود ۵ تا ۱۰ میلیون دلار']]},
+{id:'fish',e:'🎣',n:'کشتی ماهیگیری',d:'کار سخت دریا، با بدنه‌ای مقاوم.',m:[['ترالر ۳۰ متری','حدود ۳ تا ۶ میلیون دلار'],['لنج ۱۸ متری','حدود ۸۰۰ هزار تا ۱.۵ میلیون دلار'],['قایق ۱۲ متری','حدود ۲۵۰ تا ۵۰۰ هزار دلار']]},
+{id:'boat',e:'🚤',n:'قایق تفریحی',d:'برای آخر هفته‌های بی‌نظیر.',m:[['کروزر ۱۲ متری','حدود ۴۰۰ تا ۹۰۰ هزار دلار'],['اسپید‌بوت ۹ متری','حدود ۱۰۰ تا ۲۵۰ هزار دلار'],['قایق ۶ متری','حدود ۲۰ تا ۶۰ هزار دلار']]}];
+const S=[['تایتانیک','۱۹۱۲ · ۲۶۹ متر · هارلند و ولف','نماد غم‌انگیزترین سفر تاریخ؛ در نخستین سفرش پس از برخورد با کوه یخ غرق شد.'],
+['المپیک','۱۹۱۱ · خواهر ارشد تایتانیک','تقریباً هم‌شکل تایتانیک و با عمری موفق، بیش از ۲۴ سال خدمت کرد.'],
+['بریتانیک','۱۹۱۴ · کشتی بیمارستانی','سومین خواهر؛ با طراحی ایمن‌تر ساخته شد ولی در جنگ جهانی اول بر اثر مین غرق شد.'],
+['لوسیتانیا','۱۹۰۷ · کانارد','ملکه سرعت اقیانوس اطلس، تا اینکه در ۱۹۱۵ با اژدر غرق شد.'],
+['موریتانیا','۱۹۰۷ · کانارد','بیش از ۲۰ سال نوار آبی اطلس را نگه داشت؛ رقیب اصلی تایتانیک.']];
+const B=['HARLAND & WOLFF','FINCANTIERI','MEYER WERFT','HYUNDAI HEAVY','CHANTIERS DE L’ATLANTIQUE','DAMEN','BENETTI','LÜRSSEN','SAMSUNG HEAVY','DSME'];
+const TIPS=[['طراحی بدنه','نسبت طول به عرض و شکل دماغه، مصرف سوخت و پایداری را تعیین می‌کند.'],['شناوری و پایداری','مرکز ثقل باید همیشه پایین‌تر از مرکز شناوری موثر بماند تا کشتی واژگون نشود.'],['فولاد و جوشکاری','فولاد دریایی ضدخستگی و جوش بی‌نقص، عمر ۳۰ ساله کشتی را رقم می‌زند.'],['حفاظت از زنگ‌زدگی','رنگ‌های ضدخوردگی و آند‌های قربانی از بدنه در برابر آب شور محافظت می‌کنند.'],['ماشین‌آلات و سوخت','انتخاب موتور و پروانه، قلب بهره‌وری و رعایت قوانین آلایندگی است.'],['ایمنی و استانداردها','رعایت قوانین IMO، آب‌بندی و قایق نجات برای هر کشتی الزامی است.']];
+function home(){return `<section class="hero"><h1>دریا را<br>باشکوه ببین</h1><p>داستان غول‌های اقیانوس، از تایتانیک تا مدرن‌ترین ناوگان جهان؛ و اینکه چطور یکی را مال خودت کنی.</p><div><button class="btn" onclick="sc('types')">انواع کشتی‌ها</button></div>
+<svg class="sea" viewBox="0 0 1200 90" preserveAspectRatio="none"><g class="wave"><path d="M0 40 q50 -30 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 V90H0Z" fill="#1d4f9c"/></g></svg></section>
+<section id="slider"><h2>تایتانیک و <span>رقبایش</span></h2><p class="sub">پنج کشتی که عصر طلایی اقیانوس‌پیماها را ساختند.</p>
+<div class="slider">${S.map((s,i)=>`<div class="slide${i?'':' a'}">${ship('cruise',['#d8b45a','#9db4d9','#c0392b','#2fa36b','#b07ad8'][i])}<h3>${s[0]}</h3><span class="tag">${s[1]}</span><p>${s[2]}</p></div>`).join('')}<div class="dots">${S.map((_,i)=>`<i class="${i?'':'a'}" data-i="${i}"></i>`).join('')}</div></div></section>
+<section id="brands"><h2>بزرگ‌ترین <span>کشتی‌سازان</span> جهان</h2><p class="sub">نام‌هایی که دریا را ساخته‌اند.</p><div class="marq"><div class="mt">${[...B,...B].map(b=>`<b>${b}</b>`).join('')}</div></div></section>
+<section id="tips"><h2>نکات <span>کشتی‌سازی</span></h2><p class="sub">شش اصلی که هر کشتی خوب روی آن بنا می‌شود.</p><div class="grid">${TIPS.map((t,i)=>`<div class="card"><div class="n">0${i+1}</div><h4>${t[0]}</h4><p>${t[1]}</p></div>`).join('')}</div></section>
+<section id="types"><h2>انواع <span>کشتی‌ها</span></h2><p class="sub">یکی را انتخاب کن تا مدل‌های قابل خرید را ببینی.</p><div class="grid">${T.map(t=>`<div class="card" onclick="go('${t.id}')" style="cursor:pointer">${ship(t.id)}<h4>${t.e} ${t.n}</h4><p>${t.d}</p></div>`).join('')}</div></section>`}
+function page(t){return `<section><button class="back" onclick="go('')">→ بازگشت</button><h2>${t.e} <span>${t.n}</span></h2><p class="sub">${t.d}</p><div class="grid">${t.m.map(m=>`<div class="card">${ship(t.id)}<h4>${m[0]}</h4><div class="price">${m[1]}</div><button class="btn" style="padding:8px 20px;font-size:.85rem">استعلام خرید</button></div>`).join('')}</div><p class="note">قیمت‌ها تقریبی و بر پایه بازار ساخت جدید است و بسته به سازنده، مشخصات و زمان تحویل تغییر می‌کند. پیش از هر خرید، با کارگزار رسمی تأیید شود.</p></section>`}
+let tm;
+function render(){const id=location.hash.slice(1),t=T.find(x=>x.id==id);$('#app').innerHTML=t?page(t):home();scrollTo(0,0);bind();clearInterval(tm);if(!t)slider()}
+function go(h){if(location.hash.slice(1)==h){render()}else location.hash=h}
+function sc(id){const e=document.getElementById(id);e?e.scrollIntoView({behavior:'smooth'}):(location.hash='',setTimeout(()=>sc(id),60));closeD()}
+function slider(){let i=0;const sl=[...document.querySelectorAll('.slide')],d=[...document.querySelectorAll('.dots i')];const show=n=>{i=n;sl.forEach((s,k)=>s.classList.toggle('a',k==n));d.forEach((s,k)=>s.classList.toggle('a',k==n))};d.forEach(x=>x.onclick=()=>show(+x.dataset.i));tm=setInterval(()=>show((i+1)%sl.length),4500)}
+function bind(){document.querySelectorAll('.card').forEach(c=>{c.onmousemove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.03)`};c.onmouseleave=()=>c.style.transform=''})}
+const dr=$('#drawer'),sh=$('#shade');function closeD(){dr.classList.remove('o');sh.classList.remove('o')}
+$('#dl').innerHTML=T.map(t=>`<a href="#${t.id}" onclick="closeD()">${t.e} ${t.n}</a>`).join('');
+$('#bg').onclick=()=>{dr.classList.add('o');sh.classList.add('o')};$('#x').onclick=sh.onclick=closeD;
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>sc(b.dataset.s));
+addEventListener('hashchange',render);render();
+</script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اقیانوس | دنیای کشتی‌ها</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050b17;--bg2:#0a1830;--tx:#e9eef8;--mut:#8fa3c4;--gold:#d8b45a;--line:rgba(216,180,90,.25);--card:rgba(255,255,255,.04);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#050b17}}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{background:radial-gradient(1200px 600px at 80% -10%,#12315f55,transparent),var(--bg);color:var(--tx);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9;overflow-x:hidden}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:12px 18px;padding-top:calc(12px + env(safe-area-inset-top,0px));background:rgba(5,11,23,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:1.25rem;color:var(--gold);letter-spacing:.5px;cursor:pointer}
+nav{display:flex;gap:4px;margin-inline-start:auto;overflow-x:auto}
+nav button,.burger{background:none;border:0;color:var(--tx);font:inherit;font-size:.9rem;padding:6px 12px;border-radius:20px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--card);color:var(--gold)}
+.burger{border:1px solid var(--line);font-size:1.2rem;padding:4px 12px;color:var(--gold)}
+#drawer{position:fixed;inset:0 0 0 auto;width:min(320px,86vw);background:#071126;border-inline-start:1px solid var(--line);z-index:30;transform:translateX(105%);transition:.45s cubic-bezier(.7,0,.2,1);padding:70px 22px 22px;box-shadow:-30px 0 60px #000a}
+#drawer.o{transform:none}
+#drawer h3{color:var(--gold);margin-bottom:10px}
+#drawer a{display:flex;gap:10px;align-items:center;padding:12px 14px;margin:6px 0;border:1px solid var(--line);border-radius:14px;color:var(--tx);text-decoration:none;transition:.25s}
+#drawer a:hover{background:var(--card);transform:translateX(-6px);border-color:var(--gold)}
+#x{position:absolute;top:16px;inset-inline-start:16px;background:none;border:0;color:var(--tx);font-size:1.6rem}
+section{padding:72px 20px;max-width:1100px;margin:auto}
+h2{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;margin-bottom:8px}
+h2 span{color:var(--gold)}.sub{color:var(--mut);margin-bottom:28px}
+.hero{min-height:78vh;display:flex;flex-direction:column;justify-content:center;text-align:center;position:relative}
+.hero h1{font-size:clamp(2.2rem,9vw,4.6rem);font-weight:800;line-height:1.3;background:linear-gradient(120deg,#fff,var(--gold),#fff);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200%;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:-200%}}
+.hero p{color:var(--mut);max-width:560px;margin:14px auto 26px}
+.btn{display:inline-block;background:linear-gradient(135deg,#f0d58a,#b8922f);color:#1a1405;border:0;font:inherit;font-weight:800;padding:12px 28px;border-radius:30px;cursor:pointer;box-shadow:0 10px 30px #d8b45a40;transition:.3s}
+.btn:hover{transform:translateY(-3px) scale(1.03)}
+.sea{position:absolute;inset:auto 0 0 0;height:90px;opacity:.5;pointer-events:none}
+.wave{animation:wv 9s linear infinite}@keyframes wv{to{transform:translateX(-50%)}}
+.slider{position:relative;border-radius:26px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(#0d2347,#050b17);perspective:1200px}
+.slide{display:none;padding:30px 20px 60px;text-align:center;animation:fi .8s}.slide.a{display:block}
+@keyframes fi{from{opacity:0;transform:scale(.96) translateY(10px)}}
+.slide svg{width:100%;max-width:520px;filter:drop-shadow(0 20px 20px #000a);animation:fl 5s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px) rotate(-.6deg)}}
+.slide h3{font-size:1.6rem;color:var(--gold)}.slide p{color:var(--mut);max-width:520px;margin:auto}
+.dots{position:absolute;bottom:18px;width:100%;display:flex;justify-content:center;gap:8px}
+.dots i{width:9px;height:9px;border-radius:9px;background:#fff3;cursor:pointer;transition:.3s}.dots i.a{width:28px;background:var(--gold)}
+.marq{overflow:hidden;border-block:1px solid var(--line);padding:18px 0;direction:ltr;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mt{display:flex;gap:46px;width:max-content;animation:mq 28s linear infinite}.marq:hover .mt{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mt b{font-size:1.5rem;letter-spacing:2px;color:#9fb3d6;font-weight:800;white-space:nowrap}.mt b:nth-child(3n){color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;transition:transform .15s ease-out,box-shadow .3s;transform-style:preserve-3d;will-change:transform;position:relative;overflow:hidden}
+.card:hover{box-shadow:0 30px 60px #000a,0 0 0 1px var(--gold)}
+.card>*{transform:translateZ(30px)}
+.card .n{font-size:2.2rem;font-weight:800;color:var(--gold);opacity:.8}
+.card h4{font-size:1.1rem;margin:4px 0}.card p{color:var(--mut);font-size:.92rem}
+.price{color:var(--gold);font-weight:800;font-size:1.15rem;margin:8px 0}
+.back{background:none;border:1px solid var(--line);color:var(--tx);padding:8px 18px;border-radius:20px;font:inherit;cursor:pointer;margin-bottom:20px}
+.note{color:var(--mut);font-size:.8rem;margin-top:26px;border-top:1px dashed var(--line);padding-top:12px}
+footer{text-align:center;color:var(--mut);padding:40px 20px;border-top:1px solid var(--line)}
+#shade{position:fixed;inset:0;background:#000a;z-index:25;opacity:0;pointer-events:none;transition:.3s}#shade.o{opacity:1;pointer-events:auto}
+.tag{display:inline-block;font-size:.75rem;border:1px solid var(--line);border-radius:12px;padding:0 10px;color:var(--mut);margin-top:6px}
+</style></head><body>
+<header><div class="logo" onclick="go('')">⚓ اقیانوس</div>
+<nav><button data-s="slider">تایتانیک</button><button data-s="brands">برندها</button><button data-s="tips">نکات ساخت</button><button data-s="types">انواع کشتی</button></nav>
+<button class="burger" id="bg" aria-label="منو">☰</button></header>
+<div id="shade"></div>
+<aside id="drawer"><button id="x">✕</button><h3>انواع کشتی</h3><div id="dl"></div></aside>
+<main id="app"></main>
+<footer>⚓ اقیانوس · ساخته‌شده با عشق به دریا</footer>
+<script>
+const $=s=>document.querySelector(s);
+function ship(k,c='#d8b45a'){const h=`<path d="M10 78 L290 78 L262 104 L38 104Z" fill="#14233f" stroke="${c}" stroke-width="2"/><rect x="10" y="74" width="280" height="5" fill="${c}"/>`;
+const w=`<path d="M0 108 q15 -9 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0" fill="none" stroke="#4d7bd6" stroke-width="3" opacity=".7"/>`;
+let s='';
+if(k=='cruise')s=`<rect x="40" y="52" width="220" height="24" rx="4" fill="#eaf0fa"/><rect x="70" y="32" width="150" height="22" rx="4" fill="#d5deef"/><rect x="100" y="16" width="80" height="18" rx="4" fill="#eaf0fa"/><rect x="215" y="18" width="14" height="22" fill="${c}"/>`+[...Array(12)].map((_,i)=>`<rect x="${50+i*17}" y="58" width="8" height="6" fill="#2b4a82"/>`).join('');
+else if(k=='cargo')s=[...Array(5)].map((_,i)=>[...Array(3)].map((_,j)=>`<rect x="${30+i*36}" y="${58-j*14}" width="33" height="13" fill="${['#c0392b','#2c7be5','#e8a33d','#2fa36b'][(i+j*2)%4]}"/>`).join('')).join('')+`<rect x="225" y="26" width="40" height="50" fill="#eaf0fa"/><rect x="232" y="32" width="26" height="8" fill="#2b4a82"/>`;
+else if(k=='tanker')s=`<rect x="25" y="64" width="190" height="14" fill="#b83a3a"/><path d="M50 64v-8M100 64v-8M150 64v-8M200 64v-8" stroke="#aaa" stroke-width="3"/><rect x="228" y="30" width="34" height="46" fill="#eaf0fa"/><rect x="236" y="36" width="18" height="7" fill="#2b4a82"/>`;
+else if(k=='yacht')s=`<path d="M40 78 L70 56 L230 56 L262 78Z" fill="#fff"/><rect x="95" y="38" width="100" height="19" rx="5" fill="#dfe8f6"/><rect x="120" y="22" width="48" height="17" rx="4" fill="#fff"/><path d="M144 22V6" stroke="${c}" stroke-width="3"/>`;
+else if(k=='fish')s=`<rect x="170" y="40" width="50" height="38" fill="#eaf0fa"/><rect x="178" y="46" width="34" height="9" fill="#2b4a82"/><path d="M60 78V30L140 60" stroke="#ccc" stroke-width="3" fill="none"/><path d="M60 30L30 70" stroke="#ccc" stroke-width="2"/>`;
+else s=`<path d="M60 78 L90 62 L200 62 L240 78Z" fill="#fff"/><path d="M110 62 L130 44 L170 44 L180 62Z" fill="#9fc4f5"/>`;
+return `<svg viewBox="0 0 300 120">${w}${s}${h}</svg>`}
+const T=[
+{id:'cruise',e:'🛳️',n:'کشتی کروز',d:'شهرهای شناور برای هزاران مسافر.',m:[['کلاس آیکون (۵۶۰۰ مسافر)','حدود ۲ میلیارد دلار'],['کلاس ویندجمر/متوسط','حدود ۸۰۰ تا ۱٬۲۰۰ میلیون دلار'],['کشتی اکتشافی کوچک','حدود ۱۵۰ تا ۳۰۰ میلیون دلار']]},
+{id:'cargo',e:'📦',n:'کانتینربر',d:'ستون فقرات تجارت جهانی.',m:[['۲۴٬۰۰۰ TEU','حدود ۲۲۰ تا ۲۶۰ میلیون دلار'],['۱۵٬۰۰۰ TEU','حدود ۱۴۰ تا ۱۷۰ میلیون دلار'],['فیدر ۲٬۵۰۰ TEU','حدود ۳۵ تا ۵۰ میلیون دلار']]},
+{id:'tanker',e:'🛢️',n:'نفتکش',d:'غول‌های حمل نفت خام و فرآورده.',m:[['VLCC (۳۰۰٬۰۰۰ تن)','حدود ۱۲۰ تا ۱۳۵ میلیون دلار'],['سوئزمکس','حدود ۸۰ تا ۹۰ میلیون دلار'],['آفرامکس','حدود ۶۵ تا ۷۵ میلیون دلار']]},
+{id:'yacht',e:'⛵',n:'یات لوکس',d:'اوج تجمل روی آب.',m:[['سوپر‌یات ۱۰۰ متری','حدود ۲۰۰ تا ۳۰۰ میلیون دلار'],['یات ۵۰ متری','حدود ۳۰ تا ۴۵ میلیون دلار'],['یات ۲۵ متری','حدود ۵ تا ۱۰ میلیون دلار']]},
+{id:'fish',e:'🎣',n:'کشتی ماهیگیری',d:'کار سخت دریا، با بدنه‌ای مقاوم.',m:[['ترالر ۳۰ متری','حدود ۳ تا ۶ میلیون دلار'],['لنج ۱۸ متری','حدود ۸۰۰ هزار تا ۱.۵ میلیون دلار'],['قایق ۱۲ متری','حدود ۲۵۰ تا ۵۰۰ هزار دلار']]},
+{id:'boat',e:'🚤',n:'قایق تفریحی',d:'برای آخر هفته‌های بی‌نظیر.',m:[['کروزر ۱۲ متری','حدود ۴۰۰ تا ۹۰۰ هزار دلار'],['اسپید‌بوت ۹ متری','حدود ۱۰۰ تا ۲۵۰ هزار دلار'],['قایق ۶ متری','حدود ۲۰ تا ۶۰ هزار دلار']]}];
+const S=[['تایتانیک','۱۹۱۲ · ۲۶۹ متر · هارلند و ولف','نماد غم‌انگیزترین سفر تاریخ؛ در نخستین سفرش پس از برخورد با کوه یخ غرق شد.'],
+['المپیک','۱۹۱۱ · خواهر ارشد تایتانیک','تقریباً هم‌شکل تایتانیک و با عمری موفق، بیش از ۲۴ سال خدمت کرد.'],
+['بریتانیک','۱۹۱۴ · کشتی بیمارستانی','سومین خواهر؛ با طراحی ایمن‌تر ساخته شد ولی در جنگ جهانی اول بر اثر مین غرق شد.'],
+['لوسیتانیا','۱۹۰۷ · کانارد','ملکه سرعت اقیانوس اطلس، تا اینکه در ۱۹۱۵ با اژدر غرق شد.'],
+['موریتانیا','۱۹۰۷ · کانارد','بیش از ۲۰ سال نوار آبی اطلس را نگه داشت؛ رقیب اصلی تایتانیک.']];
+const B=['HARLAND & WOLFF','FINCANTIERI','MEYER WERFT','HYUNDAI HEAVY','CHANTIERS DE L’ATLANTIQUE','DAMEN','BENETTI','LÜRSSEN','SAMSUNG HEAVY','DSME'];
+const TIPS=[['طراحی بدنه','نسبت طول به عرض و شکل دماغه، مصرف سوخت و پایداری را تعیین می‌کند.'],['شناوری و پایداری','مرکز ثقل باید همیشه پایین‌تر از مرکز شناوری موثر بماند تا کشتی واژگون نشود.'],['فولاد و جوشکاری','فولاد دریایی ضدخستگی و جوش بی‌نقص، عمر ۳۰ ساله کشتی را رقم می‌زند.'],['حفاظت از زنگ‌زدگی','رنگ‌های ضدخوردگی و آند‌های قربانی از بدنه در برابر آب شور محافظت می‌کنند.'],['ماشین‌آلات و سوخت','انتخاب موتور و پروانه، قلب بهره‌وری و رعایت قوانین آلایندگی است.'],['ایمنی و استانداردها','رعایت قوانین IMO، آب‌بندی و قایق نجات برای هر کشتی الزامی است.']];
+function home(){return `<section class="hero"><h1>دریا را<br>باشکوه ببین</h1><p>داستان غول‌های اقیانوس، از تایتانیک تا مدرن‌ترین ناوگان جهان؛ و اینکه چطور یکی را مال خودت کنی.</p><div><button class="btn" onclick="sc('types')">انواع کشتی‌ها</button></div>
+<svg class="sea" viewBox="0 0 1200 90" preserveAspectRatio="none"><g class="wave"><path d="M0 40 q50 -30 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 V90H0Z" fill="#1d4f9c"/></g></svg></section>
+<section id="slider"><h2>تایتانیک و <span>رقبایش</span></h2><p class="sub">پنج کشتی که عصر طلایی اقیانوس‌پیماها را ساختند.</p>
+<div class="slider">${S.map((s,i)=>`<div class="slide${i?'':' a'}">${ship('cruise',['#d8b45a','#9db4d9','#c0392b','#2fa36b','#b07ad8'][i])}<h3>${s[0]}</h3><span class="tag">${s[1]}</span><p>${s[2]}</p></div>`).join('')}<div class="dots">${S.map((_,i)=>`<i class="${i?'':'a'}" data-i="${i}"></i>`).join('')}</div></div></section>
+<section id="brands"><h2>بزرگ‌ترین <span>کشتی‌سازان</span> جهان</h2><p class="sub">نام‌هایی که دریا را ساخته‌اند.</p><div class="marq"><div class="mt">${[...B,...B].map(b=>`<b>${b}</b>`).join('')}</div></div></section>
+<section id="tips"><h2>نکات <span>کشتی‌سازی</span></h2><p class="sub">شش اصلی که هر کشتی خوب روی آن بنا می‌شود.</p><div class="grid">${TIPS.map((t,i)=>`<div class="card"><div class="n">0${i+1}</div><h4>${t[0]}</h4><p>${t[1]}</p></div>`).join('')}</div></section>
+<section id="types"><h2>انواع <span>کشتی‌ها</span></h2><p class="sub">یکی را انتخاب کن تا مدل‌های قابل خرید را ببینی.</p><div class="grid">${T.map(t=>`<div class="card" onclick="go('${t.id}')" style="cursor:pointer">${ship(t.id)}<h4>${t.e} ${t.n}</h4><p>${t.d}</p></div>`).join('')}</div></section>`}
+function page(t){return `<section><button class="back" onclick="go('')">→ بازگشت</button><h2>${t.e} <span>${t.n}</span></h2><p class="sub">${t.d}</p><div class="grid">${t.m.map(m=>`<div class="card">${ship(t.id)}<h4>${m[0]}</h4><div class="price">${m[1]}</div><button class="btn" style="padding:8px 20px;font-size:.85rem">استعلام خرید</button></div>`).join('')}</div><p class="note">قیمت‌ها تقریبی و بر پایه بازار ساخت جدید است و بسته به سازنده، مشخصات و زمان تحویل تغییر می‌کند. پیش از هر خرید، با کارگزار رسمی تأیید شود.</p></section>`}
+let tm;
+function render(){const id=location.hash.slice(1),t=T.find(x=>x.id==id);$('#app').innerHTML=t?page(t):home();scrollTo(0,0);bind();clearInterval(tm);if(!t)slider()}
+function go(h){if(location.hash.slice(1)==h){render()}else location.hash=h}
+function sc(id){const e=document.getElementById(id);e?e.scrollIntoView({behavior:'smooth'}):(location.hash='',setTimeout(()=>sc(id),60));closeD()}
+function slider(){let i=0;const sl=[...document.querySelectorAll('.slide')],d=[...document.querySelectorAll('.dots i')];const show=n=>{i=n;sl.forEach((s,k)=>s.classList.toggle('a',k==n));d.forEach((s,k)=>s.classList.toggle('a',k==n))};d.forEach(x=>x.onclick=()=>show(+x.dataset.i));tm=setInterval(()=>show((i+1)%sl.length),4500)}
+function bind(){document.querySelectorAll('.card').forEach(c=>{c.onmousemove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.03)`};c.onmouseleave=()=>c.style.transform=''})}
+const dr=$('#drawer'),sh=$('#shade');function closeD(){dr.classList.remove('o');sh.classList.remove('o')}
+$('#dl').innerHTML=T.map(t=>`<a href="#${t.id}" onclick="closeD()">${t.e} ${t.n}</a>`).join('');
+$('#bg').onclick=()=>{dr.classList.add('o');sh.classList.add('o')};$('#x').onclick=sh.onclick=closeD;
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>sc(b.dataset.s));
+addEventListener('hashchange',render);render();
+</script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اقیانوس | دنیای کشتی‌ها</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050b17;--bg2:#0a1830;--tx:#e9eef8;--mut:#8fa3c4;--gold:#d8b45a;--line:rgba(216,180,90,.25);--card:rgba(255,255,255,.04);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#050b17}}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{background:radial-gradient(1200px 600px at 80% -10%,#12315f55,transparent),var(--bg);color:var(--tx);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9;overflow-x:hidden}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:12px 18px;padding-top:calc(12px + env(safe-area-inset-top,0px));background:rgba(5,11,23,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:1.25rem;color:var(--gold);letter-spacing:.5px;cursor:pointer}
+nav{display:flex;gap:4px;margin-inline-start:auto;overflow-x:auto}
+nav button,.burger{background:none;border:0;color:var(--tx);font:inherit;font-size:.9rem;padding:6px 12px;border-radius:20px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--card);color:var(--gold)}
+.burger{border:1px solid var(--line);font-size:1.2rem;padding:4px 12px;color:var(--gold)}
+#drawer{position:fixed;inset:0 0 0 auto;width:min(320px,86vw);background:#071126;border-inline-start:1px solid var(--line);z-index:30;transform:translateX(105%);transition:.45s cubic-bezier(.7,0,.2,1);padding:70px 22px 22px;box-shadow:-30px 0 60px #000a}
+#drawer.o{transform:none}
+#drawer h3{color:var(--gold);margin-bottom:10px}
+#drawer a{display:flex;gap:10px;align-items:center;padding:12px 14px;margin:6px 0;border:1px solid var(--line);border-radius:14px;color:var(--tx);text-decoration:none;transition:.25s}
+#drawer a:hover{background:var(--card);transform:translateX(-6px);border-color:var(--gold)}
+#x{position:absolute;top:16px;inset-inline-start:16px;background:none;border:0;color:var(--tx);font-size:1.6rem}
+section{padding:72px 20px;max-width:1100px;margin:auto}
+h2{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;margin-bottom:8px}
+h2 span{color:var(--gold)}.sub{color:var(--mut);margin-bottom:28px}
+.hero{min-height:78vh;display:flex;flex-direction:column;justify-content:center;text-align:center;position:relative}
+.hero h1{font-size:clamp(2.2rem,9vw,4.6rem);font-weight:800;line-height:1.3;background:linear-gradient(120deg,#fff,var(--gold),#fff);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200%;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:-200%}}
+.hero p{color:var(--mut);max-width:560px;margin:14px auto 26px}
+.btn{display:inline-block;background:linear-gradient(135deg,#f0d58a,#b8922f);color:#1a1405;border:0;font:inherit;font-weight:800;padding:12px 28px;border-radius:30px;cursor:pointer;box-shadow:0 10px 30px #d8b45a40;transition:.3s}
+.btn:hover{transform:translateY(-3px) scale(1.03)}
+.sea{position:absolute;inset:auto 0 0 0;height:90px;opacity:.5;pointer-events:none}
+.wave{animation:wv 9s linear infinite}@keyframes wv{to{transform:translateX(-50%)}}
+.slider{position:relative;border-radius:26px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(#0d2347,#050b17);perspective:1200px}
+.slide{display:none;padding:30px 20px 60px;text-align:center;animation:fi .8s}.slide.a{display:block}
+@keyframes fi{from{opacity:0;transform:scale(.96) translateY(10px)}}
+.slide svg{width:100%;max-width:520px;filter:drop-shadow(0 20px 20px #000a);animation:fl 5s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px) rotate(-.6deg)}}
+.slide h3{font-size:1.6rem;color:var(--gold)}.slide p{color:var(--mut);max-width:520px;margin:auto}
+.dots{position:absolute;bottom:18px;width:100%;display:flex;justify-content:center;gap:8px}
+.dots i{width:9px;height:9px;border-radius:9px;background:#fff3;cursor:pointer;transition:.3s}.dots i.a{width:28px;background:var(--gold)}
+.marq{overflow:hidden;border-block:1px solid var(--line);padding:18px 0;direction:ltr;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mt{display:flex;gap:46px;width:max-content;animation:mq 28s linear infinite}.marq:hover .mt{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mt b{font-size:1.5rem;letter-spacing:2px;color:#9fb3d6;font-weight:800;white-space:nowrap}.mt b:nth-child(3n){color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;transition:transform .15s ease-out,box-shadow .3s;transform-style:preserve-3d;will-change:transform;position:relative;overflow:hidden}
+.card:hover{box-shadow:0 30px 60px #000a,0 0 0 1px var(--gold)}
+.card>*{transform:translateZ(30px)}
+.card .n{font-size:2.2rem;font-weight:800;color:var(--gold);opacity:.8}
+.card h4{font-size:1.1rem;margin:4px 0}.card p{color:var(--mut);font-size:.92rem}
+.price{color:var(--gold);font-weight:800;font-size:1.15rem;margin:8px 0}
+.back{background:none;border:1px solid var(--line);color:var(--tx);padding:8px 18px;border-radius:20px;font:inherit;cursor:pointer;margin-bottom:20px}
+.note{color:var(--mut);font-size:.8rem;margin-top:26px;border-top:1px dashed var(--line);padding-top:12px}
+footer{text-align:center;color:var(--mut);padding:40px 20px;border-top:1px solid var(--line)}
+#shade{position:fixed;inset:0;background:#000a;z-index:25;opacity:0;pointer-events:none;transition:.3s}#shade.o{opacity:1;pointer-events:auto}
+.tag{display:inline-block;font-size:.75rem;border:1px solid var(--line);border-radius:12px;padding:0 10px;color:var(--mut);margin-top:6px}
+</style></head><body>
+<header><div class="logo" onclick="go('')">⚓ اقیانوس</div>
+<nav><button data-s="slider">تایتانیک</button><button data-s="brands">برندها</button><button data-s="tips">نکات ساخت</button><button data-s="types">انواع کشتی</button></nav>
+<button class="burger" id="bg" aria-label="منو">☰</button></header>
+<div id="shade"></div>
+<aside id="drawer"><button id="x">✕</button><h3>انواع کشتی</h3><div id="dl"></div></aside>
+<main id="app"></main>
+<footer>⚓ اقیانوس · ساخته‌شده با عشق به دریا</footer>
+<script>
+const $=s=>document.querySelector(s);
+function ship(k,c='#d8b45a'){const h=`<path d="M10 78 L290 78 L262 104 L38 104Z" fill="#14233f" stroke="${c}" stroke-width="2"/><rect x="10" y="74" width="280" height="5" fill="${c}"/>`;
+const w=`<path d="M0 108 q15 -9 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0" fill="none" stroke="#4d7bd6" stroke-width="3" opacity=".7"/>`;
+let s='';
+if(k=='cruise')s=`<rect x="40" y="52" width="220" height="24" rx="4" fill="#eaf0fa"/><rect x="70" y="32" width="150" height="22" rx="4" fill="#d5deef"/><rect x="100" y="16" width="80" height="18" rx="4" fill="#eaf0fa"/><rect x="215" y="18" width="14" height="22" fill="${c}"/>`+[...Array(12)].map((_,i)=>`<rect x="${50+i*17}" y="58" width="8" height="6" fill="#2b4a82"/>`).join('');
+else if(k=='cargo')s=[...Array(5)].map((_,i)=>[...Array(3)].map((_,j)=>`<rect x="${30+i*36}" y="${58-j*14}" width="33" height="13" fill="${['#c0392b','#2c7be5','#e8a33d','#2fa36b'][(i+j*2)%4]}"/>`).join('')).join('')+`<rect x="225" y="26" width="40" height="50" fill="#eaf0fa"/><rect x="232" y="32" width="26" height="8" fill="#2b4a82"/>`;
+else if(k=='tanker')s=`<rect x="25" y="64" width="190" height="14" fill="#b83a3a"/><path d="M50 64v-8M100 64v-8M150 64v-8M200 64v-8" stroke="#aaa" stroke-width="3"/><rect x="228" y="30" width="34" height="46" fill="#eaf0fa"/><rect x="236" y="36" width="18" height="7" fill="#2b4a82"/>`;
+else if(k=='yacht')s=`<path d="M40 78 L70 56 L230 56 L262 78Z" fill="#fff"/><rect x="95" y="38" width="100" height="19" rx="5" fill="#dfe8f6"/><rect x="120" y="22" width="48" height="17" rx="4" fill="#fff"/><path d="M144 22V6" stroke="${c}" stroke-width="3"/>`;
+else if(k=='fish')s=`<rect x="170" y="40" width="50" height="38" fill="#eaf0fa"/><rect x="178" y="46" width="34" height="9" fill="#2b4a82"/><path d="M60 78V30L140 60" stroke="#ccc" stroke-width="3" fill="none"/><path d="M60 30L30 70" stroke="#ccc" stroke-width="2"/>`;
+else s=`<path d="M60 78 L90 62 L200 62 L240 78Z" fill="#fff"/><path d="M110 62 L130 44 L170 44 L180 62Z" fill="#9fc4f5"/>`;
+return `<svg viewBox="0 0 300 120">${w}${s}${h}</svg>`}
+const T=[
+{id:'cruise',e:'🛳️',n:'کشتی کروز',d:'شهرهای شناور برای هزاران مسافر.',m:[['کلاس آیکون (۵۶۰۰ مسافر)','حدود ۲ میلیارد دلار'],['کلاس ویندجمر/متوسط','حدود ۸۰۰ تا ۱٬۲۰۰ میلیون دلار'],['کشتی اکتشافی کوچک','حدود ۱۵۰ تا ۳۰۰ میلیون دلار']]},
+{id:'cargo',e:'📦',n:'کانتینربر',d:'ستون فقرات تجارت جهانی.',m:[['۲۴٬۰۰۰ TEU','حدود ۲۲۰ تا ۲۶۰ میلیون دلار'],['۱۵٬۰۰۰ TEU','حدود ۱۴۰ تا ۱۷۰ میلیون دلار'],['فیدر ۲٬۵۰۰ TEU','حدود ۳۵ تا ۵۰ میلیون دلار']]},
+{id:'tanker',e:'🛢️',n:'نفتکش',d:'غول‌های حمل نفت خام و فرآورده.',m:[['VLCC (۳۰۰٬۰۰۰ تن)','حدود ۱۲۰ تا ۱۳۵ میلیون دلار'],['سوئزمکس','حدود ۸۰ تا ۹۰ میلیون دلار'],['آفرامکس','حدود ۶۵ تا ۷۵ میلیون دلار']]},
+{id:'yacht',e:'⛵',n:'یات لوکس',d:'اوج تجمل روی آب.',m:[['سوپر‌یات ۱۰۰ متری','حدود ۲۰۰ تا ۳۰۰ میلیون دلار'],['یات ۵۰ متری','حدود ۳۰ تا ۴۵ میلیون دلار'],['یات ۲۵ متری','حدود ۵ تا ۱۰ میلیون دلار']]},
+{id:'fish',e:'🎣',n:'کشتی ماهیگیری',d:'کار سخت دریا، با بدنه‌ای مقاوم.',m:[['ترالر ۳۰ متری','حدود ۳ تا ۶ میلیون دلار'],['لنج ۱۸ متری','حدود ۸۰۰ هزار تا ۱.۵ میلیون دلار'],['قایق ۱۲ متری','حدود ۲۵۰ تا ۵۰۰ هزار دلار']]},
+{id:'boat',e:'🚤',n:'قایق تفریحی',d:'برای آخر هفته‌های بی‌نظیر.',m:[['کروزر ۱۲ متری','حدود ۴۰۰ تا ۹۰۰ هزار دلار'],['اسپید‌بوت ۹ متری','حدود ۱۰۰ تا ۲۵۰ هزار دلار'],['قایق ۶ متری','حدود ۲۰ تا ۶۰ هزار دلار']]}];
+const S=[['تایتانیک','۱۹۱۲ · ۲۶۹ متر · هارلند و ولف','نماد غم‌انگیزترین سفر تاریخ؛ در نخستین سفرش پس از برخورد با کوه یخ غرق شد.'],
+['المپیک','۱۹۱۱ · خواهر ارشد تایتانیک','تقریباً هم‌شکل تایتانیک و با عمری موفق، بیش از ۲۴ سال خدمت کرد.'],
+['بریتانیک','۱۹۱۴ · کشتی بیمارستانی','سومین خواهر؛ با طراحی ایمن‌تر ساخته شد ولی در جنگ جهانی اول بر اثر مین غرق شد.'],
+['لوسیتانیا','۱۹۰۷ · کانارد','ملکه سرعت اقیانوس اطلس، تا اینکه در ۱۹۱۵ با اژدر غرق شد.'],
+['موریتانیا','۱۹۰۷ · کانارد','بیش از ۲۰ سال نوار آبی اطلس را نگه داشت؛ رقیب اصلی تایتانیک.']];
+const B=['HARLAND & WOLFF','FINCANTIERI','MEYER WERFT','HYUNDAI HEAVY','CHANTIERS DE L’ATLANTIQUE','DAMEN','BENETTI','LÜRSSEN','SAMSUNG HEAVY','DSME'];
+const TIPS=[['طراحی بدنه','نسبت طول به عرض و شکل دماغه، مصرف سوخت و پایداری را تعیین می‌کند.'],['شناوری و پایداری','مرکز ثقل باید همیشه پایین‌تر از مرکز شناوری موثر بماند تا کشتی واژگون نشود.'],['فولاد و جوشکاری','فولاد دریایی ضدخستگی و جوش بی‌نقص، عمر ۳۰ ساله کشتی را رقم می‌زند.'],['حفاظت از زنگ‌زدگی','رنگ‌های ضدخوردگی و آند‌های قربانی از بدنه در برابر آب شور محافظت می‌کنند.'],['ماشین‌آلات و سوخت','انتخاب موتور و پروانه، قلب بهره‌وری و رعایت قوانین آلایندگی است.'],['ایمنی و استانداردها','رعایت قوانین IMO، آب‌بندی و قایق نجات برای هر کشتی الزامی است.']];
+function home(){return `<section class="hero"><h1>دریا را<br>باشکوه ببین</h1><p>داستان غول‌های اقیانوس، از تایتانیک تا مدرن‌ترین ناوگان جهان؛ و اینکه چطور یکی را مال خودت کنی.</p><div><button class="btn" onclick="sc('types')">انواع کشتی‌ها</button></div>
+<svg class="sea" viewBox="0 0 1200 90" preserveAspectRatio="none"><g class="wave"><path d="M0 40 q50 -30 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 V90H0Z" fill="#1d4f9c"/></g></svg></section>
+<section id="slider"><h2>تایتانیک و <span>رقبایش</span></h2><p class="sub">پنج کشتی که عصر طلایی اقیانوس‌پیماها را ساختند.</p>
+<div class="slider">${S.map((s,i)=>`<div class="slide${i?'':' a'}">${ship('cruise',['#d8b45a','#9db4d9','#c0392b','#2fa36b','#b07ad8'][i])}<h3>${s[0]}</h3><span class="tag">${s[1]}</span><p>${s[2]}</p></div>`).join('')}<div class="dots">${S.map((_,i)=>`<i class="${i?'':'a'}" data-i="${i}"></i>`).join('')}</div></div></section>
+<section id="brands"><h2>بزرگ‌ترین <span>کشتی‌سازان</span> جهان</h2><p class="sub">نام‌هایی که دریا را ساخته‌اند.</p><div class="marq"><div class="mt">${[...B,...B].map(b=>`<b>${b}</b>`).join('')}</div></div></section>
+<section id="tips"><h2>نکات <span>کشتی‌سازی</span></h2><p class="sub">شش اصلی که هر کشتی خوب روی آن بنا می‌شود.</p><div class="grid">${TIPS.map((t,i)=>`<div class="card"><div class="n">0${i+1}</div><h4>${t[0]}</h4><p>${t[1]}</p></div>`).join('')}</div></section>
+<section id="types"><h2>انواع <span>کشتی‌ها</span></h2><p class="sub">یکی را انتخاب کن تا مدل‌های قابل خرید را ببینی.</p><div class="grid">${T.map(t=>`<div class="card" onclick="go('${t.id}')" style="cursor:pointer">${ship(t.id)}<h4>${t.e} ${t.n}</h4><p>${t.d}</p></div>`).join('')}</div></section>`}
+function page(t){return `<section><button class="back" onclick="go('')">→ بازگشت</button><h2>${t.e} <span>${t.n}</span></h2><p class="sub">${t.d}</p><div class="grid">${t.m.map(m=>`<div class="card">${ship(t.id)}<h4>${m[0]}</h4><div class="price">${m[1]}</div><button class="btn" style="padding:8px 20px;font-size:.85rem">استعلام خرید</button></div>`).join('')}</div><p class="note">قیمت‌ها تقریبی و بر پایه بازار ساخت جدید است و بسته به سازنده، مشخصات و زمان تحویل تغییر می‌کند. پیش از هر خرید، با کارگزار رسمی تأیید شود.</p></section>`}
+let tm;
+function render(){const id=location.hash.slice(1),t=T.find(x=>x.id==id);$('#app').innerHTML=t?page(t):home();scrollTo(0,0);bind();clearInterval(tm);if(!t)slider()}
+function go(h){if(location.hash.slice(1)==h){render()}else location.hash=h}
+function sc(id){const e=document.getElementById(id);e?e.scrollIntoView({behavior:'smooth'}):(location.hash='',setTimeout(()=>sc(id),60));closeD()}
+function slider(){let i=0;const sl=[...document.querySelectorAll('.slide')],d=[...document.querySelectorAll('.dots i')];const show=n=>{i=n;sl.forEach((s,k)=>s.classList.toggle('a',k==n));d.forEach((s,k)=>s.classList.toggle('a',k==n))};d.forEach(x=>x.onclick=()=>show(+x.dataset.i));tm=setInterval(()=>show((i+1)%sl.length),4500)}
+function bind(){document.querySelectorAll('.card').forEach(c=>{c.onmousemove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.03)`};c.onmouseleave=()=>c.style.transform=''})}
+const dr=$('#drawer'),sh=$('#shade');function closeD(){dr.classList.remove('o');sh.classList.remove('o')}
+$('#dl').innerHTML=T.map(t=>`<a href="#${t.id}" onclick="closeD()">${t.e} ${t.n}</a>`).join('');
+$('#bg').onclick=()=>{dr.classList.add('o');sh.classList.add('o')};$('#x').onclick=sh.onclick=closeD;
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>sc(b.dataset.s));
+addEventListener('hashchange',render);render();
+</script></body></html>
+<!DOCTYPE html>
+<html lang="fa" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>اقیانوس | دنیای کشتی‌ها</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050b17;--bg2:#0a1830;--tx:#e9eef8;--mut:#8fa3c4;--gold:#d8b45a;--line:rgba(216,180,90,.25);--card:rgba(255,255,255,.04);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#050b17}}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:calc(70px + env(safe-area-inset-top,0px))}
+body{background:radial-gradient(1200px 600px at 80% -10%,#12315f55,transparent),var(--bg);color:var(--tx);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9;overflow-x:hidden}
+header{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:14px;padding:12px 18px;padding-top:calc(12px + env(safe-area-inset-top,0px));background:rgba(5,11,23,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:1.25rem;color:var(--gold);letter-spacing:.5px;cursor:pointer}
+nav{display:flex;gap:4px;margin-inline-start:auto;overflow-x:auto}
+nav button,.burger{background:none;border:0;color:var(--tx);font:inherit;font-size:.9rem;padding:6px 12px;border-radius:20px;cursor:pointer;white-space:nowrap}
+nav button:hover{background:var(--card);color:var(--gold)}
+.burger{border:1px solid var(--line);font-size:1.2rem;padding:4px 12px;color:var(--gold)}
+#drawer{position:fixed;inset:0 0 0 auto;width:min(320px,86vw);background:#071126;border-inline-start:1px solid var(--line);z-index:30;transform:translateX(105%);transition:.45s cubic-bezier(.7,0,.2,1);padding:70px 22px 22px;box-shadow:-30px 0 60px #000a}
+#drawer.o{transform:none}
+#drawer h3{color:var(--gold);margin-bottom:10px}
+#drawer a{display:flex;gap:10px;align-items:center;padding:12px 14px;margin:6px 0;border:1px solid var(--line);border-radius:14px;color:var(--tx);text-decoration:none;transition:.25s}
+#drawer a:hover{background:var(--card);transform:translateX(-6px);border-color:var(--gold)}
+#x{position:absolute;top:16px;inset-inline-start:16px;background:none;border:0;color:var(--tx);font-size:1.6rem}
+section{padding:72px 20px;max-width:1100px;margin:auto}
+h2{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;margin-bottom:8px}
+h2 span{color:var(--gold)}.sub{color:var(--mut);margin-bottom:28px}
+.hero{min-height:78vh;display:flex;flex-direction:column;justify-content:center;text-align:center;position:relative}
+.hero h1{font-size:clamp(2.2rem,9vw,4.6rem);font-weight:800;line-height:1.3;background:linear-gradient(120deg,#fff,var(--gold),#fff);-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200%;animation:sh 6s linear infinite}
+@keyframes sh{to{background-position:-200%}}
+.hero p{color:var(--mut);max-width:560px;margin:14px auto 26px}
+.btn{display:inline-block;background:linear-gradient(135deg,#f0d58a,#b8922f);color:#1a1405;border:0;font:inherit;font-weight:800;padding:12px 28px;border-radius:30px;cursor:pointer;box-shadow:0 10px 30px #d8b45a40;transition:.3s}
+.btn:hover{transform:translateY(-3px) scale(1.03)}
+.sea{position:absolute;inset:auto 0 0 0;height:90px;opacity:.5;pointer-events:none}
+.wave{animation:wv 9s linear infinite}@keyframes wv{to{transform:translateX(-50%)}}
+.slider{position:relative;border-radius:26px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(#0d2347,#050b17);perspective:1200px}
+.slide{display:none;padding:30px 20px 60px;text-align:center;animation:fi .8s}.slide.a{display:block}
+@keyframes fi{from{opacity:0;transform:scale(.96) translateY(10px)}}
+.slide svg{width:100%;max-width:520px;filter:drop-shadow(0 20px 20px #000a);animation:fl 5s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-8px) rotate(-.6deg)}}
+.slide h3{font-size:1.6rem;color:var(--gold)}.slide p{color:var(--mut);max-width:520px;margin:auto}
+.dots{position:absolute;bottom:18px;width:100%;display:flex;justify-content:center;gap:8px}
+.dots i{width:9px;height:9px;border-radius:9px;background:#fff3;cursor:pointer;transition:.3s}.dots i.a{width:28px;background:var(--gold)}
+.marq{overflow:hidden;border-block:1px solid var(--line);padding:18px 0;direction:ltr;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.mt{display:flex;gap:46px;width:max-content;animation:mq 28s linear infinite}.marq:hover .mt{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.mt b{font-size:1.5rem;letter-spacing:2px;color:#9fb3d6;font-weight:800;white-space:nowrap}.mt b:nth-child(3n){color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px;transition:transform .15s ease-out,box-shadow .3s;transform-style:preserve-3d;will-change:transform;position:relative;overflow:hidden}
+.card:hover{box-shadow:0 30px 60px #000a,0 0 0 1px var(--gold)}
+.card>*{transform:translateZ(30px)}
+.card .n{font-size:2.2rem;font-weight:800;color:var(--gold);opacity:.8}
+.card h4{font-size:1.1rem;margin:4px 0}.card p{color:var(--mut);font-size:.92rem}
+.price{color:var(--gold);font-weight:800;font-size:1.15rem;margin:8px 0}
+.back{background:none;border:1px solid var(--line);color:var(--tx);padding:8px 18px;border-radius:20px;font:inherit;cursor:pointer;margin-bottom:20px}
+.note{color:var(--mut);font-size:.8rem;margin-top:26px;border-top:1px dashed var(--line);padding-top:12px}
+footer{text-align:center;color:var(--mut);padding:40px 20px;border-top:1px solid var(--line)}
+#shade{position:fixed;inset:0;background:#000a;z-index:25;opacity:0;pointer-events:none;transition:.3s}#shade.o{opacity:1;pointer-events:auto}
+.tag{display:inline-block;font-size:.75rem;border:1px solid var(--line);border-radius:12px;padding:0 10px;color:var(--mut);margin-top:6px}
+</style></head><body>
+<header><div class="logo" onclick="go('')">⚓ اقیانوس</div>
+<nav><button data-s="slider">تایتانیک</button><button data-s="brands">برندها</button><button data-s="tips">نکات ساخت</button><button data-s="types">انواع کشتی</button></nav>
+<button class="burger" id="bg" aria-label="منو">☰</button></header>
+<div id="shade"></div>
+<aside id="drawer"><button id="x">✕</button><h3>انواع کشتی</h3><div id="dl"></div></aside>
+<main id="app"></main>
+<footer>⚓ اقیانوس · ساخته‌شده با عشق به دریا</footer>
+<script>
+const $=s=>document.querySelector(s);
+function ship(k,c='#d8b45a'){const h=`<path d="M10 78 L290 78 L262 104 L38 104Z" fill="#14233f" stroke="${c}" stroke-width="2"/><rect x="10" y="74" width="280" height="5" fill="${c}"/>`;
+const w=`<path d="M0 108 q15 -9 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0" fill="none" stroke="#4d7bd6" stroke-width="3" opacity=".7"/>`;
+let s='';
+if(k=='cruise')s=`<rect x="40" y="52" width="220" height="24" rx="4" fill="#eaf0fa"/><rect x="70" y="32" width="150" height="22" rx="4" fill="#d5deef"/><rect x="100" y="16" width="80" height="18" rx="4" fill="#eaf0fa"/><rect x="215" y="18" width="14" height="22" fill="${c}"/>`+[...Array(12)].map((_,i)=>`<rect x="${50+i*17}" y="58" width="8" height="6" fill="#2b4a82"/>`).join('');
+else if(k=='cargo')s=[...Array(5)].map((_,i)=>[...Array(3)].map((_,j)=>`<rect x="${30+i*36}" y="${58-j*14}" width="33" height="13" fill="${['#c0392b','#2c7be5','#e8a33d','#2fa36b'][(i+j*2)%4]}"/>`).join('')).join('')+`<rect x="225" y="26" width="40" height="50" fill="#eaf0fa"/><rect x="232" y="32" width="26" height="8" fill="#2b4a82"/>`;
+else if(k=='tanker')s=`<rect x="25" y="64" width="190" height="14" fill="#b83a3a"/><path d="M50 64v-8M100 64v-8M150 64v-8M200 64v-8" stroke="#aaa" stroke-width="3"/><rect x="228" y="30" width="34" height="46" fill="#eaf0fa"/><rect x="236" y="36" width="18" height="7" fill="#2b4a82"/>`;
+else if(k=='yacht')s=`<path d="M40 78 L70 56 L230 56 L262 78Z" fill="#fff"/><rect x="95" y="38" width="100" height="19" rx="5" fill="#dfe8f6"/><rect x="120" y="22" width="48" height="17" rx="4" fill="#fff"/><path d="M144 22V6" stroke="${c}" stroke-width="3"/>`;
+else if(k=='fish')s=`<rect x="170" y="40" width="50" height="38" fill="#eaf0fa"/><rect x="178" y="46" width="34" height="9" fill="#2b4a82"/><path d="M60 78V30L140 60" stroke="#ccc" stroke-width="3" fill="none"/><path d="M60 30L30 70" stroke="#ccc" stroke-width="2"/>`;
+else s=`<path d="M60 78 L90 62 L200 62 L240 78Z" fill="#fff"/><path d="M110 62 L130 44 L170 44 L180 62Z" fill="#9fc4f5"/>`;
+return `<svg viewBox="0 0 300 120">${w}${s}${h}</svg>`}
+const T=[
+{id:'cruise',e:'🛳️',n:'کشتی کروز',d:'شهرهای شناور برای هزاران مسافر.',m:[['کلاس آیکون (۵۶۰۰ مسافر)','حدود ۲ میلیارد دلار'],['کلاس ویندجمر/متوسط','حدود ۸۰۰ تا ۱٬۲۰۰ میلیون دلار'],['کشتی اکتشافی کوچک','حدود ۱۵۰ تا ۳۰۰ میلیون دلار']]},
+{id:'cargo',e:'📦',n:'کانتینربر',d:'ستون فقرات تجارت جهانی.',m:[['۲۴٬۰۰۰ TEU','حدود ۲۲۰ تا ۲۶۰ میلیون دلار'],['۱۵٬۰۰۰ TEU','حدود ۱۴۰ تا ۱۷۰ میلیون دلار'],['فیدر ۲٬۵۰۰ TEU','حدود ۳۵ تا ۵۰ میلیون دلار']]},
+{id:'tanker',e:'🛢️',n:'نفتکش',d:'غول‌های حمل نفت خام و فرآورده.',m:[['VLCC (۳۰۰٬۰۰۰ تن)','حدود ۱۲۰ تا ۱۳۵ میلیون دلار'],['سوئزمکس','حدود ۸۰ تا ۹۰ میلیون دلار'],['آفرامکس','حدود ۶۵ تا ۷۵ میلیون دلار']]},
+{id:'yacht',e:'⛵',n:'یات لوکس',d:'اوج تجمل روی آب.',m:[['سوپر‌یات ۱۰۰ متری','حدود ۲۰۰ تا ۳۰۰ میلیون دلار'],['یات ۵۰ متری','حدود ۳۰ تا ۴۵ میلیون دلار'],['یات ۲۵ متری','حدود ۵ تا ۱۰ میلیون دلار']]},
+{id:'fish',e:'🎣',n:'کشتی ماهیگیری',d:'کار سخت دریا، با بدنه‌ای مقاوم.',m:[['ترالر ۳۰ متری','حدود ۳ تا ۶ میلیون دلار'],['لنج ۱۸ متری','حدود ۸۰۰ هزار تا ۱.۵ میلیون دلار'],['قایق ۱۲ متری','حدود ۲۵۰ تا ۵۰۰ هزار دلار']]},
+{id:'boat',e:'🚤',n:'قایق تفریحی',d:'برای آخر هفته‌های بی‌نظیر.',m:[['کروزر ۱۲ متری','حدود ۴۰۰ تا ۹۰۰ هزار دلار'],['اسپید‌بوت ۹ متری','حدود ۱۰۰ تا ۲۵۰ هزار دلار'],['قایق ۶ متری','حدود ۲۰ تا ۶۰ هزار دلار']]}];
+const S=[['تایتانیک','۱۹۱۲ · ۲۶۹ متر · هارلند و ولف','نماد غم‌انگیزترین سفر تاریخ؛ در نخستین سفرش پس از برخورد با کوه یخ غرق شد.'],
+['المپیک','۱۹۱۱ · خواهر ارشد تایتانیک','تقریباً هم‌شکل تایتانیک و با عمری موفق، بیش از ۲۴ سال خدمت کرد.'],
+['بریتانیک','۱۹۱۴ · کشتی بیمارستانی','سومین خواهر؛ با طراحی ایمن‌تر ساخته شد ولی در جنگ جهانی اول بر اثر مین غرق شد.'],
+['لوسیتانیا','۱۹۰۷ · کانارد','ملکه سرعت اقیانوس اطلس، تا اینکه در ۱۹۱۵ با اژدر غرق شد.'],
+['موریتانیا','۱۹۰۷ · کانارد','بیش از ۲۰ سال نوار آبی اطلس را نگه داشت؛ رقیب اصلی تایتانیک.']];
+const B=['HARLAND & WOLFF','FINCANTIERI','MEYER WERFT','HYUNDAI HEAVY','CHANTIERS DE L’ATLANTIQUE','DAMEN','BENETTI','LÜRSSEN','SAMSUNG HEAVY','DSME'];
+const TIPS=[['طراحی بدنه','نسبت طول به عرض و شکل دماغه، مصرف سوخت و پایداری را تعیین می‌کند.'],['شناوری و پایداری','مرکز ثقل باید همیشه پایین‌تر از مرکز شناوری موثر بماند تا کشتی واژگون نشود.'],['فولاد و جوشکاری','فولاد دریایی ضدخستگی و جوش بی‌نقص، عمر ۳۰ ساله کشتی را رقم می‌زند.'],['حفاظت از زنگ‌زدگی','رنگ‌های ضدخوردگی و آند‌های قربانی از بدنه در برابر آب شور محافظت می‌کنند.'],['ماشین‌آلات و سوخت','انتخاب موتور و پروانه، قلب بهره‌وری و رعایت قوانین آلایندگی است.'],['ایمنی و استانداردها','رعایت قوانین IMO، آب‌بندی و قایق نجات برای هر کشتی الزامی است.']];
+function home(){return `<section class="hero"><h1>دریا را<br>باشکوه ببین</h1><p>داستان غول‌های اقیانوس، از تایتانیک تا مدرن‌ترین ناوگان جهان؛ و اینکه چطور یکی را مال خودت کنی.</p><div><button class="btn" onclick="sc('types')">انواع کشتی‌ها</button></div>
+<svg class="sea" viewBox="0 0 1200 90" preserveAspectRatio="none"><g class="wave"><path d="M0 40 q50 -30 100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 t100 0 V90H0Z" fill="#1d4f9c"/></g></svg></section>
+<section id="slider"><h2>تایتانیک و <span>رقبایش</span></h2><p class="sub">پنج کشتی که عصر طلایی اقیانوس‌پیماها را ساختند.</p>
+<div class="slider">${S.map((s,i)=>`<div class="slide${i?'':' a'}">${ship('cruise',['#d8b45a','#9db4d9','#c0392b','#2fa36b','#b07ad8'][i])}<h3>${s[0]}</h3><span class="tag">${s[1]}</span><p>${s[2]}</p></div>`).join('')}<div class="dots">${S.map((_,i)=>`<i class="${i?'':'a'}" data-i="${i}"></i>`).join('')}</div></div></section>
+<section id="brands"><h2>بزرگ‌ترین <span>کشتی‌سازان</span> جهان</h2><p class="sub">نام‌هایی که دریا را ساخته‌اند.</p><div class="marq"><div class="mt">${[...B,...B].map(b=>`<b>${b}</b>`).join('')}</div></div></section>
+<section id="tips"><h2>نکات <span>کشتی‌سازی</span></h2><p class="sub">شش اصلی که هر کشتی خوب روی آن بنا می‌شود.</p><div class="grid">${TIPS.map((t,i)=>`<div class="card"><div class="n">0${i+1}</div><h4>${t[0]}</h4><p>${t[1]}</p></div>`).join('')}</div></section>
+<section id="types"><h2>انواع <span>کشتی‌ها</span></h2><p class="sub">یکی را انتخاب کن تا مدل‌های قابل خرید را ببینی.</p><div class="grid">${T.map(t=>`<div class="card" onclick="go('${t.id}')" style="cursor:pointer">${ship(t.id)}<h4>${t.e} ${t.n}</h4><p>${t.d}</p></div>`).join('')}</div></section>`}
+function page(t){return `<section><button class="back" onclick="go('')">→ بازگشت</button><h2>${t.e} <span>${t.n}</span></h2><p class="sub">${t.d}</p><div class="grid">${t.m.map(m=>`<div class="card">${ship(t.id)}<h4>${m[0]}</h4><div class="price">${m[1]}</div><button class="btn" style="padding:8px 20px;font-size:.85rem">استعلام خرید</button></div>`).join('')}</div><p class="note">قیمت‌ها تقریبی و بر پایه بازار ساخت جدید است و بسته به سازنده، مشخصات و زمان تحویل تغییر می‌کند. پیش از هر خرید، با کارگزار رسمی تأیید شود.</p></section>`}
+let tm;
+function render(){const id=location.hash.slice(1),t=T.find(x=>x.id==id);$('#app').innerHTML=t?page(t):home();scrollTo(0,0);bind();clearInterval(tm);if(!t)slider()}
+function go(h){if(location.hash.slice(1)==h){render()}else location.hash=h}
+function sc(id){const e=document.getElementById(id);e?e.scrollIntoView({behavior:'smooth'}):(location.hash='',setTimeout(()=>sc(id),60));closeD()}
+function slider(){let i=0;const sl=[...document.querySelectorAll('.slide')],d=[...document.querySelectorAll('.dots i')];const show=n=>{i=n;sl.forEach((s,k)=>s.classList.toggle('a',k==n));d.forEach((s,k)=>s.classList.toggle('a',k==n))};d.forEach(x=>x.onclick=()=>show(+x.dataset.i));tm=setInterval(()=>show((i+1)%sl.length),4500)}
+function bind(){document.querySelectorAll('.card').forEach(c=>{c.onmousemove=e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`perspective(700px) rotateY(${x*14}deg) rotateX(${-y*14}deg) scale(1.03)`};c.onmouseleave=()=>c.style.transform=''})}
+const dr=$('#drawer'),sh=$('#shade');function closeD(){dr.classList.remove('o');sh.classList.remove('o')}
+$('#dl').innerHTML=T.map(t=>`<a href="#${t.id}" onclick="closeD()">${t.e} ${t.n}</a>`).join('');
+$('#bg').onclick=()=>{dr.classList.add('o');sh.classList.add('o')};$('#x').onclick=sh.onclick=closeD;
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>sc(b.dataset.s));
+addEventListener('hashchange',render);render();
+</script></body></html>
