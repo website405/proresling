@@ -1,213 +1,926 @@
+```html
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تجربه وب‌سایت 3D و مدرن</title>
+    <title>کافه کلاسیک سه بعدی | مرجع تخصصی و تجربه سه بعدی قهوه</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Vazirmatn -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <!-- Three.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Tahoma', sans-serif;
-        }
-        body {
-            background-color: #0d1117;
-            color: #e6edf3;
-            overflow-x: hidden;
-        }
-
-        /* Canvas background for Three.js 3D element */
-        #webgl-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: 1;
-            pointer-events: none;
-        }
-
-        /* Header */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 50px;
-            z-index: 10;
-            background: rgba(13, 17, 23, 0.6);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-            color: #58a6ff;
-            letter-spacing: 2px;
-        }
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 25px;
-        }
-        nav ul li a {
-            color: #8b949e;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-        }
-        nav ul li a:hover {
-            color: #58a6ff;
-        }
-
-        /* Content Sections overlaying 3D background */
-        section {
-            position: relative;
-            z-index: 2;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            padding: 0 10%;
-        }
-        .content-box {
-            max-width: 450px;
-            background: rgba(22, 27, 34, 0.75);
-            padding: 35px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-        }
-        .content-box h3 {
-            color: #58a6ff;
-            font-size: 13px;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-        .content-box h2 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-            color: #fff;
-        }
-        .content-box p {
-            color: #8b949e;
-            line-height: 1.7;
-            font-size: 0.95rem;
-        }
-
-        .align-right { justify-content: flex-start; }
-        .align-left { justify-content: flex-end; }
-        .align-center { justify-content: center; text-align: center; }
-    </style>
-</head>
-<body>
-
-    <!-- 3D Canvas rendering container -->
-    <canvas id="webgl-canvas"></canvas>
-
-    <header>
-        <div class="logo">3D CRAFT</div>
-        <nav>
-            <ul>
-                <li><a href="#sec1">طراحی سه‌بعدی</a></li>
-                <li><a href="#sec2">انیمیشن اسکرول</a></li>
-                <li><a href="#sec3">تکنولوژی WEBGL</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section class="align-right" id="sec1">
-        <div class="content-box">
-            <h3>بخش ۰۱</h3>
-            <h2>حرکت تعاملی سه‌بعدی</h2>
-            <p>المان‌های 3D همزمان با اسکرول صفحه تغییر زاویه داده، می‌چرخند و حس عمق واقعی را در مرورگر ایجاد می‌کنند.</p>
-        </div>
-    </section>
-
-    <section class="align-left" id="sec2">
-        <div class="content-box">
-            <h3>بخش ۰۲</h3>
-            <h2>پاسخ به حرکت کاربر</h2>
-            <p>با پایین رفتن در صفحه، زوایای دوربین و نورپردازی شیء سه‌بعدی جابه‌جا شده تا تجربه بصری روان و لوکسی خلق شود.</p>
-        </div>
-    </section>
-
-    <section class="align-center" id="sec3">
-        <div class="content-box">
-            <h3>بخش ۰۳</h3>
-            <h2>تکنولوژی Three.js</h2>
-            <p>قابلیت بارگذاری فایلهای آماده سه‌بعدی مثل پسوند <code>.gltf</code> یا <code>.obj</code> (مانند دانه قهوه، موتور کشتی یا هر محصول دیگر) در این ساختار وجود دارد.</p>
-        </div>
-    </section>
 
     <script>
-        // --- THREE.JS SETUP ---
-        const canvas = document.getElementById('webgl-canvas');
-        const scene = new THREE.Scene();
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        coffee: {
+                            100: '#f5efe6',
+                            200: '#e8d8c8',
+                            300: '#d7b89c',
+                            400: '#bc8a5f',
+                            500: '#8b5a2b',
+                            600: '#67411b',
+                            700: '#4a2c11',
+                            800: '#2d1806',
+                            900: '#1a0d02',
+                        },
+                        gold: {
+                            400: '#f6ca65',
+                            500: '#e5b233',
+                            600: '#c49218',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #1a0d02;
+            color: #f5efe6;
+            overflow-x: hidden;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2d1806;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #8b5a2b;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #bc8a5f;
+        }
 
-        // Camera Setup
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.z = 5;
+        /* Glassmorphism */
+        .glass-card {
+            background: rgba(45, 24, 6, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 178, 51, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
 
-        // Renderer
-        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        .glass-nav {
+            background: rgba(26, 13, 2, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(229, 178, 51, 0.3);
+        }
 
-        // Create 3D Object (Icosahedron as sample 3D mesh)
-        const geometry = new THREE.IcosahedronGeometry(1.8, 1);
-        const material = new THREE.MeshStandardMaterial({
-            color: 0x58a6ff,
-            wireframe: true,
-            roughness: 0.3,
-            metalness: 0.8
-        });
-        const mesh = new THREE.Mesh(geometry, material);
-        scene.add(mesh);
+        .gold-glow {
+            text-shadow: 0 0 10px rgba(229, 178, 51, 0.5);
+        }
 
-        // Lighting
-        const pointLight = new THREE.PointLight(0xffffff, 1.5);
-        pointLight.position.set(5, 5, 5);
-        scene.add(pointLight);
+        .gold-border-glow {
+            box-shadow: 0 0 15px rgba(229, 178, 51, 0.3);
+        }
 
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-        scene.add(ambientLight);
+        #canvas-container {
+            width: 100%;
+            height: 65vh;
+            position: relative;
+            cursor: grab;
+        }
+        #canvas-container:active {
+            cursor: grabbing;
+        }
 
-        // --- SCROLL ANIMATION LOGIC ---
-        let scrollPercent = 0;
-        window.addEventListener('scroll', () => {
-            scrollPercent =
-                (document.documentElement.scrollTop || document.body.scrollTop) /
-                ((document.documentElement.scrollHeight || document.body.scrollHeight) - document.documentElement.clientHeight);
-        });
+        .pulse-btn {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-coffee-900 text-coffee-100 selection:bg-gold-500 selection:text-coffee-900">
 
-        // Render Loop & 3D Transformations based on scroll
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 w-full z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3 space-x-reverse">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-coffee-600 to-gold-500 flex items-center justify-center border-2 border-gold-400 shadow-lg">
+                    <i class="fa-solid fa-mug-hot text-2xl text-coffee-900"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-black text-gold-400 tracking-wider gold-glow block">کافه دو رنسانس</span>
+                    <span class="text-xs text-coffee-300 tracking-widest block">LE CAFÉ RENAISSANCE 3D</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex space-x-8 space-x-reverse text-sm font-semibold">
+                <a href="#3d-experience" class="hover:text-gold-400 transition flex items-center gap-2"><i class="fa-solid fa-cube text-gold-500"></i> تجربه ۳ بعدی</a>
+                <a href="#encyclopedia" class="hover:text-gold-400 transition flex items-center gap-2"><i class="fa-solid fa-book-open"></i> دانشنامه قهوه</a>
+                <a href="#menu" class="hover:text-gold-400 transition flex items-center gap-2"><i class="fa-solid fa-list-ul"></i> منوی کافه</a>
+                <a href="#calculator" class="hover:text-gold-400 transition flex items-center gap-2"><i class="fa-solid fa-calculator"></i> ماشین حساب</a>
+                <a href="#community" class="hover:text-gold-400 transition flex items-center gap-2"><i class="fa-solid fa-users"></i> باشگاه مشتریان</a>
+            </nav>
+
+            <div class="flex items-center space-x-4 space-x-reverse">
+                <button id="sound-toggle" onclick="toggleAudio()" class="px-4 py-2 rounded-full glass-card border border-gold-500/50 hover:bg-gold-500 hover:text-coffee-900 transition flex items-center gap-2 text-xs font-bold">
+                    <i id="sound-icon" class="fa-solid fa-volume-xmark text-gold-400"></i>
+                    <span id="sound-text">صدای کافه</span>
+                </button>
+                <a href="#reservation" class="hidden sm:inline-block bg-gradient-to-r from-gold-500 to-coffee-400 text-coffee-900 px-5 py-2.5 rounded-full font-bold hover:shadow-lg hover:shadow-gold-500/30 transition transform hover:-translate-y-0.5">
+                    رزرو میز
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Hero 3D Section -->
+    <section id="3d-experience" class="pt-24 relative overflow-hidden bg-gradient-to-b from-coffee-900 via-coffee-800 to-coffee-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+            <div class="text-center max-w-3xl mx-auto mb-4">
+                <span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-gold-500/10 text-gold-400 border border-gold-500/30">
+                    شاهکار معماری و طعم
+                </span>
+                <h1 class="text-4xl md:text-6xl font-black mt-4 mb-4 text-white leading-tight">
+                    سفر ۳ بعدی به اعماق <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-400 to-coffee-300">عطر و طعم قهوه</span>
+                </h1>
+                <p class="text-coffee-200 text-base md:text-lg">
+                    با ماوس فنجان ۳ بعدی کلاسیک را بچرخانید، نورپردازی محیط را تغییر دهید و دانه‌های قهوه را لمس کنید!
+                </p>
+            </div>
+
+            <!-- 3D Canvas Viewport -->
+            <div class="rounded-3xl border-2 border-gold-500/40 overflow-hidden shadow-2xl relative glass-card">
+                <div id="canvas-container"></div>
+
+                <!-- 3D Controls Overlay -->
+                <div class="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-auto flex flex-wrap gap-2 justify-center z-10 bg-coffee-900/80 p-3 rounded-2xl border border-gold-500/30 backdrop-blur-md">
+                    <button onclick="changeSceneColor('default')" class="px-3 py-1.5 rounded-xl bg-coffee-700 hover:bg-gold-500 hover:text-coffee-900 text-xs font-bold transition">
+                        <i class="fa-solid fa-sun"></i> نور کلاسیک
+                    </button>
+                    <button onclick="changeSceneColor('warm')" class="px-3 py-1.5 rounded-xl bg-coffee-700 hover:bg-gold-500 hover:text-coffee-900 text-xs font-bold transition">
+                        <i class="fa-solid fa-moon"></i> کافه شبانه
+                    </button>
+                    <button onclick="toggleRotation()" class="px-3 py-1.5 rounded-xl bg-coffee-700 hover:bg-gold-500 hover:text-coffee-900 text-xs font-bold transition">
+                        <i class="fa-solid fa-rotate"></i> <span id="rot-btn-text">توقف چرخش</span>
+                    </button>
+                    <button onclick="resetCamera()" class="px-3 py-1.5 rounded-xl bg-coffee-700 hover:bg-gold-500 hover:text-coffee-900 text-xs font-bold transition">
+                        <i class="fa-solid fa-arrows-to-dot"></i> زاویه اولیه
+                    </button>
+                </div>
+
+                <!-- Interactive Hint -->
+                <div class="absolute top-4 left-4 text-xs bg-coffee-900/70 text-gold-400 px-3 py-1.5 rounded-full border border-gold-500/20 pointer-events-none flex items-center gap-2">
+                    <i class="fa-solid fa-hand-pointer animate-bounce"></i> برای چرخش سه بعدی کشیدگی ایجاد کنید
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Stats Bar -->
+    <section class="py-8 bg-coffee-800/50 border-y border-gold-500/20">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="p-4 rounded-2xl glass-card">
+                <i class="fa-solid fa-mug-saucer text-3xl text-gold-400 mb-2"></i>
+                <div class="text-3xl font-black text-white">45+</div>
+                <div class="text-xs text-coffee-300 mt-1">نوع قهوه اختصاصی</div>
+            </div>
+            <div class="p-4 rounded-2xl glass-card">
+                <i class="fa-solid fa-earth-americas text-3xl text-gold-400 mb-2"></i>
+                <div class="text-3xl font-black text-white">18</div>
+                <div class="text-xs text-coffee-300 mt-1">کشور مبدأ دانه‌ها</div>
+            </div>
+            <div class="p-4 rounded-2xl glass-card">
+                <i class="fa-solid fa-award text-3xl text-gold-400 mb-2"></i>
+                <div class="text-3xl font-black text-white">100%</div>
+                <div class="text-xs text-coffee-300 mt-1">اورگانیک و باریستا آکادمی</div>
+            </div>
+            <div class="p-4 rounded-2xl glass-card">
+                <i class="fa-solid fa-face-smile text-3xl text-gold-400 mb-2"></i>
+                <div class="text-3xl font-black text-white">25k+</div>
+                <div class="text-xs text-coffee-300 mt-1">مشتری رضایت‌مند</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Encyclopedia Section -->
+    <section id="encyclopedia" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-5xl font-black text-white mb-4">دانشنامه تخصصی <span class="text-gold-400">دانه‌های قهوه</span></h2>
+                <p class="text-coffee-300">شناخت گونه‌ها، خصوصیات طعمی و ویژگی‌های رست مختلف قهوه‌های جهان</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Arabica -->
+                <div class="glass-card rounded-3xl p-8 hover:border-gold-500 transition duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">عربیکا (Arabica)</h3>
+                    <p class="text-coffee-200 text-sm leading-relaxed mb-6">
+                        معروف‌ترین و باکیفیت‌ترین دانه قهوه جهان. دارای اسیدیته پیچیده، طعم‌های میوه‌ای و گلی و میزان کافئین پایین‌تر نسبت به روبوستا.
+                    </p>
+                    <div class="space-y-2 border-t border-coffee-700 pt-4 text-xs">
+                        <div class="flex justify-between text-coffee-300"><span>میزان کافئین:</span> <span class="text-gold-400 font-bold">1.2% - 1.5%</span></div>
+                        <div class="flex justify-between text-coffee-300"><span>ارتفاع کشت:</span> <span class="text-gold-400 font-bold">1000 - 2000 متر</span></div>
+                        <div class="flex justify-between text-coffee-300"><span>طعم غالب:</span> <span class="text-gold-400 font-bold">شیرین، میوه‌ای، آجیلی</span></div>
+                    </div>
+                </div>
+
+                <!-- Robusta -->
+                <div class="glass-card rounded-3xl p-8 hover:border-gold-500 transition duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">روبوستا (Robusta)</h3>
+                    <p class="text-coffee-200 text-sm leading-relaxed mb-6">
+                        دانه‌ای پرقدرت، تلخ و دارای کرمای (خامه) بسیار غلیظ. ایده‌آل برای ترکیب‌های اسپرسوی تلخ و سنگین با گیرایی بالاست.
+                    </p>
+                    <div class="space-y-2 border-t border-coffee-700 pt-4 text-xs">
+                        <div class="flex justify-between text-coffee-300"><span>میزان کافئین:</span> <span class="text-gold-400 font-bold">2.2% - 2.7%</span></div>
+                        <div class="flex justify-between text-coffee-300"><span>ارتفاع کشت:</span> <span class="text-gold-400 font-bold">200 - 800 متر</span></div>
+                        <div class="flex justify-between text-coffee-300"><span>طعم غالب:</span> <span class="text-gold-400 font-bold">شکلات تلخ، چوبی، دودی</span></div>
+                    </div>
+                </div>
+
+                <!-- Liberica -->
+                <div class="glass-card rounded-3xl p-8 hover:border-gold-500 transition duration-300 group">
+                    <div class="w-16 h-16 rounded-2xl bg-gold-500/20 text-gold-400 flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                        <i class="fa-solid fa-tree"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3">لیبریکا (Liberica)</h3>
+                    <p class="text-coffee-200 text-sm leading-relaxed mb-6">
+                        گونه‌ای نادر و نایاب با دانه‌های درشت و نامنظم. عطر و طعمی کاملاً متمایز، دودی، چوبی و تا حدی میوه‌ای نایاب دارد.
+                    </p>
+                    <div class="space-y-2 border-t border-coffee-700 pt-4 text-xs">
+                        <div class="flex justify-between text-coffee-300"><span>میزان کافئین:</span> <span class="text-gold-400 font-bold">1.4%</span></div>
+                        <div class="flex justify-between text-coffee-300"><span>ارتفاع کشت:</span> <span class="text-gold-400 font-bold">کمتر از 500 متر</span></div>
+                        <div class="flex justify-between text-coffee-300"><span>طعم غالب:</span> <span class="text-gold-400 font-bold">ادویه‌ای، دودی، گلی</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Menu Section -->
+    <section id="menu" class="py-20 bg-coffee-950/80 border-t border-coffee-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+                <div>
+                    <span class="text-gold-400 text-sm font-bold uppercase tracking-widest">منوی اختصاصی</span>
+                    <h2 class="text-3xl md:text-5xl font-black text-white mt-2">نوشیدنی‌های کلاسیک و مدرن</h2>
+                </div>
+                <!-- Menu Filters -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0" id="menu-filters">
+                    <button onclick="filterMenu('all')" class="menu-filter-btn px-4 py-2 rounded-xl bg-gold-500 text-coffee-900 font-bold text-sm">همه</button>
+                    <button onclick="filterMenu('espresso')" class="menu-filter-btn px-4 py-2 rounded-xl bg-coffee-800 hover:bg-gold-500 hover:text-coffee-900 text-white font-bold text-sm transition">بر پایه اسپرسو</button>
+                    <button onclick="filterMenu('brew')" class="menu-filter-btn px-4 py-2 rounded-xl bg-coffee-800 hover:bg-gold-500 hover:text-coffee-900 text-white font-bold text-sm transition">دم‌آوری دمی</button>
+                    <button onclick="filterMenu('cold')" class="menu-filter-btn px-4 py-2 rounded-xl bg-coffee-800 hover:bg-gold-500 hover:text-coffee-900 text-white font-bold text-sm transition">سرد و تابستانی</button>
+                </div>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="menu-container">
+                <!-- Items inserted via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Brewing Ratio Calculator -->
+    <section id="calculator" class="py-20 relative bg-gradient-to-br from-coffee-900 to-coffee-800">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="glass-card rounded-3xl p-8 md:p-12 border border-gold-500/30">
+                <div class="text-center mb-8">
+                    <i class="fa-solid fa-scale-balanced text-4xl text-gold-400 mb-3"></i>
+                    <h2 class="text-3xl font-black text-white">ماشین‌حساب حرفه‌ای نسبت دم‌آوری (Brew Calculator)</h2>
+                    <p class="text-coffee-300 text-sm mt-2">محاسبه دقیق مقدار پودر قهوه و آب برای عصاره‌گیری استاندارد</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-xs font-bold text-gold-400 mb-2">روش دم‌آوری را انتخاب کنید:</label>
+                            <select id="brew-method" onchange="calculateBrew()" class="w-full bg-coffee-900 border border-gold-500/40 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-gold-400">
+                                <option value="1:15">V60 / چککه‌ای (نسبت 1 به 15)</option>
+                                <option value="1:16">کمکس / Chemex (نسبت 1 به 16)</option>
+                                <option value="1:12">فرنش پرس / French Press (نسبت 1 به 12)</option>
+                                <option value="1:2">اسپرسو / Espresso (نسبت 1 به 2)</option>
+                                <option value="1:8">ایروپرس / AeroPress (نسبت 1 به 8)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold text-gold-400 mb-2">تعداد فنجان یا مقدار آب (میلی‌لیتر):</label>
+                            <input type="range" id="water-range" min="100" max="1000" step="50" value="300" oninput="calculateBrew()" class="w-full accent-gold-500">
+                            <div class="flex justify-between text-xs text-coffee-300 mt-1">
+                                <span>100 ml</span>
+                                <span id="water-val" class="text-gold-400 font-bold text-base">300 ml</span>
+                                <span>1000 ml</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-coffee-950/80 rounded-2xl p-6 border border-gold-500/20 text-center space-y-4">
+                        <div class="text-xs text-coffee-400">پودر قهوه مورد نیاز:</div>
+                        <div id="coffee-result" class="text-4xl font-black text-gold-400">20.0 <span class="text-lg text-white">گرم</span></div>
+                        <hr class="border-coffee-800">
+                        <div class="text-xs text-coffee-400">آب جوش مورد نیاز:</div>
+                        <div id="water-result" class="text-2xl font-bold text-white">300 <span class="text-sm text-coffee-300">میلی‌لیتر</span></div>
+                        <div class="text-xs text-coffee-400">دمای پیشنهادی آب: <span class="text-gold-400 font-bold">92°C - 94°C</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation & Order Section -->
+    <section id="reservation" class="py-20 bg-coffee-900 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-gold-400 font-bold text-xs uppercase tracking-widest">محیطی دلنشین و کلاسیک</span>
+                    <h2 class="text-3xl md:text-5xl font-black text-white mt-2 mb-6">رزرو آنلاین میز در کافه رنسانس</h2>
+                    <p class="text-coffee-200 text-sm leading-relaxed mb-8">
+                        برای سپری کردن لحظاتی آرام، جلسات کاری یا تجربه نوشیدن بهترین قهوه‌های دمی جهان، میز خود را از قبل رزرو کنید.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">آدرس کافه</h4>
+                                <p class="text-xs text-coffee-300">خیابان ولیعصر، بالاتر از پارک ساعی، پلاک ۱۲۴۰</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm">ساعات کاری</h4>
+                                <p class="text-xs text-coffee-300">همه روزه از ساعت ۰۷:۳۰ صبح تا ۲۳:۳۰ شب</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reservation Form -->
+                <div class="glass-card p-8 rounded-3xl border border-gold-500/30">
+                    <form id="res-form" onsubmit="handleReserve(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-coffee-200 mb-1">نام و نام خانوادگی</label>
+                            <input type="text" required class="w-full bg-coffee-900/80 border border-coffee-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-gold-400" placeholder="مثال: علی محمدی">
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-coffee-200 mb-1">شماره تماس</label>
+                                <input type="tel" required class="w-full bg-coffee-900/80 border border-coffee-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-gold-400" placeholder="0912...">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-coffee-200 mb-1">تعداد نفرات</label>
+                                <input type="number" min="1" max="10" value="2" required class="w-full bg-coffee-900/80 border border-coffee-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-gold-400">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-coffee-200 mb-1">تاریخ</label>
+                                <input type="date" required class="w-full bg-coffee-900/80 border border-coffee-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-gold-400">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-coffee-200 mb-1">ساعت</label>
+                                <input type="time" required class="w-full bg-coffee-900/80 border border-coffee-700 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-gold-400">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-coffee-200 mb-1">توضیحات تکمیلی (ترجیح میز، جشن و ...)</label>
+                            <textarea rows="3" class="w-full bg-coffee-900/80 border border-coffee-700 rounded-xl px-4 py-2 text-white text-sm focus:outline-none focus:border-gold-400" placeholder="توضیحات..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-gold-500 to-coffee-500 text-coffee-900 font-black py-3 rounded-xl hover:shadow-lg transition">
+                            تأیید و رزرو نهایی
+                        </button>
+                    </form>
+                    <div id="res-msg" class="hidden mt-4 p-3 bg-green-900/50 border border-green-500 text-green-200 text-center rounded-xl text-xs font-bold">
+                        درخواست رزرو شما با موفقیت ثبت شد. به‌زودی جهت تأیید با شما تماس می‌گیریم.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community & Testimonials -->
+    <section id="community" class="py-20 bg-coffee-950 border-t border-coffee-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-5xl font-black text-white mb-4">نظرات قهوه‌نوشان</h2>
+                <p class="text-coffee-300">آنچه قهوه‌دوستان درباره کافه رنسانس می‌گویند</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-6 rounded-3xl relative">
+                    <div class="flex items-center gap-1 text-gold-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-coffee-200 text-xs leading-relaxed italic mb-6">
+                        "طراحی سه بعدی سایت محشره! اما مهم‌تر از اون کیفیت دانه‌های کلمبیا و دم‌آوری V60 کافه هست که تا حالا نظیرشو جایی نخورده بودم."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center font-bold">م‌ر</div>
+                        <div>
+                            <div class="text-white text-sm font-bold">مهدی رضایی</div>
+                            <div class="text-coffee-400 text-xs">کافه گرد و منتقد</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl relative">
+                    <div class="flex items-center gap-1 text-gold-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-coffee-200 text-xs leading-relaxed italic mb-6">
+                        "فضا و دکوراسیون کلاسیک کافه همراه با صدای موسیقی ملایم، بهترین جا برای کارهای فریلنسری و مطالعه است. اسپرسوهای فوق‌العاده‌ای دارن."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center font-bold">س‌ک</div>
+                        <div>
+                            <div class="text-white text-sm font-bold">سارا کاظمی</div>
+                            <div class="text-coffee-400 text-xs">طراح رابط کاربری</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card p-6 rounded-3xl relative">
+                    <div class="flex items-center gap-1 text-gold-400 mb-4">
+                        <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star font-regular opacity-40"></i>
+                    </div>
+                    <p class="text-coffee-200 text-xs leading-relaxed italic mb-6">
+                        "ماشین حساب نسبت دم‌آوری توی سایت خیلی کاربردی بود. الان خودم توی خانه دقیق‌ترین قهوه‌ها رو دم می‌کنم. ممنون از آموزش‌های خوبتون."
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/20 text-gold-400 flex items-center justify-center font-bold">ام</div>
+                        <div>
+                            <div class="text-white text-sm font-bold">امین مرادی</div>
+                            <div class="text-coffee-400 text-xs">علاقه‌مند به قهوه دمی</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-coffee-950 border-t border-coffee-800 text-coffee-300 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 space-x-reverse mb-4">
+                        <i class="fa-solid fa-mug-hot text-2xl text-gold-400"></i>
+                        <span class="text-xl font-black text-white">کافه رنسانس</span>
+                    </div>
+                    <p class="text-xs text-coffee-400 leading-relaxed">
+                        تجربه‌ای متفاوت از هنر دم‌آوری قهوه با ترکیب سنت کلاسیک و فناوری روز دنیا.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">دسترسی سریع</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#3d-experience" class="hover:text-gold-400 transition">تجربه 3 بعدی</a></li>
+                        <li><a href="#encyclopedia" class="hover:text-gold-400 transition">دانشنامه قهوه</a></li>
+                        <li><a href="#menu" class="hover:text-gold-400 transition">منو و قیمت‌ها</a></li>
+                        <li><a href="#calculator" class="hover:text-gold-400 transition">ماشین حساب دم‌آوری</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">شبکه‌های اجتماعی</h4>
+                    <div class="flex space-x-4 space-x-reverse text-lg">
+                        <a href="#" class="w-9 h-9 rounded-full bg-coffee-800 flex items-center justify-center hover:bg-gold-500 hover:text-coffee-900 transition"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-coffee-800 flex items-center justify-center hover:bg-gold-500 hover:text-coffee-900 transition"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-coffee-800 flex items-center justify-center hover:bg-gold-500 hover:text-coffee-900 transition"><i class="fa-brands fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">خبرنامه کافه</h4>
+                    <p class="text-xs text-coffee-400 mb-3">از تخفیف‌ها و رویدادهای قهوه مطلع شوید:</p>
+                    <div class="flex">
+                        <input type="email" placeholder="ایمیل شما..." class="bg-coffee-900 border border-coffee-700 text-xs px-3 py-2 rounded-r-xl w-full text-white focus:outline-none">
+                        <button class="bg-gold-500 text-coffee-900 text-xs px-4 rounded-l-xl font-bold hover:bg-gold-400 transition">عضویت</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-coffee-900 pt-6 text-center text-xs text-coffee-500">
+                &copy; ۱۴۰۵ کافه دو رنسانس - تمامی حقوق مادی و معنوی محفوظ است. طراحی سه بعدی اختصاصی.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Audio Synth Sound Effects (Ambient Cafe White Noise) -->
+    <script>
+        let audioCtx;
+        let isPlaying = false;
+        let noiseNode;
+
+        function toggleAudio() {
+            const soundIcon = document.getElementById('sound-icon');
+            const soundText = document.getElementById('sound-text');
+
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            if (!isPlaying) {
+                // Generate soft white noise to simulate cafe atmosphere
+                const bufferSize = audioCtx.sampleRate * 2;
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                for (let i = 0; i < bufferSize; i++) {
+                    data[i] = Math.random() * 2 - 1;
+                }
+
+                noiseNode = audioCtx.createBufferSource();
+                noiseNode.buffer = buffer;
+                noiseNode.loop = true;
+
+                // Filter to make it sound like warm rain/cafe background
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 400;
+
+                const gainNode = audioCtx.createGain();
+                gainNode.gain.value = 0.03; // Very soft volume
+
+                noiseNode.connect(filter);
+                filter.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+
+                noiseNode.start();
+                isPlaying = true;
+                soundIcon.className = "fa-solid fa-volume-high text-gold-400 animate-pulse";
+                soundText.innerText = "صدای فعال";
+            } else {
+                if (noiseNode) noiseNode.stop();
+                isPlaying = false;
+                soundIcon.className = "fa-solid fa-volume-xmark text-gold-400";
+                soundText.innerText = "صدای کافه";
+            }
+        }
+    </script>
+
+    <!-- Menu Items Data & Filtering Logic -->
+    <script>
+        const menuData = [
+            { id: 1, title: "اسپرسو سینگل سینگل اورجین", cat: "espresso", price: "۵۵,۰۰۰ تومان", desc: "۱۰۰٪ عربیکای کلمبیا با اسیدیته شفاف و طعم‌یاد مرکباتی", icon: "fa-mug-hot" },
+            { id: 2, title: "کاپوچینو ایتالیایی", cat: "espresso", price: "۷۵,۰۰۰ تومان", desc: "ترکیب اسپرسو، شیر بخار داده شده و فوم مخملی غلیظ", icon: "fa-mug-saucer" },
+            { id: 3, title: "قهوه دمی V60", cat: "brew", price: "۸۵,۰۰۰ تومان", desc: "دم‌آوری تخصصی چککه‌ای با دانه‌های برتر اتیوپی ینیگارچف", icon: "fa-filter" },
+            { id: 4, title: "کلد برو (دم‌آوری سرد)", cat: "cold", price: "۹۰,۰۰۰ تومان", desc: "عصاره‌گیری ۱۲ ساعته با آب سرد، بسیار ملایم و کم‌اسید", icon: "fa-glass-water-droplet" },
+            { id: 5, title: "آیس لات کارامل", cat: "cold", price: "۸۵,۰۰۰ تومان", desc: "اسپرسو، شیر تازه، یخ و سس کارامل دست‌ساز", icon: "fa-whiskey-glass" },
+            { id: 6, title: "کمکس رنسانس (دو نفره)", cat: "brew", price: "۱4۰,۰۰۰ تومان", desc: "شفاف‌ترین طعم قهوه با فیلتر ضخیم اختصاصی کمکس", icon: "fa-flask" }
+        ];
+
+        function renderMenu(items) {
+            const container = document.getElementById('menu-container');
+            container.innerHTML = items.map(item => `
+                <div class="glass-card rounded-2xl p-6 hover:border-gold-500/60 transition duration-300 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-400 flex items-center justify-center text-2xl">
+                                <i class="fa-solid ${item.icon}"></i>
+                            </div>
+                            <span class="text-gold-400 font-bold text-sm bg-gold-500/10 px-3 py-1 rounded-full border border-gold-500/20">${item.price}</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">${item.title}</h3>
+                        <p class="text-coffee-300 text-xs leading-relaxed mb-4">${item.desc}</p>
+                    </div>
+                    <button onclick="quickOrder('${item.title}')" class="w-full bg-coffee-800 hover:bg-gold-500 hover:text-coffee-900 text-white font-bold text-xs py-2.5 rounded-xl transition">
+                        سفارش سریع
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function filterMenu(category) {
+            // Update buttons style
+            const btns = document.querySelectorAll('.menu-filter-btn');
+            btns.forEach(btn => {
+                btn.className = "menu-filter-btn px-4 py-2 rounded-xl bg-coffee-800 hover:bg-gold-500 hover:text-coffee-900 text-white font-bold text-sm transition";
+            });
+            event.target.className = "menu-filter-btn px-4 py-2 rounded-xl bg-gold-500 text-coffee-900 font-bold text-sm";
+
+            if (category === 'all') {
+                renderMenu(menuData);
+            } else {
+                const filtered = menuData.filter(i => i.cat === category);
+                renderMenu(filtered);
+            }
+        }
+
+        function quickOrder(title) {
+            const resSection = document.getElementById('reservation');
+            resSection.scrollIntoView({ behavior: 'smooth' });
+            alert(`آیتم "${title}" به لیست سفارش حضوری شما افزوده شد. لطفا فرم رزرو را تکمیل نمایید.`);
+        }
+
+        // Initialize Menu
+        renderMenu(menuData);
+    </script>
+
+    <!-- Brewing Calculator Logic -->
+    <script>
+        function calculateBrew() {
+            const ratioStr = document.getElementById('brew-method').value;
+            const waterVal = parseInt(document.getElementById('water-range').value);
+            
+            document.getElementById('water-val').innerText = `${waterVal} ml`;
+
+            const ratioNum = parseFloat(ratioStr.split(':')[1]);
+            const coffeeNeeded = (waterVal / ratioNum).toFixed(1);
+
+            document.getElementById('coffee-result').innerHTML = `${coffeeNeeded} <span class="text-lg text-white">گرم</span>`;
+            document.getElementById('water-result').innerHTML = `${waterVal} <span class="text-sm text-coffee-300">میلی‌لیتر</span>`;
+        }
+
+        function handleReserve(e) {
+            e.preventDefault();
+            const msg = document.getElementById('res-msg');
+            msg.classList.remove('hidden');
+            setTimeout(() => {
+                msg.classList.add('hidden');
+                document.getElementById('res-form').reset();
+            }, 4000);
+        }
+    </script>
+
+    <!-- THREE.JS 3D Interactive Coffee Scene Engine -->
+    <script>
+        let scene, camera, renderer, coffeeCupGroup, steamParticles = [];
+        let autoRotate = true;
+        let isMouseDown = false;
+        let mouseX = 0, mouseY = 0;
+
+        function init3D() {
+            const container = document.getElementById('canvas-container');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            // Scene
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x1a0d02, 0.05);
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+            camera.position.set(0, 3, 7);
+            camera.lookAt(0, 0, 0);
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            container.appendChild(renderer.domElement);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffecd6, 0.8);
+            scene.add(ambientLight);
+
+            const mainLight = new THREE.SpotLight(0xf6ca65, 2.5);
+            mainLight.position.set(5, 8, 5);
+            mainLight.castShadow = true;
+            mainLight.shadow.mapSize.width = 1024;
+            mainLight.shadow.mapSize.height = 1024;
+            scene.add(mainLight);
+
+            const rimLight = new THREE.PointLight(0x8b5a2b, 1.5);
+            rimLight.position.set(-5, -2, -5);
+            scene.add(rimLight);
+
+            // Build 3D Coffee Cup Group
+            coffeeCupGroup = new THREE.Group();
+
+            // Ceramic Cup Material
+            const cupMaterial = new THREE.MeshStandardMaterial({
+                color: 0x2d1806,
+                roughness: 0.2,
+                metalness: 0.1,
+            });
+
+            // Gold Rim Material
+            const goldMaterial = new THREE.MeshStandardMaterial({
+                color: 0xe5b233,
+                roughness: 0.3,
+                metalness: 0.8,
+            });
+
+            // Coffee Liquid Material
+            const coffeeLiquidMaterial = new THREE.MeshStandardMaterial({
+                color: 0x3d1c06,
+                roughness: 0.1,
+                metalness: 0.0,
+            });
+
+            // Cup Body (Cylinder)
+            const cupGeo = new THREE.CylinderGeometry(1.2, 0.9, 1.8, 32, 1, true);
+            const cupMesh = new THREE.Mesh(cupGeo, cupMaterial);
+            cupMesh.castShadow = true;
+            cupMesh.receiveShadow = true;
+            coffeeCupGroup.add(cupMesh);
+
+            // Cup Bottom
+            const bottomGeo = new THREE.CylinderGeometry(0.9, 0.9, 0.1, 32);
+            const bottomMesh = new THREE.Mesh(bottomGeo, cupMaterial);
+            bottomMesh.position.y = -0.85;
+            coffeeCupGroup.add(bottomMesh);
+
+            // Gold Rim Accent
+            const rimGeo = new THREE.TorusGeometry(1.2, 0.04, 16, 32);
+            const rimMesh = new THREE.Mesh(rimGeo, goldMaterial);
+            rimMesh.rotation.x = Math.PI / 2;
+            rimMesh.position.y = 0.9;
+            coffeeCupGroup.add(rimMesh);
+
+            // Cup Handle (Torus Segment)
+            const handleGeo = new THREE.TorusGeometry(0.6, 0.12, 16, 32, Math.PI * 1.2);
+            const handleMesh = new THREE.Mesh(handleGeo, cupMaterial);
+            handleMesh.position.set(1.3, 0, 0);
+            handleMesh.rotation.z = -Math.PI / 2;
+            coffeeCupGroup.add(handleMesh);
+
+            // Coffee Liquid Level Inside Cup
+            const liquidGeo = new THREE.CylinderGeometry(1.15, 1.15, 0.05, 32);
+            const liquidMesh = new THREE.Mesh(liquidGeo, coffeeLiquidMaterial);
+            liquidMesh.position.y = 0.7;
+            coffeeCupGroup.add(liquidMesh);
+
+            // Saucer Plate
+            const saucerGeo = new THREE.CylinderGeometry(2.0, 1.2, 0.15, 32);
+            const saucerMesh = new THREE.Mesh(saucerGeo, cupMaterial);
+            saucerMesh.position.y = -1.0;
+            saucerMesh.receiveShadow = true;
+            coffeeCupGroup.add(saucerMesh);
+
+            // Scatter 3D Coffee Beans on Plate Base
+            const beanGeo = new THREE.SphereGeometry(0.12, 8, 8);
+            beanGeo.scale(1, 0.6, 1.6); // Bean shape
+            const beanMat = new THREE.MeshStandardMaterial({ color: 0x1f0e03, roughness: 0.5 });
+
+            for (let i = 0; i < 15; i++) {
+                const bean = new THREE.Mesh(beanGeo, beanMat);
+                const angle = Math.random() * Math.PI * 2;
+                const radius = 1.3 + Math.random() * 0.5;
+                bean.position.set(Math.cos(angle) * radius, -0.9, Math.sin(angle) * radius);
+                bean.rotation.set(Math.random(), Math.random(), Math.random());
+                bean.castShadow = true;
+                coffeeCupGroup.add(bean);
+            }
+
+            scene.add(coffeeCupGroup);
+
+            // Create Animated Steam Particles
+            const steamGeo = new THREE.SphereGeometry(0.08, 8, 8);
+            const steamMat = new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0.25
+            });
+
+            for (let i = 0; i < 25; i++) {
+                const p = new THREE.Mesh(steamGeo, steamMat);
+                resetSteamParticle(p);
+                scene.add(p);
+                steamParticles.push(p);
+            }
+
+            // Mouse Interaction Events
+            const domEl = renderer.domElement;
+            domEl.addEventListener('mousedown', (e) => {
+                isMouseDown = true;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            window.addEventListener('mouseup', () => { isMouseDown = false; });
+
+            domEl.addEventListener('mousemove', (e) => {
+                if (!isMouseDown) return;
+                const deltaX = e.clientX - mouseX;
+                const deltaY = e.clientY - mouseY;
+
+                coffeeCupGroup.rotation.y += deltaX * 0.008;
+                coffeeCupGroup.rotation.x += deltaY * 0.008;
+
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Touch support for mobile
+            domEl.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) {
+                    isMouseDown = true;
+                    mouseX = e.touches[0].clientX;
+                    mouseY = e.touches[0].clientY;
+                }
+            });
+
+            domEl.addEventListener('touchmove', (e) => {
+                if (!isMouseDown || e.touches.length !== 1) return;
+                const deltaX = e.touches[0].clientX - mouseX;
+                const deltaY = e.touches[0].clientY - mouseY;
+
+                coffeeCupGroup.rotation.y += deltaX * 0.008;
+                coffeeCupGroup.rotation.x += deltaY * 0.008;
+
+                mouseX = e.touches[0].clientX;
+                mouseY = e.touches[0].clientY;
+            });
+
+            domEl.addEventListener('touchend', () => { isMouseDown = false; });
+
+            // Handle Resize
+            window.addEventListener('resize', onWindowResize);
+
+            // Start Loop
+            animate();
+        }
+
+        function resetSteamParticle(p) {
+            p.position.x = (Math.random() - 0.5) * 0.8;
+            p.position.y = 0.8 + Math.random() * 0.2;
+            p.position.z = (Math.random() - 0.5) * 0.8;
+            p.scale.setScalar(0.5 + Math.random() * 0.8);
+        }
+
         function animate() {
             requestAnimationFrame(animate);
 
-            // Rotate 3D Object smoothly based on scroll position
-            mesh.rotation.y = scrollPercent * Math.PI * 4;
-            mesh.rotation.x = scrollPercent * Math.PI * 2;
+            // Gentle Idle Rotation
+            if (autoRotate && !isMouseDown) {
+                coffeeCupGroup.rotation.y += 0.005;
+            }
 
-            // Shift position X/Y based on scroll
-            mesh.position.x = Math.sin(scrollPercent * Math.PI * 2) * 1.5;
-            mesh.position.z = Math.cos(scrollPercent * Math.PI) * 1.5;
+            // Animate Steam Floating Up
+            steamParticles.forEach(p => {
+                p.position.y += 0.012;
+                p.position.x += Math.sin(p.position.y * 3) * 0.003;
+                if (p.position.y > 2.8) {
+                    resetSteamParticle(p);
+                }
+            });
 
             renderer.render(scene, camera);
         }
-        animate();
 
-        // Window Resize Handling
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            camera.aspect = width / height;
             camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
+            renderer.setSize(width, height);
+        }
+
+        // 3D Control Helpers
+        function toggleRotation() {
+            autoRotate = !autoRotate;
+            document.getElementById('rot-btn-text').innerText = autoRotate ? "توقف چرخش" : "شروع چرخش";
+        }
+
+        function resetCamera() {
+            coffeeCupGroup.rotation.set(0, 0, 0);
+            camera.position.set(0, 3, 7);
+        }
+
+        function changeSceneColor(mode) {
+            if (mode === 'warm') {
+                scene.background = new THREE.Color(0x0d0601);
+                scene.fog.color = new THREE.Color(0x0d0601);
+            } else {
+                scene.background = null;
+                scene.fog.color = new THREE.Color(0x1a0d02);
+            }
+        }
+
+        // Window Onload Trigger
+        window.onload = function () {
+            init3D();
+            calculateBrew();
+        };
     </script>
 </body>
 </html>
+
+```
