@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صنایع کشتی‌سازی و دریانوردی OCEANIC CRAFT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tahoma', sans-serif;
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #0b131f;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+        
+        /* Header & Navigation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(11, 19, 31, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00b4d8;
+            letter-spacing: 2px;
+        }
+        
+        /* Desktop Menu */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+        .nav-links li a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        .nav-links li a:hover {
+            color: #00b4d8;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .btn-contact {
+            background-color: #00b4d8;
+            color: #0b131f;
+            padding: 10px 22px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        .btn-contact:hover {
+            background-color: #90e0ef;
+        }
+
+        /* Hamburger Icon */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 25px;
+            height: 18px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background-color: #00b4d8;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            text-align: center;
+            background: linear-gradient(rgba(11, 19, 31, 0.8), rgba(11, 19, 31, 0.9)), 
+                        url('https://images.unsplash.com/photo-1559136555-9303baea8ebd?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 650px;
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            background-color: #111c2e;
+            padding: 100px 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 70vh;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .content-text {
+            max-width: 500px;
+            text-align: right;
+        }
+        .content-text h3 {
+            color: #00b4d8;
+            font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        .content-text h2 {
+            font-size: 2.3rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+        .content-text p {
+            color: #94a3b8;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        .content-image {
+            width: 450px;
+            height: 320px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+        }
+        .content-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Brands Section */
+        .brands-section {
+            background-color: #0b131f;
+            padding: 80px 50px;
+            text-align: center;
+        }
+        .brands-section h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+        .brands-section p {
+            color: #94a3b8;
+            margin-bottom: 40px;
+        }
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .brand-card {
+            background: #111c2e;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            padding: 30px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #00b4d8;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .brand-card:hover {
+            transform: translateY(-5px);
+            border-color: #00b4d8;
+            box-shadow: 0 8px 20px rgba(0, 180, 216, 0.15);
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 25px;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 75%;
+                height: 100vh;
+                background-color: #0b131f;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 35px;
+                transition: right 0.4s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+                border-left: 1px solid rgba(0, 180, 216, 0.2);
+            }
+            .nav-links.active {
+                right: 0;
+            }
+            .content-section {
+                flex-direction: column;
+                padding: 60px 25px;
+                gap: 40px;
+            }
+            .content-image {
+                width: 100%;
+                height: 250px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">OCEANIC CRAFT</div>
+        
+        <nav>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#hero" onclick="closeMenu()">صفحه اصلی</a></li>
+                <li><a href="#engineering" onclick="closeMenu()">طراحی و مهندسی</a></li>
+                <li><a href="#construction" onclick="closeMenu()">کشتی‌سازی</a></li>
+                <li><a href="#repairs" onclick="closeMenu()">تعمیرات و بازسازی</a></li>
+                <li><a href="#brands" onclick="closeMenu()">برندهای همکار</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-actions">
+            <a href="#contact" class="btn-contact">سفارش پروژه</a>
+            <!-- Hamburger Icon -->
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <h1>پیشرو در صنایع ساخت و مهندسی کشتی</h1>
+        <p>طراحی، پیاده‌سازی و نوسازی انواع شناورهای تجاری، اقیانوس‌پیما و یات‌های لوکس با استانداردهای بین‌المللی.</p>
+    </section>
+
+    <!-- Section 1: Engineering -->
+    <div class="content-section" id="engineering">
+        <div class="content-text">
+            <h3>بخش اول</h3>
+            <h2>طراحی و مهندسی دریا</h2>
+            <p>محاسبات دقیق هیدرودینامیک، تحلیل مقاومت بدنه و بهینه‌سازی مصرف سوخت با استفاده از مدرن‌ترین نرم‌افزارهای شبیه‌سازی دریایی.</p>
+        </div>
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80" alt="Ship Engineering">
+        </div>
+    </div>
+
+    <!-- Section 2: Construction -->
+    <div class="content-section" id="construction" style="background-color: #0b131f;">
+        <div class="content-image">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80" alt="Shipbuilding Yard">
+        </div>
+        <div class="content-text">
+            <h3>بخش دوم</h3>
+            <h2>ساخت و مونتاژ سازه</h2>
+            <p>مونتاژ قطعات فولادی فول‌سایز، جوشکاری تخصصی زیرآب و استانداردسازی بدنه در حوضچه‌های خشک اختصاصی.</p>
+        </div>
+    </div>
+
+    <!-- Brands Section -->
+    <section class="brands-section" id="brands">
+        <h2>برندهای برتر و همکاران بین‌المللی</h2>
+        <p>همکاری با بزرگ‌ترین نام‌های صنعت کشتی‌سازی و تامین تجهیزات دریانوردی جهان</p>
+        
+        <div class="brands-grid">
+            <div class="brand-card">Lürssen Yachts</div>
+            <div class="brand-card">Fincantieri</div>
+            <div class="brand-card">Meyer Werft</div>
+            <div class="brand-card">Damen Shipyards</div>
+            <div class="brand-card">Hyundai Heavy Industries</div>
+            <div class="brand-card">Wärtsilä Engine</div>
+        </div>
+    </section>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        function toggleMenu() {
+            navLinks.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            navLinks.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
