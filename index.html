@@ -14,20 +14,25 @@ body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:50%;
 body::before{width:60vmax;height:60vmax;background:var(--sec);top:-20vmax;left:-15vmax}
 body::after{width:55vmax;height:55vmax;background:var(--acc);bottom:-25vmax;right:-15vmax;opacity:.4}
 .glass{background:var(--glass);border:1px solid var(--gb);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:0 12px 40px var(--sh),inset 0 1px 0 var(--gb)}
-header{position:sticky;top:calc(10px + env(safe-area-inset-top,0px));z-index:20;margin:10px auto 0;width:min(1100px,calc(100% - 20px));border-radius:999px;display:flex;align-items:center;gap:10px;padding:8px 10px 8px 16px}
+header{position:sticky;top:calc(10px + env(safe-area-inset-top,0px));z-index:20;margin:10px auto 0;width:min(1100px,calc(100% - 20px));border-radius:999px;display:flex;align-items:center;gap:6px;padding:8px 10px 8px 12px}
 .logo{font-weight:800;font-size:1.15rem;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
 .logo i{font-style:normal;background:var(--acc);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center}
 nav{display:flex;gap:2px;margin-inline-start:auto}
 nav button,.ic{background:none;border:0;color:var(--tx);font:inherit;font-size:.88rem;padding:6px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:.25s}
 nav button:hover,.ic:hover{background:var(--gb)}
-.ic{border:1px solid var(--gb);padding:5px 12px;font-size:1.05rem}
+.ic{border:1px solid var(--gb);padding:5px 12px;font-size:1.05rem;position:relative}
+.bd{position:absolute;top:-6px;inset-inline-start:-6px;background:var(--acc);color:#fff;font-size:.7rem;min-width:19px;height:19px;border-radius:19px;display:grid;place-items:center;font-weight:800;line-height:1}
 .burger{display:none}
-@media(max-width:780px){nav{display:none}.burger{display:block;margin-inline-start:auto}}
-#drawer{position:fixed;inset:0 0 0 auto;width:min(320px,86vw);z-index:30;transform:translateX(105%);visibility:hidden;transition:transform .45s cubic-bezier(.7,0,.2,1),visibility .45s;padding:70px 20px 20px;border-radius:28px 0 0 28px;background:var(--bg);overflow:auto}
-#drawer.o{transform:none;visibility:visible}
-#drawer h3{margin:10px 0 6px;color:var(--acc)}
+#lg span{font-size:.85rem}
+@media(max-width:780px){nav{display:none}.burger{display:block}header .ic:first-of-type{margin-inline-start:auto}#lg span{display:none}.logo{font-size:1rem}}
+#drawer,#cart{position:fixed;top:0;bottom:0;width:min(340px,88vw);z-index:30;transition:transform .45s cubic-bezier(.7,0,.2,1),visibility .45s;padding:70px 20px 20px;background:var(--bg);overflow:auto;visibility:hidden}
+#drawer{right:0;transform:translateX(105%);border-radius:28px 0 0 28px}
+#cart{left:0;transform:translateX(-105%);border-radius:0 28px 28px 0}
+#drawer.o,#cart.o{transform:none;visibility:visible}
+#drawer h3,#cart h3{margin:10px 0 6px;color:var(--acc)}
 #drawer a{display:block;padding:10px 14px;margin:6px 0;border-radius:16px;color:var(--tx);text-decoration:none;background:var(--glass);border:1px solid var(--gb)}
-#x{position:absolute;top:18px;inset-inline-start:18px;background:none;border:0;color:var(--tx);font-size:1.5rem;cursor:pointer}
+.x{position:absolute;top:18px;inset-inline-start:18px;background:none;border:0;color:var(--tx);font-size:1.5rem;cursor:pointer}
+#cart .x{inset-inline-start:auto;inset-inline-end:18px}
 #shade{position:fixed;inset:0;background:#0007;z-index:25;opacity:0;pointer-events:none;transition:.3s}#shade.o{opacity:1;pointer-events:auto}
 section{padding:64px 18px;max-width:1100px;margin:auto}
 h2{font-size:clamp(1.6rem,5vw,2.3rem);font-weight:800}h2 span{color:var(--acc)}
@@ -70,6 +75,33 @@ h2{font-size:clamp(1.6rem,5vw,2.3rem);font-weight:800}h2 span{color:var(--acc)}
 .price{color:var(--acc);font-weight:800;font-size:1.1rem;margin:6px 0 10px}
 .back{background:var(--glass);border:1px solid var(--gb);color:var(--tx);padding:8px 18px;border-radius:999px;font:inherit;cursor:pointer;margin-bottom:20px}
 .note{color:var(--mut);font-size:.8rem;margin-top:24px}
+/* محصول، سبد، مودال */
+.pp{display:grid;gap:26px;grid-template-columns:1fr}
+@media(min-width:760px){.pp{grid-template-columns:1fr 1fr;align-items:start}}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--gb);background:var(--glass);border-radius:999px;overflow:hidden}
+.qty button{background:none;border:0;color:var(--tx);font:inherit;font-size:1.2rem;width:38px;height:40px;cursor:pointer}
+.qty b{min-width:34px;text-align:center}
+.tabs{display:flex;gap:6px;margin:34px 0 14px}
+.tb{background:var(--glass);border:1px solid var(--gb);color:var(--tx);font:inherit;padding:8px 18px;border-radius:999px;cursor:pointer}
+.tb.a{background:var(--acc);color:#fff;border-color:var(--acc)}
+.pn{border-radius:26px;padding:20px}
+.sp{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem}
+.sp td{padding:8px 4px;border-bottom:1px solid var(--gb)}.sp td:first-child{color:var(--mut);width:36%}
+.rv{padding:12px 0;border-bottom:1px solid var(--gb)}.rv b{margin-inline-end:8px}.st{color:#e8a33d;letter-spacing:2px}
+input,textarea,select{width:100%;font:inherit;color:var(--tx);background:var(--glass);border:1px solid var(--gb);border-radius:16px;padding:10px 14px;margin:4px 0 10px;outline:0}
+input:focus,textarea:focus{border-color:var(--acc)}
+label{font-size:.88rem;color:var(--mut)}
+.ci{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--gb)}
+.ci .ph{width:76px;margin:0;flex:none;border-radius:12px}.ci div{flex:1;min-width:0}.ci h4{font-size:.92rem;line-height:1.5}
+.ci .qty button{width:30px;height:32px}.ci small{color:var(--mut)}
+.rm{background:none;border:0;cursor:pointer;font-size:1.1rem}
+.tot{display:flex;justify-content:space-between;font-weight:800;margin:16px 0}
+#modal{position:fixed;inset:0;z-index:40;display:none;place-items:center;background:#0008;padding:18px}
+#modal.o{display:grid}
+.mbx{width:min(400px,100%);border-radius:28px;padding:28px 22px 22px;background:var(--bg);position:relative}
+#toast{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom,0px));left:50%;transform:translate(-50%,30px);background:var(--pri);color:var(--sur);padding:10px 22px;border-radius:999px;z-index:60;opacity:0;transition:.35s;pointer-events:none;white-space:nowrap}
+#toast.o{opacity:1;transform:translate(-50%,0)}
 footer{width:min(1100px,calc(100% - 20px));margin:40px auto 14px;border-radius:32px;padding:34px 24px 18px}
 footer.glass{--tx:var(--sur);--mut:var(--sec);--gb:rgba(255,255,255,.18);background:var(--pri);color:var(--tx)}
 footer.glass h5{color:var(--acc)}
@@ -81,9 +113,14 @@ footer p{color:var(--mut);font-size:.9rem}
 </style></head><body>
 <header class="glass"><div class="logo" onclick="go('')"><i>⚓</i>اقیانوس</div>
 <nav><button data-s="slider">تایتانیک</button><button data-s="brands">کشتی‌سازان</button><button data-s="tips">نکات ساخت</button><button data-s="types">انواع کشتی</button></nav>
+<button class="ic" id="lg" title="ورود / ثبت‌نام">👤 <span>ورود / ثبت‌نام</span></button>
+<button class="ic" id="cb" title="سبد خرید" aria-label="سبد خرید">🛒<span class="bd" id="cn">0</span></button>
 <button class="ic" id="th" title="تغییر تم">🎨</button><button class="ic burger" id="bg" aria-label="منو">☰</button></header>
 <div id="shade"></div>
-<aside id="drawer" class="glass"><button id="x">✕</button><h3>بخش‌ها</h3><div id="ds"></div><h3>انواع کشتی</h3><div id="dl"></div></aside>
+<aside id="drawer" class="glass"><button class="x" id="x">✕</button><h3>بخش‌ها</h3><div id="ds"></div><h3>انواع کشتی</h3><div id="dl"></div></aside>
+<aside id="cart" class="glass"><button class="x" id="cx">✕</button><h3>🛒 سبد خرید</h3><div id="cl"></div></aside>
+<div id="modal"><div class="mbx glass"><button class="x" id="mx">✕</button><div id="mb"></div></div></div>
+<div id="toast"></div>
 <main id="app"></main>
 <footer class="glass"><div class="fg">
 <div><h5>⚓ اقیانوس</h5><p>روایت غول‌های دریا، از تایتانیک تا ناوگان امروز؛ با قیمت و راهنمای ساخت.</p></div>
@@ -93,7 +130,11 @@ footer p{color:var(--mut);font-size:.9rem}
 <div class="cp">© ۲۰۲۶ اقیانوس · ساخته‌شده با عشق به دریا</div></footer>
 <script>
 const $=s=>document.querySelector(s);
-/* عکس واقعی: آدرس عکس را اینجا بگذارید (یا data:URI). تا آن موقع، تصویر برداری نمایش داده می‌شود. */
+const ld=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const fa=n=>(+n).toLocaleString('fa-IR');
+const fm=n=>fa(Math.round(n*1e6))+' دلار';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const IMG={titanic:'',olympic:'',britannic:'',lusitania:'',mauretania:'',cruise:'',cargo:'',tanker:'',yacht:'',fish:'',boat:''};
 function ship(k,c='#14B8A6'){const h=`<path d="M10 78 L290 78 L262 104 L38 104Z" fill="#0B3D3B" stroke="${c}" stroke-width="2"/><rect x="10" y="74" width="280" height="5" fill="${c}"/>`;
 const w=`<path d="M0 108 q15 -9 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0" fill="none" stroke="#60A5FA" stroke-width="3" opacity=".7"/>`;
@@ -107,13 +148,15 @@ else if(k=='boat')s=`<path d="M60 78 L90 62 L200 62 L240 78Z" fill="#fff"/><path
 else s=`<rect x="30" y="56" width="240" height="20" rx="3" fill="#1a1a1a"/><rect x="50" y="42" width="190" height="15" fill="#eaf0fa"/><path d="M80 42V16M122 42V10M164 42V16M206 42V10" stroke="#d9a441" stroke-width="12"/>`;
 return `<svg viewBox="0 0 300 120">${w}${s}${h}</svg>`}
 const pic=(id,c)=>`<div class="ph">${IMG[id]?`<img src="${IMG[id]}" alt="" loading="lazy">`:ship(id,c)}</div>`;
+/* m: [نام مدل، بازه قیمت، قیمت میانگین به میلیون دلار] */
 const T=[
-{id:'cruise',e:'🛳️',n:'کشتی کروز',d:'شهرهای شناور برای هزاران مسافر.',m:[['کلاس آیکون (۵۶۰۰ مسافر)','حدود ۲ میلیارد دلار'],['کلاس ویندجمر/متوسط','حدود ۸۰۰ تا ۱٬۲۰۰ میلیون دلار'],['کشتی اکتشافی کوچک','حدود ۱۵۰ تا ۳۰۰ میلیون دلار']]},
-{id:'cargo',e:'📦',n:'کانتینربر',d:'ستون فقرات تجارت جهانی.',m:[['۲۴٬۰۰۰ TEU','حدود ۲۲۰ تا ۲۶۰ میلیون دلار'],['۱۵٬۰۰۰ TEU','حدود ۱۴۰ تا ۱۷۰ میلیون دلار'],['فیدر ۲٬۵۰۰ TEU','حدود ۳۵ تا ۵۰ میلیون دلار']]},
-{id:'tanker',e:'🛢️',n:'نفتکش',d:'غول‌های حمل نفت خام و فرآورده.',m:[['VLCC (۳۰۰٬۰۰۰ تن)','حدود ۱۲۰ تا ۱۳۵ میلیون دلار'],['سوئزمکس','حدود ۸۰ تا ۹۰ میلیون دلار'],['آفرامکس','حدود ۶۵ تا ۷۵ میلیون دلار']]},
-{id:'yacht',e:'⛵',n:'یات لوکس',d:'اوج تجمل روی آب.',m:[['سوپریات ۱۰۰ متری','حدود ۲۰۰ تا ۳۰۰ میلیون دلار'],['یات ۵۰ متری','حدود ۳۰ تا ۴۵ میلیون دلار'],['یات ۲۵ متری','حدود ۵ تا ۱۰ میلیون دلار']]},
-{id:'fish',e:'🎣',n:'کشتی ماهیگیری',d:'کار سخت دریا، با بدنه‌ای مقاوم.',m:[['ترالر ۳۰ متری','حدود ۳ تا ۶ میلیون دلار'],['لنج ۱۸ متری','حدود ۸۰۰ هزار تا ۱.۵ میلیون دلار'],['قایق ۱۲ متری','حدود ۲۵۰ تا ۵۰۰ هزار دلار']]},
-{id:'boat',e:'🚤',n:'قایق تفریحی',d:'برای آخر هفته‌های بی‌نظیر.',m:[['کروزر ۱۲ متری','حدود ۴۰۰ تا ۹۰۰ هزار دلار'],['اسپیدبوت ۹ متری','حدود ۱۰۰ تا ۲۵۰ هزار دلار'],['قایق ۶ متری','حدود ۲۰ تا ۶۰ هزار دلار']]}];
+{id:'cruise',e:'🛳️',n:'کشتی کروز',d:'شهرهای شناور برای هزاران مسافر.',t:'۳۶ تا ۴۸ ماه',x:'کشتی‌های کروز مجموعه‌ای از کابین، رستوران، استخر و سالن نمایش را روی یک بدنه فولادی جمع می‌کنند. هزینه نهایی به تعداد کابین، سیستم پیشران (LNG یا دیزلی) و میزان سفارشی‌سازی داخلی بستگی دارد.',m:[['کلاس آیکون (۵۶۰۰ مسافر)','حدود ۲ میلیارد دلار',2000],['کلاس ویندجمر/متوسط','حدود ۸۰۰ تا ۱٬۲۰۰ میلیون دلار',1000],['کشتی اکتشافی کوچک','حدود ۱۵۰ تا ۳۰۰ میلیون دلار',225]]},
+{id:'cargo',e:'📦',n:'کانتینربر',d:'ستون فقرات تجارت جهانی.',t:'۲۴ تا ۳۶ ماه',x:'کانتینربرها بر اساس ظرفیت TEU طبقه‌بندی می‌شوند. کشتی‌های بزرگ‌تر هزینه حمل هر کانتینر را کم می‌کنند، اما به بنادر عمیق و جرثقیل‌های بزرگ نیاز دارند.',m:[['۲۴٬۰۰۰ TEU','حدود ۲۲۰ تا ۲۶۰ میلیون دلار',240],['۱۵٬۰۰۰ TEU','حدود ۱۴۰ تا ۱۷۰ میلیون دلار',155],['فیدر ۲٬۵۰۰ TEU','حدود ۳۵ تا ۵۰ میلیون دلار',42.5]]},
+{id:'tanker',e:'🛢️',n:'نفتکش',d:'غول‌های حمل نفت خام و فرآورده.',t:'۲۴ تا ۳۰ ماه',x:'نفتکش‌های مدرن بدنه دوجداره دارند تا خطر نشت کم شود. اندازه کشتی (VLCC، سوئزمکس، آفرامکس) مسیرهای قابل عبور و بنادر مقصد را تعیین می‌کند.',m:[['VLCC (۳۰۰٬۰۰۰ تن)','حدود ۱۲۰ تا ۱۳۵ میلیون دلار',127.5],['سوئزمکس','حدود ۸۰ تا ۹۰ میلیون دلار',85],['آفرامکس','حدود ۶۵ تا ۷۵ میلیون دلار',70]]},
+{id:'yacht',e:'⛵',n:'یات لوکس',d:'اوج تجمل روی آب.',t:'۱۸ تا ۴۸ ماه',x:'یات‌های لوکس معمولاً به‌صورت سفارشی ساخته می‌شوند؛ از چیدمان داخلی تا فضاهای رفاهی مثل هلی‌پد، استخر و ساحل خصوصی. نگهداری سالانه حدود ۱۰ درصد قیمت یات است.',m:[['سوپریات ۱۰۰ متری','حدود ۲۰۰ تا ۳۰۰ میلیون دلار',250],['یات ۵۰ متری','حدود ۳۰ تا ۴۵ میلیون دلار',37.5],['یات ۲۵ متری','حدود ۵ تا ۱۰ میلیون دلار',7.5]]},
+{id:'fish',e:'🎣',n:'کشتی ماهیگیری',d:'کار سخت دریا، با بدنه‌ای مقاوم.',t:'۸ تا ۲۰ ماه',x:'کشتی‌های ماهیگیری برای کار طولانی در دریای مواج طراحی می‌شوند: بدنه مقاوم، عرشه کار بزرگ، سردخانه و تجهیزات جابه‌جایی تور.',m:[['ترالر ۳۰ متری','حدود ۳ تا ۶ میلیون دلار',4.5],['لنج ۱۸ متری','حدود ۸۰۰ هزار تا ۱.۵ میلیون دلار',1.15],['قایق ۱۲ متری','حدود ۲۵۰ تا ۵۰۰ هزار دلار',0.375]]},
+{id:'boat',e:'🚤',n:'قایق تفریحی',d:'برای آخر هفته‌های بی‌نظیر.',t:'۲ تا ۸ ماه',x:'قایق‌های تفریحی برای استفاده روزانه و سفرهای کوتاه ساخته می‌شوند. موتور، تجهیزات ناوبری و کیفیت داخلی بیشترین تأثیر را روی قیمت دارند.',m:[['کروزر ۱۲ متری','حدود ۴۰۰ تا ۹۰۰ هزار دلار',0.65],['اسپیدبوت ۹ متری','حدود ۱۰۰ تا ۲۵۰ هزار دلار',0.175],['قایق ۶ متری','حدود ۲۰ تا ۶۰ هزار دلار',0.04]]}];
+const REV=[['سارا م.',5,'کیفیت ساخت عالی بود و مشاوره‌ی تیم فروش دقیق و صادقانه.'],['کامران ر.',4,'تحویل کمی طولانی شد، ولی نتیجه‌ی نهایی ارزشش را داشت.']];
 const S=[['titanic','تایتانیک','۱۹۱۲ · ۲۶۹ متر · هارلند و ولف','نماد غم‌انگیزترین سفر تاریخ؛ در نخستین سفرش پس از برخورد با کوه یخ غرق شد.'],
 ['olympic','المپیک','۱۹۱۱ · خواهر ارشد تایتانیک','تقریباً هم‌شکل تایتانیک و با عمری موفق، بیش از ۲۴ سال خدمت کرد.'],
 ['britannic','بریتانیک','۱۹۱۴ · کشتی بیمارستانی','سومین خواهر؛ با طراحی ایمن‌تر ساخته شد ولی در جنگ جهانی اول بر اثر مین غرق شد.'],
@@ -127,19 +170,63 @@ function home(){return `<section class="hero"><div class="box glass"><h1>دری�
 <section id="brands" class="band b-acc"><h2>بزرگ‌ترین <span>کشتی‌سازان</span> جهان</h2><p class="sub">نام‌هایی که دریا را ساخته‌اند.</p><div class="marq glass"><div class="mt">${[...B,...B].map(b=>`<b>${b}</b>`).join('')}</div></div></section>
 <section id="tips" class="band b-pri"><h2>نکات <span>کشتی‌سازی</span></h2><p class="sub">شش اصلی که هر کشتی خوب روی آن بنا می‌شود.</p><div class="grid">${TIPS.map((t,i)=>`<div class="card glass" style="padding:22px"><div class="n">0${i+1}</div><h4>${t[0]}</h4><p>${t[1]}</p></div>`).join('')}</div></section>
 <section id="types" class="band b-sec"><h2>انواع <span>کشتی‌ها</span></h2><p class="sub">یکی را انتخاب کن تا مدل‌های قابل خرید را ببینی.</p><div class="grid">${T.map(t=>`<div class="card glass" onclick="go('${t.id}')" style="cursor:pointer">${pic(t.id)}<h4>${t.e} ${t.n}</h4><p>${t.d}</p></div>`).join('')}</div></section>`}
-function page(t){return `<section class="band b-sur"><button class="back" onclick="go('')">→ بازگشت</button><h2>${t.e} <span>${t.n}</span></h2><p class="sub">${t.d}</p><div class="grid">${t.m.map(m=>`<div class="card glass">${pic(t.id)}<h4>${m[0]}</h4><div class="price">${m[1]}</div><button class="btn" style="padding:8px 20px;font-size:.85rem">استعلام خرید</button></div>`).join('')}</div><p class="note">قیمت‌ها تقریبی و بر پایه بازار ساخت جدید است و بسته به سازنده، مشخصات و زمان تحویل تغییر می‌کند. پیش از هر خرید، با کارگزار رسمی تأیید شود.</p></section>`}
-let tm;
-function render(){const id=location.hash.slice(1),t=T.find(x=>x.id==id);$('#app').innerHTML=t?page(t):home();scrollTo(0,0);clearInterval(tm);if(!t)slider()}
+function page(t){return `<section class="band b-sur"><button class="back" onclick="go('')">→ بازگشت</button><h2>${t.e} <span>${t.n}</span></h2><p class="sub">${t.d}</p><div class="grid">${t.m.map((m,i)=>`<div class="card glass" onclick="go('${t.id}-${i}')" style="cursor:pointer">${pic(t.id)}<h4>${m[0]}</h4><div class="price">${m[1]}</div><button class="btn" style="padding:8px 20px;font-size:.85rem">مشاهده و خرید</button></div>`).join('')}</div><p class="note">قیمت‌ها تقریبی و بر پایه بازار ساخت جدید است و بسته به سازنده، مشخصات و زمان تحویل تغییر می‌کند. پیش از هر خرید، با کارگزار رسمی تأیید شود.</p></section>`}
+function product(t,i){const m=t.m[i],k=t.id+'-'+i;
+return `<section class="band b-sur"><button class="back" onclick="go('${t.id}')">→ بازگشت به ${t.n}</button>
+<div class="pp"><div class="glass" style="border-radius:28px;padding:14px">${pic(t.id)}</div>
+<div><h2>${m[0]}</h2><span class="tag">${t.e} ${t.n}</span><div class="price" style="font-size:1.5rem">${fm(m[2])}</div><p class="sub" style="margin-bottom:12px">${m[1]} · ${t.d}</p>
+<div class="row"><div class="qty"><button onclick="q(1)" aria-label="افزایش">+</button><b id="qv">۱</b><button onclick="q(-1)" aria-label="کاهش">−</button></div><button class="btn" onclick="add('${k}',qn)">🛒 افزودن به سبد خرید</button></div></div></div>
+<div class="tabs"><button class="tb a" onclick="tab(1)">توضیحات تکمیلی</button><button class="tb" onclick="tab(2)">نظرات</button></div>
+<div class="pn glass" id="p1"><p>${t.x}</p><table class="sp"><tr><td>مدل</td><td>${m[0]}</td></tr><tr><td>نوع</td><td>${t.n}</td></tr><tr><td>بازه قیمت</td><td>${m[1]}</td></tr><tr><td>زمان تحویل</td><td>${t.t}</td></tr><tr><td>استاندارد</td><td>کلاس‌شده طبق IACS و قوانین IMO</td></tr></table></div>
+<div class="pn glass" id="p2" style="display:none"><div id="rl"></div><h4 style="margin-top:18px">نظر خودت را بنویس</h4><label>نام</label><input id="rn" placeholder="نام شما"><label>امتیاز</label><select id="rs"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select><label>نظر</label><textarea id="rt" rows="3"></textarea><button class="btn" onclick="addRev('${k}')">ثبت نظر</button></div>
+<p class="note">قیمت سبد بر پایه میانگین بازه است و نهایی نیست.</p></section>`}
+let tm,qn=1;
+function render(){const id=location.hash.slice(1),[a,b]=id.split('-'),t=T.find(x=>x.id==a);qn=1;
+$('#app').innerHTML=t?(b!==undefined&&t.m[b]?product(t,+b):page(t)):home();
+scrollTo(0,0);clearInterval(tm);if(!t)slider();else if(b!==undefined&&t.m[b])drawRev(id)}
+function q(d){qn=Math.max(1,Math.min(99,qn+d));$('#qv').textContent=fa(qn)}
+function tab(n){[1,2].forEach(i=>{$('#p'+i).style.display=i==n?'':'none'});document.querySelectorAll('.tb').forEach((b,i)=>b.classList.toggle('a',i==n-1))}
+function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
+function drawRev(k){const own=ld('rv-'+k,[]);$('#rl').innerHTML=[...own,...REV].map(r=>`<div class="rv"><b>${esc(r[0])}</b><span class="st">${stars(r[1])}</span><p>${esc(r[2])}</p></div>`).join('')+'<p class="note" style="margin-top:8px">دو نظر آخر نمونه‌ی نمایشی هستند.</p>'}
+function addRev(k){const n=$('#rn').value.trim()||'کاربر مهمان',tx=$('#rt').value.trim();if(!tx)return toast('متن نظر را بنویس');const a=ld('rv-'+k,[]);a.unshift([n,+$('#rs').value,tx]);sv('rv-'+k,a);$('#rt').value='';drawRev(k);toast('نظرت ثبت شد ✓')}
+/* سبد خرید */
+let cart=ld('cart',[]);
+const item=k=>{const[a,b]=k.split('-'),t=T.find(x=>x.id==a);return t&&t.m[b]?{t,m:t.m[b]}:null};
+function add(k,n){const c=cart.find(x=>x.k==k);c?c.q=Math.min(99,c.q+n):cart.push({k,q:n});saveC();toast('به سبد خرید اضافه شد ✓')}
+function chq(k,d){const c=cart.find(x=>x.k==k);if(!c)return;c.q+=d;if(c.q<1)cart=cart.filter(x=>x.k!=k);saveC()}
+function rmv(k){cart=cart.filter(x=>x.k!=k);saveC()}
+function saveC(){sv('cart',cart);drawCart()}
+function drawCart(){cart=cart.filter(c=>item(c.k));$('#cn').textContent=fa(cart.reduce((s,c)=>s+c.q,0));$('#cn').style.display=cart.length?'':'none';
+let tot=0;$('#cl').innerHTML=cart.length?cart.map(c=>{const{t,m}=item(c.k);tot+=m[2]*c.q;return `<div class="ci">${pic(t.id)}<div><h4>${m[0]}</h4><small>${fm(m[2])}</small><div class="qty" style="display:flex;width:max-content;margin-top:4px"><button onclick="chq('${c.k}',1)">+</button><b>${fa(c.q)}</b><button onclick="chq('${c.k}',-1)">−</button></div></div><button class="rm" onclick="rmv('${c.k}')" aria-label="حذف">🗑️</button></div>`}).join('')+`<div class="tot"><span>جمع تقریبی</span><span>${fm(tot)}</span></div><button class="btn" style="width:100%" onclick="toast('این نسخه نمایشی است؛ درگاه پرداخت متصل نیست')">ادامه خرید</button>`:'<p class="sub">سبد خرید خالی است.</p>'}
+function openC(){closeD();$('#cart').classList.add('o');$('#shade').classList.add('o')}
+/* ورود / ثبت‌نام */
+let mode='in';const user=()=>ld('u',null);
+function mh(){const u=user();if(u)return `<h3 style="color:var(--acc)">خوش آمدی 👋</h3><p dir="ltr" style="text-align:right;margin:6px 0 18px">${esc(u)}</p><button class="btn" onclick="out()">خروج از حساب</button>`;
+return `<div class="tabs" style="margin-top:0"><button class="tb ${mode=='in'?'a':''}" onclick="mode='in';mr()">ورود</button><button class="tb ${mode=='up'?'a':''}" onclick="mode='up';mr()">ثبت‌نام</button></div>
+<label>ایمیل</label><input id="em" type="email" dir="ltr" placeholder="you@example.com" autocomplete="email">
+<label>رمز عبور</label><input id="pw" type="password" dir="ltr" placeholder="حداقل ۶ کاراکتر" autocomplete="${mode=='in'?'current-password':'new-password'}">
+<p id="er" class="note" style="margin:0 0 10px;color:#c0392b"></p><button class="btn" style="width:100%" onclick="sub()">${mode=='in'?'ورود':'ساخت حساب'}</button>`}
+function mr(){$('#mb').innerHTML=mh()}
+function openM(){closeD();mr();$('#modal').classList.add('o')}
+function closeM(){$('#modal').classList.remove('o')}
+function sub(){const e=$('#em').value.trim(),p=$('#pw').value;
+if(!/^\S+@\S+\.\S+$/.test(e))return $('#er').textContent='ایمیل معتبر نیست.';
+if(p.length<6)return $('#er').textContent='رمز عبور باید حداقل ۶ کاراکتر باشد.';
+sv('u',e);updU();closeM();toast(mode=='in'?'وارد شدی ✓':'حساب ساخته شد ✓')}
+function out(){try{localStorage.removeItem('u')}catch(e){}updU();closeM();toast('خارج شدی')}
+function updU(){$('#lg span').textContent=user()?'حساب من':'ورود / ثبت‌نام'}
+let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('o');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('o'),2200)}
 function go(h){if(location.hash.slice(1)==h)render();else location.hash=h}
 function sc(id){const e=document.getElementById(id);closeD();e?e.scrollIntoView({behavior:'smooth'}):(location.hash='',setTimeout(()=>sc(id),80))}
 function slider(){let i=0;const sl=[...document.querySelectorAll('.slide')],d=[...document.querySelectorAll('.dots i')];const show=n=>{i=n;sl.forEach((s,k)=>s.classList.toggle('a',k==n));d.forEach((s,k)=>s.classList.toggle('a',k==n))};d.forEach(x=>x.onclick=()=>show(+x.dataset.i));tm=setInterval(()=>show((i+1)%sl.length),4500)}
-const dr=$('#drawer'),sh=$('#shade');function closeD(){dr.classList.remove('o');sh.classList.remove('o')}
+const dr=$('#drawer'),sh=$('#shade');function closeD(){dr.classList.remove('o');$('#cart').classList.remove('o');sh.classList.remove('o')}
 function setT(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('th',t)}catch(e){}}
 try{const t=localStorage.getItem('th');if(t)setT(t)}catch(e){}
 $('#th').onclick=()=>setT(document.documentElement.dataset.theme=='teal'?'blue':'teal');
 const L=T.map(t=>`<a href="#${t.id}" onclick="closeD()">${t.e} ${t.n}</a>`).join('');$('#dl').innerHTML=L;$('#fl').innerHTML=L;
 $('#ds').innerHTML=[['slider','🚢 تایتانیک و رقبا'],['brands','🏭 کشتی‌سازان'],['tips','🔧 نکات ساخت']].map(s=>`<a href="javascript:void 0" onclick="sc('${s[0]}')">${s[1]}</a>`).join('');
-$('#bg').onclick=()=>{dr.classList.add('o');sh.classList.add('o')};$('#x').onclick=sh.onclick=closeD;
+$('#bg').onclick=()=>{dr.classList.add('o');sh.classList.add('o')};$('#x').onclick=$('#cx').onclick=sh.onclick=closeD;
+$('#cb').onclick=openC;$('#lg').onclick=openM;$('#mx').onclick=closeM;$('#modal').onclick=e=>{if(e.target.id=='modal')closeM()};
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>sc(b.dataset.s));
-addEventListener('hashchange',render);render();
+addEventListener('hashchange',render);updU();drawCart();render();
 </script></body></html>
