@@ -1,258 +1,1027 @@
+```html
 <!DOCTYPE html>
-<html lang="fa" dir="rtl" data-theme="teal"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>اقیانوس | دنیای کشتی‌ها</title>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;800&display=swap" rel="stylesheet">
-<style>
-:root{--pri:#0B3D3B;--acc:#14B8A6;--sec:#99F6E4;--sur:#E6FFFB;--bg:#F8FFFE;--tx:#0B3D3B;--mut:#3f6f6c;--glass:rgba(255,255,255,.45);--gb:rgba(255,255,255,.7);--sh:rgba(11,61,59,.18);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-:root[data-theme="blue"]{--pri:#0B1F3B;--acc:#2563EB;--sec:#60A5FA;--sur:#DBEAFE;--bg:#F0F7FF;--tx:#0B1F3B;--mut:#46618a;--sh:rgba(11,31,59,.2)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="x"]){--bg:var(--pri);--tx:var(--sur);--mut:var(--sec);--glass:rgba(255,255,255,.07);--gb:rgba(255,255,255,.16);--sh:rgba(0,0,0,.45)}}
-*{box-sizing:border-box;margin:0}
-html{scroll-behavior:smooth;overflow-x:hidden;scroll-padding-top:96px}
-body{background:var(--bg);color:var(--tx);font-family:Vazirmatn,Tahoma,sans-serif;line-height:1.9;overflow-x:clip;min-height:100%;position:relative}
-body::before,body::after{content:"";position:fixed;z-index:-1;border-radius:50%;filter:blur(90px);opacity:.55}
-body::before{width:60vmax;height:60vmax;background:var(--sec);top:-20vmax;left:-15vmax}
-body::after{width:55vmax;height:55vmax;background:var(--acc);bottom:-25vmax;right:-15vmax;opacity:.4}
-.glass{background:var(--glass);border:1px solid var(--gb);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:0 12px 40px var(--sh),inset 0 1px 0 var(--gb)}
-header{position:sticky;top:calc(10px + env(safe-area-inset-top,0px));z-index:20;margin:10px auto 0;width:min(1100px,calc(100% - 20px));border-radius:999px;display:flex;align-items:center;gap:6px;padding:8px 10px 8px 12px}
-.logo{font-weight:800;font-size:1.15rem;cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:8px}
-.logo i{font-style:normal;background:var(--acc);color:#fff;width:34px;height:34px;border-radius:50%;display:grid;place-items:center}
-nav{display:flex;gap:2px;margin-inline-start:auto}
-nav button,.ic{background:none;border:0;color:var(--tx);font:inherit;font-size:.88rem;padding:6px 14px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:.25s}
-nav button:hover,.ic:hover{background:var(--gb)}
-.ic{border:1px solid var(--gb);padding:5px 12px;font-size:1.05rem;position:relative}
-.bd{position:absolute;top:-6px;inset-inline-start:-6px;background:var(--acc);color:#fff;font-size:.7rem;min-width:19px;height:19px;border-radius:19px;display:grid;place-items:center;font-weight:800;line-height:1}
-.burger{display:none}
-#lg span{font-size:.85rem}
-@media(max-width:780px){nav{display:none}.burger{display:block}header .ic:first-of-type{margin-inline-start:auto}#lg span{display:none}.logo{font-size:1rem}}
-#drawer,#cart{position:fixed;top:0;bottom:0;width:min(340px,88vw);z-index:30;transition:transform .45s cubic-bezier(.7,0,.2,1),visibility .45s;padding:70px 20px 20px;background:var(--bg);overflow:auto;visibility:hidden}
-#drawer{right:0;transform:translateX(105%);border-radius:28px 0 0 28px}
-#cart{left:0;transform:translateX(-105%);border-radius:0 28px 28px 0}
-#drawer.o,#cart.o{transform:none;visibility:visible}
-#drawer h3,#cart h3{margin:10px 0 6px;color:var(--acc)}
-#drawer a{display:block;padding:10px 14px;margin:6px 0;border-radius:16px;color:var(--tx);text-decoration:none;background:var(--glass);border:1px solid var(--gb)}
-.x{position:absolute;top:18px;inset-inline-start:18px;background:none;border:0;color:var(--tx);font-size:1.5rem;cursor:pointer}
-#cart .x{inset-inline-start:auto;inset-inline-end:18px}
-#shade{position:fixed;inset:0;background:#0007;z-index:25;opacity:0;pointer-events:none;transition:.3s}#shade.o{opacity:1;pointer-events:auto}
-section{padding:64px 18px;max-width:1100px;margin:auto}
-h2{font-size:clamp(1.6rem,5vw,2.3rem);font-weight:800}h2 span{color:var(--acc)}
-.sub{color:var(--mut);margin-bottom:26px}
-:root{--on:#0B3D3B}:root[data-theme="blue"]{--on:#fff}
-.band{position:relative;background:var(--bb);color:var(--tx);box-shadow:0 0 0 100vmax var(--bb);clip-path:inset(0 -100vmax)}
-.b-sur{--bb:var(--sur);--tx:var(--pri);--mut:color-mix(in srgb,var(--pri) 72%,var(--sur));--glass:rgba(255,255,255,.55);--gb:rgba(255,255,255,.95);--sh:rgba(11,31,59,.14);--ad:color-mix(in srgb,var(--acc) 62%,var(--pri))}
-.b-sec{--bb:var(--sec);--tx:var(--pri);--mut:color-mix(in srgb,var(--pri) 80%,var(--sec));--glass:rgba(255,255,255,.4);--gb:rgba(255,255,255,.75);--sh:rgba(11,31,59,.18);--ad:color-mix(in srgb,var(--acc) 40%,var(--pri))}
-.b-pri{--bb:var(--pri);--tx:var(--sur);--mut:var(--sec);--glass:rgba(255,255,255,.07);--gb:rgba(255,255,255,.18);--sh:rgba(0,0,0,.45);--ad:var(--sec)}
-.b-acc{--bb:var(--acc);--tx:var(--on);--mut:var(--on);--glass:rgba(255,255,255,.22);--gb:rgba(255,255,255,.45);--sh:rgba(0,0,0,.2);--ad:var(--on)}
-.band h2 span,.band .n,.band .price{color:var(--ad)}
-.band .mt b:nth-child(3n){color:var(--tx)}
-.hero{min-height:74vh;display:grid;place-items:center;text-align:center}
-.hero .box{border-radius:40px;padding:48px 26px;max-width:760px}
-.hero h1{font-size:clamp(2.1rem,8vw,4.2rem);font-weight:800;line-height:1.3}
-.hero h1 span{color:var(--acc)}
-.hero p{color:var(--mut);max-width:520px;margin:14px auto 26px}
-.btn{display:inline-block;background:var(--acc);color:#fff;border:0;font:inherit;font-weight:800;padding:11px 26px;border-radius:999px;cursor:pointer;box-shadow:0 10px 26px var(--sh);transition:.3s}
-.btn:hover{transform:translateY(-3px)}
-.btn.g{background:var(--glass);color:var(--tx);border:1px solid var(--gb);margin-inline-start:8px}
-.slider{position:relative;border-radius:32px;overflow:hidden}
-.slide{display:none;padding:26px 18px 64px;text-align:center;animation:fi .7s}.slide.a{display:block}
-@keyframes fi{from{opacity:0;transform:scale(.97)}}
-.ph{width:100%;max-width:560px;aspect-ratio:16/9;margin:0 auto 14px;border-radius:24px;overflow:hidden;background:linear-gradient(var(--sur),var(--sec));display:grid;place-items:center;border:1px solid var(--gb)}
-.ph img{width:100%;height:100%;object-fit:cover}.ph svg{width:92%}
-.slide h3{font-size:1.5rem;color:var(--acc)}.slide p{color:var(--mut);max-width:520px;margin:auto}
-.dots{position:absolute;bottom:18px;width:100%;display:flex;justify-content:center;gap:8px}
-.dots i{width:9px;height:9px;border-radius:9px;background:var(--mut);opacity:.4;cursor:pointer;transition:.3s}.dots i.a{width:28px;background:var(--acc);opacity:1}
-.tag{display:inline-block;font-size:.75rem;border:1px solid var(--gb);border-radius:12px;padding:0 10px;color:var(--mut);margin:4px 0}
-.marq{overflow:hidden;border-radius:999px;padding:16px 0;direction:ltr;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
-.mt{display:flex;gap:46px;width:max-content;animation:mq 28s linear infinite}.marq:hover .mt{animation-play-state:paused}
-@keyframes mq{to{transform:translateX(-50%)}}
-.mt b{font-size:1.35rem;letter-spacing:2px;color:var(--mut);white-space:nowrap}.mt b:nth-child(3n){color:var(--acc)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.card{border-radius:26px;padding:14px 14px 20px;transition:transform .2s,box-shadow .3s}
-.card:hover{transform:translateY(-6px)}
-.card .ph{border-radius:18px;margin-bottom:10px;max-width:none}
-.card h4{font-size:1.08rem}.card p{color:var(--mut);font-size:.9rem}
-.card .n{font-size:2rem;font-weight:800;color:var(--acc)}
-.price{color:var(--acc);font-weight:800;font-size:1.1rem;margin:6px 0 10px}
-.back{background:var(--glass);border:1px solid var(--gb);color:var(--tx);padding:8px 18px;border-radius:999px;font:inherit;cursor:pointer;margin-bottom:20px}
-.note{color:var(--mut);font-size:.8rem;margin-top:24px}
-/* محصول، سبد، مودال */
-.pp{display:grid;gap:26px;grid-template-columns:1fr}
-@media(min-width:760px){.pp{grid-template-columns:1fr 1fr;align-items:start}}
-.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px}
-.qty{display:inline-flex;align-items:center;border:1px solid var(--gb);background:var(--glass);border-radius:999px;overflow:hidden}
-.qty button{background:none;border:0;color:var(--tx);font:inherit;font-size:1.2rem;width:38px;height:40px;cursor:pointer}
-.qty b{min-width:34px;text-align:center}
-.tabs{display:flex;gap:6px;margin:34px 0 14px}
-.tb{background:var(--glass);border:1px solid var(--gb);color:var(--tx);font:inherit;padding:8px 18px;border-radius:999px;cursor:pointer}
-.tb.a{background:var(--acc);color:#fff;border-color:var(--acc)}
-.pn{border-radius:26px;padding:20px}
-.sp{width:100%;border-collapse:collapse;margin-top:14px;font-size:.92rem}
-.sp td{padding:8px 4px;border-bottom:1px solid var(--gb)}.sp td:first-child{color:var(--mut);width:36%}
-.rv{padding:12px 0;border-bottom:1px solid var(--gb)}.rv b{margin-inline-end:8px}.st{color:#e8a33d;letter-spacing:2px}
-input,textarea,select{width:100%;font:inherit;color:var(--tx);background:var(--glass);border:1px solid var(--gb);border-radius:16px;padding:10px 14px;margin:4px 0 10px;outline:0}
-input:focus,textarea:focus{border-color:var(--acc)}
-label{font-size:.88rem;color:var(--mut)}
-.ci{display:flex;gap:10px;align-items:center;padding:12px 0;border-bottom:1px solid var(--gb)}
-.ci .ph{width:76px;margin:0;flex:none;border-radius:12px}.ci div{flex:1;min-width:0}.ci h4{font-size:.92rem;line-height:1.5}
-.ci .qty button{width:30px;height:32px}.ci small{color:var(--mut)}
-.rm{background:none;border:0;cursor:pointer;font-size:1.1rem}
-.tot{display:flex;justify-content:space-between;font-weight:800;margin:16px 0}
-#modal{position:fixed;inset:0;z-index:40;display:none;place-items:center;background:#0008;padding:18px}
-#modal.o{display:grid}
-.mbx{width:min(400px,100%);border-radius:28px;padding:28px 22px 22px;background:var(--bg);position:relative}
-#toast{position:fixed;bottom:calc(24px + env(safe-area-inset-bottom,0px));left:50%;transform:translate(-50%,30px);background:var(--pri);color:var(--sur);padding:10px 22px;border-radius:999px;z-index:60;opacity:0;transition:.35s;pointer-events:none;white-space:nowrap}
-#toast.o{opacity:1;transform:translate(-50%,0)}
-footer{width:min(1100px,calc(100% - 20px));margin:40px auto 14px;border-radius:32px;padding:34px 24px 18px}
-footer.glass{--tx:var(--sur);--mut:var(--sec);--gb:rgba(255,255,255,.18);background:var(--pri);color:var(--tx)}
-footer.glass h5{color:var(--acc)}
-.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:24px}
-footer h5{color:var(--acc);margin-bottom:6px;font-size:1rem}
-footer a{display:block;color:var(--mut);text-decoration:none;font-size:.9rem;cursor:pointer;padding:2px 0}footer a:hover{color:var(--acc)}
-footer p{color:var(--mut);font-size:.9rem}
-.cp{text-align:center;color:var(--mut);font-size:.8rem;margin-top:22px;padding-top:14px;border-top:1px solid var(--gb)}
-</style></head><body>
-<header class="glass"><div class="logo" onclick="go('')"><i>⚓</i>اقیانوس</div>
-<nav><button data-s="slider">تایتانیک</button><button data-s="brands">کشتی‌سازان</button><button data-s="tips">نکات ساخت</button><button data-s="types">انواع کشتی</button></nav>
-<button class="ic" id="lg" title="ورود / ثبت‌نام">👤 <span>ورود / ثبت‌نام</span></button>
-<button class="ic" id="cb" title="سبد خرید" aria-label="سبد خرید">🛒<span class="bd" id="cn">0</span></button>
-<button class="ic" id="th" title="تغییر تم">🎨</button><button class="ic burger" id="bg" aria-label="منو">☰</button></header>
-<div id="shade"></div>
-<aside id="drawer" class="glass"><button class="x" id="x">✕</button><h3>بخش‌ها</h3><div id="ds"></div><h3>انواع کشتی</h3><div id="dl"></div></aside>
-<aside id="cart" class="glass"><button class="x" id="cx">✕</button><h3>🛒 سبد خرید</h3><div id="cl"></div></aside>
-<div id="modal"><div class="mbx glass"><button class="x" id="mx">✕</button><div id="mb"></div></div></div>
-<div id="toast"></div>
-<main id="app"></main>
-<footer class="glass"><div class="fg">
-<div><h5>⚓ اقیانوس</h5><p>روایت غول‌های دریا، از تایتانیک تا ناوگان امروز؛ با قیمت و راهنمای ساخت.</p></div>
-<div><h5>بخش‌ها</h5><a onclick="sc('slider')">تایتانیک و رقبا</a><a onclick="sc('brands')">کشتی‌سازان</a><a onclick="sc('tips')">نکات ساخت</a></div>
-<div><h5>انواع کشتی</h5><div id="fl"></div></div>
-<div><h5>تم</h5><a onclick="setT('teal')">🌊 فیروزه‌ای</a><a onclick="setT('blue')">🔷 آبی اقیانوسی</a></div></div>
-<div class="cp">© ۲۰۲۶ اقیانوس · ساخته‌شده با عشق به دریا</div></footer>
-<script>
-const $=s=>document.querySelector(s);
-const ld=(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}};
-const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-const fa=n=>(+n).toLocaleString('fa-IR');
-const fm=n=>fa(Math.round(n*1e6))+' دلار';
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const IMG={titanic:'',olympic:'',britannic:'',lusitania:'',mauretania:'',cruise:'',cargo:'',tanker:'',yacht:'',fish:'',boat:''};
-function ship(k,c='#14B8A6'){const h=`<path d="M10 78 L290 78 L262 104 L38 104Z" fill="#0B3D3B" stroke="${c}" stroke-width="2"/><rect x="10" y="74" width="280" height="5" fill="${c}"/>`;
-const w=`<path d="M0 108 q15 -9 30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0 t30 0" fill="none" stroke="#60A5FA" stroke-width="3" opacity=".7"/>`;
-let s='';
-if(k=='cruise')s=`<rect x="40" y="52" width="220" height="24" rx="4" fill="#eaf0fa"/><rect x="70" y="32" width="150" height="22" rx="4" fill="#d5deef"/><rect x="100" y="16" width="80" height="18" rx="4" fill="#eaf0fa"/><rect x="215" y="18" width="14" height="22" fill="${c}"/>`+[...Array(12)].map((_,i)=>`<rect x="${50+i*17}" y="58" width="8" height="6" fill="#2b4a82"/>`).join('');
-else if(k=='cargo')s=[...Array(5)].map((_,i)=>[...Array(3)].map((_,j)=>`<rect x="${30+i*36}" y="${58-j*14}" width="33" height="13" fill="${['#c0392b','#2c7be5','#e8a33d','#2fa36b'][(i+j*2)%4]}"/>`).join('')).join('')+`<rect x="225" y="26" width="40" height="50" fill="#eaf0fa"/><rect x="232" y="32" width="26" height="8" fill="#2b4a82"/>`;
-else if(k=='tanker')s=`<rect x="25" y="64" width="190" height="14" fill="#b83a3a"/><path d="M50 64v-8M100 64v-8M150 64v-8M200 64v-8" stroke="#aaa" stroke-width="3"/><rect x="228" y="30" width="34" height="46" fill="#eaf0fa"/><rect x="236" y="36" width="18" height="7" fill="#2b4a82"/>`;
-else if(k=='yacht')s=`<path d="M40 78 L70 56 L230 56 L262 78Z" fill="#fff"/><rect x="95" y="38" width="100" height="19" rx="5" fill="#dfe8f6"/><rect x="120" y="22" width="48" height="17" rx="4" fill="#fff"/><path d="M144 22V6" stroke="${c}" stroke-width="3"/>`;
-else if(k=='fish')s=`<rect x="170" y="40" width="50" height="38" fill="#eaf0fa"/><rect x="178" y="46" width="34" height="9" fill="#2b4a82"/><path d="M60 78V30L140 60" stroke="#ccc" stroke-width="3" fill="none"/><path d="M60 30L30 70" stroke="#ccc" stroke-width="2"/>`;
-else if(k=='boat')s=`<path d="M60 78 L90 62 L200 62 L240 78Z" fill="#fff"/><path d="M110 62 L130 44 L170 44 L180 62Z" fill="#9fc4f5"/>`;
-else s=`<rect x="30" y="56" width="240" height="20" rx="3" fill="#1a1a1a"/><rect x="50" y="42" width="190" height="15" fill="#eaf0fa"/><path d="M80 42V16M122 42V10M164 42V16M206 42V10" stroke="#d9a441" stroke-width="12"/>`;
-return `<svg viewBox="0 0 300 120">${w}${s}${h}</svg>`}
-const pic=(id,c)=>`<div class="ph">${IMG[id]?`<img src="${IMG[id]}" alt="" loading="lazy">`:ship(id,c)}</div>`;
-/* m: [نام مدل، بازه قیمت، قیمت میانگین به میلیون دلار] */
-const T=[
-{id:'cruise',e:'🛳️',n:'کشتی کروز',d:'شهرهای شناور برای هزاران مسافر.',t:'۳۶ تا ۴۸ ماه',x:'کشتی‌های کروز مجموعه‌ای از کابین، رستوران، استخر و سالن نمایش را روی یک بدنه فولادی جمع می‌کنند. هزینه نهایی به تعداد کابین، سیستم پیشران (LNG یا دیزلی) و میزان سفارشی‌سازی داخلی بستگی دارد.',m:[['کلاس آیکون (۵۶۰۰ مسافر)','حدود ۲ میلیارد دلار',2000],['کلاس ویندجمر/متوسط','حدود ۸۰۰ تا ۱٬۲۰۰ میلیون دلار',1000],['کشتی اکتشافی کوچک','حدود ۱۵۰ تا ۳۰۰ میلیون دلار',225]]},
-{id:'cargo',e:'📦',n:'کانتینربر',d:'ستون فقرات تجارت جهانی.',t:'۲۴ تا ۳۶ ماه',x:'کانتینربرها بر اساس ظرفیت TEU طبقه‌بندی می‌شوند. کشتی‌های بزرگ‌تر هزینه حمل هر کانتینر را کم می‌کنند، اما به بنادر عمیق و جرثقیل‌های بزرگ نیاز دارند.',m:[['۲۴٬۰۰۰ TEU','حدود ۲۲۰ تا ۲۶۰ میلیون دلار',240],['۱۵٬۰۰۰ TEU','حدود ۱۴۰ تا ۱۷۰ میلیون دلار',155],['فیدر ۲٬۵۰۰ TEU','حدود ۳۵ تا ۵۰ میلیون دلار',42.5]]},
-{id:'tanker',e:'🛢️',n:'نفتکش',d:'غول‌های حمل نفت خام و فرآورده.',t:'۲۴ تا ۳۰ ماه',x:'نفتکش‌های مدرن بدنه دوجداره دارند تا خطر نشت کم شود. اندازه کشتی (VLCC، سوئزمکس، آفرامکس) مسیرهای قابل عبور و بنادر مقصد را تعیین می‌کند.',m:[['VLCC (۳۰۰٬۰۰۰ تن)','حدود ۱۲۰ تا ۱۳۵ میلیون دلار',127.5],['سوئزمکس','حدود ۸۰ تا ۹۰ میلیون دلار',85],['آفرامکس','حدود ۶۵ تا ۷۵ میلیون دلار',70]]},
-{id:'yacht',e:'⛵',n:'یات لوکس',d:'اوج تجمل روی آب.',t:'۱۸ تا ۴۸ ماه',x:'یات‌های لوکس معمولاً به‌صورت سفارشی ساخته می‌شوند؛ از چیدمان داخلی تا فضاهای رفاهی مثل هلی‌پد، استخر و ساحل خصوصی. نگهداری سالانه حدود ۱۰ درصد قیمت یات است.',m:[['سوپریات ۱۰۰ متری','حدود ۲۰۰ تا ۳۰۰ میلیون دلار',250],['یات ۵۰ متری','حدود ۳۰ تا ۴۵ میلیون دلار',37.5],['یات ۲۵ متری','حدود ۵ تا ۱۰ میلیون دلار',7.5]]},
-{id:'fish',e:'🎣',n:'کشتی ماهیگیری',d:'کار سخت دریا، با بدنه‌ای مقاوم.',t:'۸ تا ۲۰ ماه',x:'کشتی‌های ماهیگیری برای کار طولانی در دریای مواج طراحی می‌شوند: بدنه مقاوم، عرشه کار بزرگ، سردخانه و تجهیزات جابه‌جایی تور.',m:[['ترالر ۳۰ متری','حدود ۳ تا ۶ میلیون دلار',4.5],['لنج ۱۸ متری','حدود ۸۰۰ هزار تا ۱.۵ میلیون دلار',1.15],['قایق ۱۲ متری','حدود ۲۵۰ تا ۵۰۰ هزار دلار',0.375]]},
-{id:'boat',e:'🚤',n:'قایق تفریحی',d:'برای آخر هفته‌های بی‌نظیر.',t:'۲ تا ۸ ماه',x:'قایق‌های تفریحی برای استفاده روزانه و سفرهای کوتاه ساخته می‌شوند. موتور، تجهیزات ناوبری و کیفیت داخلی بیشترین تأثیر را روی قیمت دارند.',m:[['کروزر ۱۲ متری','حدود ۴۰۰ تا ۹۰۰ هزار دلار',0.65],['اسپیدبوت ۹ متری','حدود ۱۰۰ تا ۲۵۰ هزار دلار',0.175],['قایق ۶ متری','حدود ۲۰ تا ۶۰ هزار دلار',0.04]]}];
-const REV=[['سارا م.',5,'کیفیت ساخت عالی بود و مشاوره‌ی تیم فروش دقیق و صادقانه.'],['کامران ر.',4,'تحویل کمی طولانی شد، ولی نتیجه‌ی نهایی ارزشش را داشت.']];
-const S=[['titanic','تایتانیک','۱۹۱۲ · ۲۶۹ متر · هارلند و ولف','نماد غم‌انگیزترین سفر تاریخ؛ در نخستین سفرش پس از برخورد با کوه یخ غرق شد.'],
-['olympic','المپیک','۱۹۱۱ · خواهر ارشد تایتانیک','تقریباً هم‌شکل تایتانیک و با عمری موفق، بیش از ۲۴ سال خدمت کرد.'],
-['britannic','بریتانیک','۱۹۱۴ · کشتی بیمارستانی','سومین خواهر؛ با طراحی ایمن‌تر ساخته شد ولی در جنگ جهانی اول بر اثر مین غرق شد.'],
-['lusitania','لوسیتانیا','۱۹۰۷ · کانارد','ملکه سرعت اقیانوس اطلس، تا اینکه در ۱۹۱۵ با اژدر غرق شد.'],
-['mauretania','موریتانیا','۱۹۰۷ · کانارد','بیش از ۲۰ سال نوار آبی اطلس را نگه داشت؛ رقیب اصلی تایتانیک.']];
-const B=['HARLAND & WOLFF','FINCANTIERI','MEYER WERFT','HYUNDAI HEAVY','CHANTIERS DE L’ATLANTIQUE','DAMEN','BENETTI','LÜRSSEN','SAMSUNG HEAVY','DSME'];
-const TIPS=[['طراحی بدنه','نسبت طول به عرض و شکل دماغه، مصرف سوخت و پایداری را تعیین می‌کند.'],['شناوری و پایداری','مرکز ثقل باید همیشه پایین‌تر از مرکز شناوری موثر بماند تا کشتی واژگون نشود.'],['فولاد و جوشکاری','فولاد دریایی ضدخستگی و جوش بی‌نقص، عمر ۳۰ ساله کشتی را رقم می‌زند.'],['حفاظت از زنگ‌زدگی','رنگ‌های ضدخوردگی و آندهای قربانی از بدنه در برابر آب شور محافظت می‌کنند.'],['ماشین‌آلات و سوخت','انتخاب موتور و پروانه، قلب بهره‌وری و رعایت قوانین آلایندگی است.'],['ایمنی و استانداردها','رعایت قوانین IMO، آب‌بندی و قایق نجات برای هر کشتی الزامی است.']];
-function home(){return `<section class="hero"><div class="box glass"><h1>دریا را<br><span>باشکوه</span> ببین</h1><p>داستان غول‌های اقیانوس، از تایتانیک تا مدرن‌ترین ناوگان جهان؛ و اینکه چطور یکی را مال خودت کنی.</p><button class="btn" onclick="sc('types')">انواع کشتی‌ها</button><button class="btn g" onclick="sc('slider')">داستان تایتانیک</button></div></section>
-<section id="slider" class="band b-sur"><h2>تایتانیک و <span>رقبایش</span></h2><p class="sub">پنج کشتی که عصر طلایی اقیانوس‌پیماها را ساختند.</p>
-<div class="slider glass">${S.map((s,i)=>`<div class="slide${i?'':' a'}">${pic(s[0],['#14B8A6','#60A5FA','#c0392b','#2fa36b','#b07ad8'][i])}<h3>${s[1]}</h3><span class="tag">${s[2]}</span><p>${s[3]}</p></div>`).join('')}<div class="dots">${S.map((_,i)=>`<i class="${i?'':'a'}" data-i="${i}"></i>`).join('')}</div></div></section>
-<section id="brands" class="band b-acc"><h2>بزرگ‌ترین <span>کشتی‌سازان</span> جهان</h2><p class="sub">نام‌هایی که دریا را ساخته‌اند.</p><div class="marq glass"><div class="mt">${[...B,...B].map(b=>`<b>${b}</b>`).join('')}</div></div></section>
-<section id="tips" class="band b-pri"><h2>نکات <span>کشتی‌سازی</span></h2><p class="sub">شش اصلی که هر کشتی خوب روی آن بنا می‌شود.</p><div class="grid">${TIPS.map((t,i)=>`<div class="card glass" style="padding:22px"><div class="n">0${i+1}</div><h4>${t[0]}</h4><p>${t[1]}</p></div>`).join('')}</div></section>
-<section id="types" class="band b-sec"><h2>انواع <span>کشتی‌ها</span></h2><p class="sub">یکی را انتخاب کن تا مدل‌های قابل خرید را ببینی.</p><div class="grid">${T.map(t=>`<div class="card glass" onclick="go('${t.id}')" style="cursor:pointer">${pic(t.id)}<h4>${t.e} ${t.n}</h4><p>${t.d}</p></div>`).join('')}</div></section>`}
-function page(t){return `<section class="band b-sur"><button class="back" onclick="go('')">→ بازگشت</button><h2>${t.e} <span>${t.n}</span></h2><p class="sub">${t.d}</p><div class="grid">${t.m.map((m,i)=>`<div class="card glass" onclick="go('${t.id}-${i}')" style="cursor:pointer">${pic(t.id)}<h4>${m[0]}</h4><div class="price">${m[1]}</div><button class="btn" style="padding:8px 20px;font-size:.85rem">مشاهده و خرید</button></div>`).join('')}</div><p class="note">قیمت‌ها تقریبی و بر پایه بازار ساخت جدید است و بسته به سازنده، مشخصات و زمان تحویل تغییر می‌کند. پیش از هر خرید، با کارگزار رسمی تأیید شود.</p></section>`}
-function product(t,i){const m=t.m[i],k=t.id+'-'+i;
-return `<section class="band b-sur"><button class="back" onclick="go('${t.id}')">→ بازگشت به ${t.n}</button>
-<div class="pp"><div class="glass" style="border-radius:28px;padding:14px">${pic(t.id)}</div>
-<div><h2>${m[0]}</h2><span class="tag">${t.e} ${t.n}</span><div class="price" style="font-size:1.5rem">${fm(m[2])}</div><p class="sub" style="margin-bottom:12px">${m[1]} · ${t.d}</p>
-<div class="row"><div class="qty"><button onclick="q(1)" aria-label="افزایش">+</button><b id="qv">۱</b><button onclick="q(-1)" aria-label="کاهش">−</button></div><button class="btn" onclick="add('${k}',qn)">🛒 افزودن به سبد خرید</button></div></div></div>
-<div class="tabs"><button class="tb a" onclick="tab(1)">توضیحات تکمیلی</button><button class="tb" onclick="tab(2)">نظرات</button></div>
-<div class="pn glass" id="p1"><p>${t.x}</p><table class="sp"><tr><td>مدل</td><td>${m[0]}</td></tr><tr><td>نوع</td><td>${t.n}</td></tr><tr><td>بازه قیمت</td><td>${m[1]}</td></tr><tr><td>زمان تحویل</td><td>${t.t}</td></tr><tr><td>استاندارد</td><td>کلاس‌شده طبق IACS و قوانین IMO</td></tr></table></div>
-<div class="pn glass" id="p2" style="display:none"><div id="rl"></div><h4 style="margin-top:18px">نظر خودت را بنویس</h4><label>نام</label><input id="rn" placeholder="نام شما"><label>امتیاز</label><select id="rs"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select><label>نظر</label><textarea id="rt" rows="3"></textarea><button class="btn" onclick="addRev('${k}')">ثبت نظر</button></div>
-</section>`}
-let tm,qn=1;
-function render(){const id=location.hash.slice(1),[a,b]=id.split('-'),t=T.find(x=>x.id==a);qn=1;
-if(id=='checkout'){clearInterval(tm);$('#app').innerHTML=checkout();scrollTo(0,0);return}
-$('#app').innerHTML=t?(b!==undefined&&t.m[b]?product(t,+b):page(t)):home();
-scrollTo(0,0);clearInterval(tm);if(!t)slider();else if(b!==undefined&&t.m[b])drawRev(id)}
-function q(d){qn=Math.max(1,Math.min(99,qn+d));$('#qv').textContent=fa(qn)}
-function tab(n){[1,2].forEach(i=>{$('#p'+i).style.display=i==n?'':'none'});document.querySelectorAll('.tb').forEach((b,i)=>b.classList.toggle('a',i==n-1))}
-function stars(n){return '★'.repeat(n)+'☆'.repeat(5-n)}
-function drawRev(k){const own=ld('rv-'+k,[]);$('#rl').innerHTML=[...own,...REV].map(r=>`<div class="rv"><b>${esc(r[0])}</b><span class="st">${stars(r[1])}</span><p>${esc(r[2])}</p></div>`).join('')}
-function addRev(k){const n=$('#rn').value.trim()||'کاربر مهمان',tx=$('#rt').value.trim();if(!tx)return toast('متن نظر را بنویس');const a=ld('rv-'+k,[]);a.unshift([n,+$('#rs').value,tx]);sv('rv-'+k,a);$('#rt').value='';drawRev(k);toast('نظرت ثبت شد ✓')}
-/* سبد خرید */
-let cart=ld('cart',[]);
-const item=k=>{const[a,b]=k.split('-'),t=T.find(x=>x.id==a);return t&&t.m[b]?{t,m:t.m[b]}:null};
-function add(k,n){const c=cart.find(x=>x.k==k);c?c.q=Math.min(99,c.q+n):cart.push({k,q:n});saveC();toast('به سبد خرید اضافه شد ✓')}
-function chq(k,d){const c=cart.find(x=>x.k==k);if(!c)return;c.q+=d;if(c.q<1)cart=cart.filter(x=>x.k!=k);saveC()}
-function rmv(k){cart=cart.filter(x=>x.k!=k);saveC()}
-function saveC(){sv('cart',cart);drawCart();drawSum()}
-function drawCart(){cart=cart.filter(c=>item(c.k));$('#cn').textContent=fa(cart.reduce((s,c)=>s+c.q,0));$('#cn').style.display=cart.length?'':'none';
-let tot=0;$('#cl').innerHTML=cart.length?cart.map(c=>{const{t,m}=item(c.k);tot+=m[2]*c.q;return `<div class="ci">${pic(t.id)}<div><h4>${m[0]}</h4><small>${fm(m[2])}</small><div class="qty" style="display:flex;width:max-content;margin-top:4px"><button onclick="chq('${c.k}',1)">+</button><b>${fa(c.q)}</b><button onclick="chq('${c.k}',-1)">−</button></div></div><button class="rm" onclick="rmv('${c.k}')" aria-label="حذف">🗑️</button></div>`}).join('')+`<div class="tot"><span>جمع تقریبی</span><span>${fm(tot)}</span></div><button class="btn" style="width:100%" onclick="closeD();go('checkout')">ادامه خرید</button>`:'<p class="sub">سبد خرید خالی است.</p>'}
-function openC(){closeD();$('#cart').classList.add('o');$('#shade').classList.add('o')}
-/* تسویه حساب */
-function sumHtml(){let tot=0;const r=cart.map(c=>{const i=item(c.k);if(!i)return'';tot+=i.m[2]*c.q;return `<div class="ci">${pic(i.t.id)}<div><h4>${i.m[0]}</h4><small>${fa(c.q)} × ${fm(i.m[2])}</small></div><b style="font-size:.85rem">${fm(i.m[2]*c.q)}</b></div>`}).join('');return cart.length?r+`<div class="tot"><span>جمع تقریبی</span><span>${fm(tot)}</span></div>`:'<p class="sub">سبد خرید خالی است.</p>'}
-function drawSum(){const e=$('#sm');if(e)e.innerHTML=sumHtml()}
-function checkout(){return `<section class="band b-sur"><button class="back" onclick="go('')">→ بازگشت</button><h2>تسویه <span>حساب</span></h2><p class="sub">اطلاعات سفارش را کامل کن.</p>
-<div class="pp"><div class="pn glass"><h4>اطلاعات خریدار</h4>
-<label>نام و نام خانوادگی</label><input id="ckn" autocomplete="name">
-<label>ایمیل</label><input id="cke" type="email" dir="ltr" value="${esc(user()||'')}" autocomplete="email">
-<label>شماره تماس</label><input id="ckp" type="tel" dir="ltr" autocomplete="tel">
-<label>کشور و شهر</label><input id="ckc" autocomplete="address-level2">
-<label>آدرس کامل</label><textarea id="cka" rows="3"></textarea>
-<label>روش پرداخت</label><select id="ckm"><option>حواله بانکی</option><option>درخواست پیش‌فاکتور</option><option>اعتبار اسنادی (L/C)</option></select>
-<label>توضیحات (اختیاری)</label><textarea id="ckt" rows="2"></textarea>
-<p id="ker" class="note" style="margin:0 0 10px;color:#c0392b"></p><button class="btn" style="width:100%" onclick="placeOrder()">ثبت سفارش</button></div>
-<div class="pn glass"><h4>خلاصه سفارش</h4><div id="sm">${sumHtml()}</div></div></div>
-</section>`}
-function placeOrder(){const v=i=>$('#'+i).value.trim(),er=m=>$('#ker').textContent=m;
-if(!cart.length)return er('سبد خرید خالی است.');
-if(!v('ckn'))return er('نام را وارد کن.');
-if(!/^\S+@\S+\.\S+$/.test(v('cke')))return er('ایمیل معتبر نیست.');
-if(v('ckp').replace(/\D/g,'').length<7)return er('شماره تماس معتبر نیست.');
-if(!v('ckc')||v('cka').length<6)return er('کشور، شهر و آدرس را کامل بنویس.');
-let tot=0;const items=cart.map(c=>{const i=item(c.k);tot+=i.m[2]*c.q;return[i.m[0],c.q]});
-const o={id:'OC-'+String(Date.now()).slice(-6),date:new Date().toLocaleDateString('fa-IR'),name:v('ckn'),pay:v('ckm'),items,tot};
-const a=ld('orders',[]);a.unshift(o);sv('orders',a);cart=[];saveC();
-$('#app').innerHTML=`<section class="band b-sur" style="text-align:center"><div class="pn glass" style="max-width:520px;margin:auto;padding:34px 22px"><div style="font-size:3rem">✅</div><h2>سفارش <span>ثبت شد</span></h2><p class="sub" style="margin-top:8px">${esc(o.name)} عزیز، سفارشت با کد <b dir="ltr">${o.id}</b> در تاریخ ${o.date} ثبت شد.</p><p>جمع تقریبی: <b>${fm(o.tot)}</b><br>روش پرداخت: ${esc(o.pay)}</p><button class="btn" style="margin-top:16px" onclick="go('')">بازگشت به صفحه اصلی</button></div></section>`;scrollTo(0,0);toast('سفارش ثبت شد ✓')}
-/* ورود / ثبت‌نام */
-let mode='in';const user=()=>ld('u',null);
-function mh(){const u=user();if(u)return `<h3 style="color:var(--acc)">خوش آمدی 👋</h3><p dir="ltr" style="text-align:right;margin:6px 0 18px">${esc(u)}</p><button class="btn" onclick="out()">خروج از حساب</button>`;
-return `<div class="tabs" style="margin-top:0"><button class="tb ${mode=='in'?'a':''}" onclick="mode='in';mr()">ورود</button><button class="tb ${mode=='up'?'a':''}" onclick="mode='up';mr()">ثبت‌نام</button></div>
-<label>ایمیل</label><input id="em" type="email" dir="ltr" placeholder="you@example.com" autocomplete="email">
-<label>رمز عبور</label><input id="pw" type="password" dir="ltr" placeholder="حداقل ۶ کاراکتر" autocomplete="${mode=='in'?'current-password':'new-password'}">
-<p id="er" class="note" style="margin:0 0 10px;color:#c0392b"></p><button class="btn" style="width:100%" onclick="sub()">${mode=='in'?'ورود':'ساخت حساب'}</button>`}
-function mr(){$('#mb').innerHTML=mh()}
-function openM(){closeD();mr();$('#modal').classList.add('o')}
-function closeM(){$('#modal').classList.remove('o')}
-function sub(){const e=$('#em').value.trim(),p=$('#pw').value;
-if(!/^\S+@\S+\.\S+$/.test(e))return $('#er').textContent='ایمیل معتبر نیست.';
-if(p.length<6)return $('#er').textContent='رمز عبور باید حداقل ۶ کاراکتر باشد.';
-sv('u',e);updU();closeM();toast(mode=='in'?'وارد شدی ✓':'حساب ساخته شد ✓')}
-function out(){try{localStorage.removeItem('u')}catch(e){}updU();closeM();toast('خارج شدی')}
-function updU(){$('#lg span').textContent=user()?'حساب من':'ورود / ثبت‌نام'}
-let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('o');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('o'),2200)}
-function go(h){if(location.hash.slice(1)==h)render();else location.hash=h}
-function sc(id){const e=document.getElementById(id);closeD();e?e.scrollIntoView({behavior:'smooth'}):(location.hash='',setTimeout(()=>sc(id),80))}
-function slider(){let i=0;const sl=[...document.querySelectorAll('.slide')],d=[...document.querySelectorAll('.dots i')];const show=n=>{i=n;sl.forEach((s,k)=>s.classList.toggle('a',k==n));d.forEach((s,k)=>s.classList.toggle('a',k==n))};d.forEach(x=>x.onclick=()=>show(+x.dataset.i));tm=setInterval(()=>show((i+1)%sl.length),4500)}
-const dr=$('#drawer'),sh=$('#shade');function closeD(){dr.classList.remove('o');$('#cart').classList.remove('o');sh.classList.remove('o')}
-function setT(t){document.documentElement.dataset.theme=t;try{localStorage.setItem('th',t)}catch(e){}}
-try{const t=localStorage.getItem('th');if(t)setT(t)}catch(e){}
-$('#th').onclick=()=>setT(document.documentElement.dataset.theme=='teal'?'blue':'teal');
-const L=T.map(t=>`<a href="#${t.id}" onclick="closeD()">${t.e} ${t.n}</a>`).join('');$('#dl').innerHTML=L;$('#fl').innerHTML=L;
-$('#ds').innerHTML=[['slider','🚢 تایتانیک و رقبا'],['brands','🏭 کشتی‌سازان'],['tips','🔧 نکات ساخت']].map(s=>`<a href="javascript:void 0" onclick="sc('${s[0]}')">${s[1]}</a>`).join('');
-$('#bg').onclick=()=>{dr.classList.add('o');sh.classList.add('o')};$('#x').onclick=$('#cx').onclick=sh.onclick=closeD;
-$('#cb').onclick=openC;$('#lg').onclick=openM;$('#mx').onclick=closeM;$('#modal').onclick=e=>{if(e.target.id=='modal')closeM()};
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>sc(b.dataset.s));
-addEventListener('hashchange',render);updU();drawCart();render();
-</script></body></html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تکنو کلاسیک | مرجع تخصصی لپ‌تاپ و قطعات سخت‌افزاری</title>
+    <!-- فونت وزیرمتن برای تایپوگرافی استاندارد و خوانای فارسی -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <!-- تیلویند سی‌اس‌اس -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    },
+                    colors: {
+                        classic: {
+                            navy: '#0f172a',
+                            gold: '#b45309',
+                            goldLight: '#f59e0b',
+                            cream: '#fafaf9',
+                            slate: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* تنظیمات اسکرول نرم و شخصی‌سازی اسکرول‌بار */
+        html {
+            scroll-behavior: smooth;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* افکت شیشه‌ای مدرن (Glassmorphism) */
+        .glass-header {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-800 antialiased selection:bg-amber-700 selection:text-white flex flex-col min-h-screen">
+
+    <!-- نوار اطلاع‌رسانی بالای صفحه -->
+    <div class="bg-slate-900 text-stone-200 text-xs py-2 px-4 border-b border-amber-700/30">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <p class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                <span>ضمانت اصالت کالا و گارانتی ۱۸ ماهه تعویض بی‌قید و شرط برای تمامی لپ‌تاپ‌ها</span>
+            </p>
+            <div class="flex items-center gap-4 text-stone-400">
+                <a href="#footer" class="hover:text-amber-400 transition">پشتیبانی ۲۴/۷: ۰۲۱-۸۸۰۰۰۰۰۰</a>
+                <span>|</span>
+                <a href="#features" class="hover:text-amber-400 transition">ارسال رایگان به سراسر کشور</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- هدر اصلی و ناوبری -->
+    <header class="sticky top-0 z-40 glass-header border-b border-stone-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20 gap-4">
+                
+                <!-- لوگو و نام برند -->
+                <a href="#" class="flex items-center gap-3 group shrink-0">
+                    <div class="w-11 h-11 bg-slate-900 rounded-xl flex items-center justify-center border border-amber-600/50 shadow-md group-hover:border-amber-500 transition">
+                        <!-- لوگوی SVG اختصاصی -->
+                        <svg class="w-6 h-6 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                            <line x1="2" y1="20" x2="22" y2="20"></line>
+                            <path d="M9 17v3M15 17v3"></path>
+                            <circle cx="12" cy="10" r="2" fill="currentColor"></circle>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="text-xl font-black tracking-tight text-slate-900 block">تکنو<span class="text-amber-700">کلاسیک</span></span>
+                        <span class="text-[11px] text-slate-500 font-medium block -mt-1">مهندسی و اصالت سخت‌افزار</span>
+                    </div>
+                </a>
+
+                <!-- نوار جستجوی هوشمند -->
+                <div class="hidden md:flex flex-1 max-w-lg relative">
+                    <input type="text" id="searchInput" placeholder="جستجو در میان لپ‌تاپ‌ها، پردازنده‌ها، کارت گرافیک..." 
+                        class="w-full bg-stone-100 border border-stone-300 text-slate-800 text-sm rounded-xl pl-10 pr-4 py-2.5 focus:outline-none focus:bg-white focus:border-amber-700 focus:ring-2 focus:ring-amber-700/20 transition">
+                    <svg class="w-5 h-5 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+
+                <!-- دکمه‌های عملیاتی هدر -->
+                <div class="flex items-center gap-3">
+                    <!-- دکمه سبد خرید -->
+                    <button onclick="toggleCart()" class="relative p-2.5 bg-stone-100 hover:bg-stone-200 text-slate-800 rounded-xl border border-stone-200 transition flex items-center gap-2">
+                        <svg class="w-5 h-5 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                        </svg>
+                        <span class="hidden sm:inline text-sm font-semibold">سبد خرید</span>
+                        <span id="cartBadge" class="bg-amber-700 text-white text-xs font-bold px-2 py-0.5 rounded-lg">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- نوار جستجوی موبایل -->
+            <div class="md:hidden pb-3">
+                <div class="relative">
+                    <input type="text" id="mobileSearchInput" placeholder="جستجوی محصول..." 
+                        class="w-full bg-stone-100 border border-stone-300 text-slate-800 text-sm rounded-xl pl-10 pr-4 py-2 focus:outline-none focus:bg-white focus:border-amber-700">
+                    <svg class="w-4 h-4 text-slate-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- بخش قهرمان (Hero Section) با طراحی کلاسیک و گرافیک برداری اختصاصی -->
+    <section class="relative bg-slate-900 text-white overflow-hidden border-b-4 border-amber-700">
+        <!-- الگوی پس‌زمینه هندسی ظریف -->
+        <div class="absolute inset-0 opacity-10">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#f59e0b" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- متن معرفی -->
+                <div class="lg:col-span-6 space-y-6 text-center lg:text-right">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold">
+                        <span>نسل جدید پردازنده‌های معماری کلاسیک و مدرن</span>
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-stone-50">
+                        قدرت مهندسی در دستان شما؛ <span class="text-amber-500">انتخابی ماندگار</span>
+                    </h1>
+                    <p class="text-stone-300 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        مجموعه‌ای دست‌چین شده از برترین لپ‌تاپ‌های مهندسی، گیمینگ، ایستگاه‌های کاری و قطعات سخت‌افزاری اورجینال با استانداردهای کیفی بی‌نظیر.
+                    </p>
+                    <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#catalog" class="px-7 py-3.5 bg-amber-700 hover:bg-amber-600 text-white font-bold rounded-xl shadow-lg shadow-amber-900/40 transition transform hover:-translate-y-0.5">
+                            مشاهده کاتالوگ محصولات
+                        </a>
+                        <a href="#features" class="px-7 py-3.5 bg-slate-800 hover:bg-slate-700 text-stone-200 font-semibold rounded-xl border border-slate-700 transition">
+                            مشاوره تخصصی خرید
+                        </a>
+                    </div>
+                </div>
+
+                <!-- تصویر اختصاصی لپ‌تاپ پرچمدار ساخته شده با SVG -->
+                <div class="lg:col-span-6 flex justify-center">
+                    <div class="w-full max-w-lg bg-gradient-to-b from-slate-800 to-slate-900 p-6 rounded-2xl border border-slate-700/80 shadow-2xl relative">
+                        <div class="absolute -top-3 -right-3 bg-amber-600 text-white text-xs font-bold px-3 py-1 rounded-lg shadow">
+                            پیشنهاد ویژه سرآشپز سخت‌افزار
+                        </div>
+                        <!-- گرافیک برداری دقیق یک لپ‌تاپ مهندسی -->
+                        <svg viewBox="0 0 500 320" class="w-full h-auto drop-shadow-2xl" xmlns="http://www.w3.org/2000/svg">
+                            <!-- بدنه صفحه نمایش -->
+                            <rect x="65" y="20" width="370" height="225" rx="14" fill="#1e293b" stroke="#475569" stroke-width="4"/>
+                            <!-- حاشیه داخلی نمایشگر -->
+                            <rect x="78" y="32" width="344" height="198" rx="6" fill="#0f172a"/>
+                            <!-- گرافیک داخل صفحه نمایش -->
+                            <defs>
+                                <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#1e293b"/>
+                                    <stop offset="50%" stop-color="#0f172a"/>
+                                    <stop offset="100%" stop-color="#451a03"/>
+                                </linearGradient>
+                            </defs>
+                            <rect x="82" y="36" width="336" height="190" rx="4" fill="url(#screenGrad)"/>
+                            <!-- المان‌های UI داخل مانیتور -->
+                            <circle cx="250" cy="130" r="55" fill="none" stroke="#b45309" stroke-width="2" stroke-dasharray="8 4"/>
+                            <circle cx="250" cy="130" r="38" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
+                            <polygon points="250,105 270,142 230,142" fill="#f59e0b" opacity="0.8"/>
+                            <rect x="100" y="55" width="80" height="8" rx="4" fill="#334155"/>
+                            <rect x="100" y="70" width="50" height="6" rx="3" fill="#b45309"/>
+                            <rect x="330" y="195" width="70" height="12" rx="6" fill="#b45309"/>
+                            <!-- وب‌کم -->
+                            <circle cx="250" cy="26" r="2.5" fill="#64748b"/>
+                            <!-- لولا -->
+                            <rect x="110" y="245" width="280" height="6" fill="#334155"/>
+                            <!-- پایه و کیبورد لپ‌تاپ -->
+                            <path d="M 30 251 L 470 251 L 490 272 C 492 276 488 280 480 280 L 20 280 C 12 280 8 276 10 272 Z" fill="#cbd5e1"/>
+                            <path d="M 10 272 L 490 272 L 485 278 L 15 278 Z" fill="#94a3b8"/>
+                            <!-- تاچ‌پد -->
+                            <rect x="205" y="255" width="90" height="12" rx="2" fill="#94a3b8" opacity="0.6"/>
+                        </svg>
+                        <div class="mt-4 flex justify-between items-center border-t border-slate-800 pt-4">
+                            <div>
+                                <h3 class="font-bold text-stone-100">سری مهندسی ProBook X1</h3>
+                                <p class="text-xs text-stone-400">پردازنده Core i9 | رم ۳۲ گیگابایت | نمایشگر 4K</p>
+                            </div>
+                            <span class="text-amber-400 font-bold text-sm">موجود در انبار</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- نوار دسته‌بندی سریع (سازه‌های مجزا) -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-7 relative z-20">
+        <div class="bg-white rounded-2xl shadow-lg border border-stone-200 p-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <button onclick="filterCategory('laptop')" class="flex items-center gap-3 p-3 rounded-xl hover:bg-stone-50 border border-transparent hover:border-stone-200 transition text-right group">
+                <div class="w-12 h-12 rounded-xl bg-slate-900 text-amber-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 text-sm">لپ‌تاپ‌های تخصصی</h4>
+                    <span class="text-xs text-slate-500">مهندسی، اداری، گیمینگ</span>
+                </div>
+            </button>
+
+            <button onclick="filterCategory('gpu')" class="flex items-center gap-3 p-3 rounded-xl hover:bg-stone-50 border border-transparent hover:border-stone-200 transition text-right group">
+                <div class="w-12 h-12 rounded-xl bg-slate-900 text-amber-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 text-sm">قطعات داخلی</h4>
+                    <span class="text-xs text-slate-500">گرافیک، پردازنده، رم</span>
+                </div>
+            </button>
+
+            <button onclick="filterCategory('storage')" class="flex items-center gap-3 p-3 rounded-xl hover:bg-stone-50 border border-transparent hover:border-stone-200 transition text-right group">
+                <div class="w-12 h-12 rounded-xl bg-slate-900 text-amber-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 text-sm">حافظه و ذخیره‌سازی</h4>
+                    <span class="text-xs text-slate-500">SSD پرسرعت و هارد اکسترنال</span>
+                </div>
+            </button>
+
+            <button onclick="filterCategory('peripheral')" class="flex items-center gap-3 p-3 rounded-xl hover:bg-stone-50 border border-transparent hover:border-stone-200 transition text-right group">
+                <div class="w-12 h-12 rounded-xl bg-slate-900 text-amber-500 flex items-center justify-center shrink-0 group-hover:scale-105 transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-slate-900 text-sm">تجهیزات جانبی</h4>
+                    <span class="text-xs text-slate-500">کیبورد مکانیکال، ماوس، مانیتور</span>
+                </div>
+            </button>
+        </div>
+    </section>
+
+    <!-- بخش اصلی کاتالوگ محصولات (ساختار سایدبار فیلتر + گرید محصولات) -->
+    <main id="catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-stone-200 pb-4">
+            <div>
+                <h2 class="text-2xl font-black text-slate-900">ویترین محصولات منتخب</h2>
+                <p class="text-sm text-slate-500 mt-1">تمامی کالاها دارای شماره سریال قابل استعلام و بسته‌بندی پلمپ کارخانه هستند.</p>
+            </div>
+
+            <!-- مرتب‌سازی -->
+            <div class="flex items-center gap-3 w-full md:w-auto">
+                <label for="sortSelect" class="text-sm font-medium text-slate-600 shrink-0">مرتب‌سازی:</label>
+                <select id="sortSelect" onchange="applyFilters()" class="bg-white border border-stone-300 text-slate-800 text-sm rounded-xl px-3 py-2 focus:outline-none focus:border-amber-700 w-full md:w-48">
+                    <option value="default">پیشنهاد سیستم</option>
+                    <option value="price-asc">ارزان‌ترین به گران‌ترین</option>
+                    <option value="price-desc">گران‌ترین به ارزان‌ترین</option>
+                    <option value="rating">محبوب‌ترین کاربران</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- سایدبار فیلترها -->
+            <aside class="lg:col-span-3 space-y-6">
+                <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-6">
+                    <div class="flex justify-between items-center border-b border-stone-100 pb-3">
+                        <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                            <svg class="w-4 h-4 text-amber-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
+                            <span>فیلترهای تخصصی</span>
+                        </h3>
+                        <button onclick="resetFilters()" class="text-xs text-amber-700 hover:underline font-medium">حذف فیلترها</button>
+                    </div>
+
+                    <!-- فیلتر دسته‌بندی -->
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">دسته‌بندی کالا</h4>
+                        <div class="space-y-2 text-sm">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="category" value="all" checked onchange="applyFilters()" class="text-amber-700 focus:ring-amber-700">
+                                <span>همه محصولات</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="category" value="laptop" onchange="applyFilters()" class="text-amber-700 focus:ring-amber-700">
+                                <span>لپ‌تاپ و اولترابوک</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="category" value="gpu" onchange="applyFilters()" class="text-amber-700 focus:ring-amber-700">
+                                <span>کارت گرافیک و پردازنده</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="category" value="storage" onchange="applyFilters()" class="text-amber-700 focus:ring-amber-700">
+                                <span>حافظه SSD و رم</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="category" value="peripheral" onchange="applyFilters()" class="text-amber-700 focus:ring-amber-700">
+                                <span>لوازم جانبی حرفه‌ای</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- فیلتر برند -->
+                    <div class="border-t border-stone-100 pt-4">
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">سازنده / برند</h4>
+                        <div class="space-y-2 text-sm" id="brandFilters">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" value="ASUS" onchange="applyFilters()" class="rounded text-amber-700 focus:ring-amber-700">
+                                <span>ایسوس (ASUS)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" value="Apple" onchange="applyFilters()" class="rounded text-amber-700 focus:ring-amber-700">
+                                <span>اپل (Apple)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" value="NVIDIA" onchange="applyFilters()" class="rounded text-amber-700 focus:ring-amber-700">
+                                <span>انویدیا (NVIDIA)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" value="Samsung" onchange="applyFilters()" class="rounded text-amber-700 focus:ring-amber-700">
+                                <span>سامسونگ (Samsung)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" value="Logitech" onchange="applyFilters()" class="rounded text-amber-700 focus:ring-amber-700">
+                                <span>لاجیتک (Logitech)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- فیلتر موجودی -->
+                    <div class="border-t border-stone-100 pt-4">
+                        <label class="flex items-center justify-between cursor-pointer">
+                            <span class="text-sm font-medium text-slate-700">فقط کالاهای موجود</span>
+                            <input type="checkbox" id="inStockOnly" onchange="applyFilters()" class="rounded text-amber-700 focus:ring-amber-700 w-4 h-4">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- بنر مشاوره کلاسیک در سایدبار -->
+                <div class="bg-slate-900 text-white p-5 rounded-2xl border border-amber-700/40 relative overflow-hidden">
+                    <h4 class="font-bold text-amber-400 mb-2">نیاز به اسمبل اختصاصی دارید؟</h4>
+                    <p class="text-xs text-stone-300 leading-relaxed mb-4">
+                        کارشناسان سخت‌افزار ما بر اساس بودجه و نوع نرم‌افزارهای شما، بهترین پیکربندی را پیشنهاد می‌دهند.
+                    </p>
+                    <button onclick="showToast('درخواست مشاوره ثبت شد. کارشناسان ما تا دقایقی دیگر با شما تماس می‌گیرند.')" class="w-full py-2.5 bg-amber-700 hover:bg-amber-600 text-white text-xs font-bold rounded-xl transition">
+                        درخواست مشاوره رایگان
+                    </button>
+                </div>
+            </aside>
+
+            <!-- گرید نمایش محصولات -->
+            <div class="lg:col-span-9">
+                <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <!-- کارت‌های محصول توسط جاوااسکریپت رندر می‌شوند -->
+                </div>
+
+                <!-- پیام عدم یافتن نتیجه -->
+                <div id="emptyState" class="hidden bg-white rounded-2xl border border-stone-200 p-12 text-center">
+                    <div class="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">محصولی با این مشخصات یافت نشد</h3>
+                    <p class="text-sm text-slate-500 mt-1 mb-4">لطفاً فیلترهای انتخابی را تغییر دهید یا عبارت جستجو را بازبینی کنید.</p>
+                    <button onclick="resetFilters()" class="px-5 py-2 bg-slate-900 text-white text-sm font-semibold rounded-xl hover:bg-slate-800 transition">
+                        بازنشانی تمامی فیلترها
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- بخش ویژگی‌ها و استانداردهای فروشگاه (سازه اعتمادسازی کلاسیک) -->
+    <section id="features" class="bg-white border-t border-stone-200 py-14">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl font-black text-slate-900">چرا حرفه‌ای‌ها تکنوکلاسیک را انتخاب می‌کنند؟</h2>
+                <p class="text-sm text-slate-500 mt-2">ترکیب اصالت سنتی در مشتری‌مداری با مدرن‌ترین استانداردهای تامین سخت‌افزار</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200/80 flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-700/10 text-amber-700 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 mb-1">تضمین اصالت و پلمپ فیزیکی</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">تمامی لپ‌تاپ‌ها و قطعات دارای هولوگرام شرکتی و کد رهگیری گمرکی معتبر هستند.</p>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200/80 flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-700/10 text-amber-700 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 mb-1">ارسال ایمن و بیمه‌شده</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">بسته‌بندی ضدضربه چندلایه همراه با بیمه کامل کالا تا لحظه تحویل به خریدار.</p>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-stone-50 border border-stone-200/80 flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-700/10 text-amber-700 flex items-center justify-center shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-slate-900 mb-1">نصب و راه‌اندازی رایگان</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">نصب سیستم‌عامل اورجینال و درایورهای تخصصی پیش از ارسال طبق سفارش شما.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر کلاسیک و جامع -->
+    <footer id="footer" class="bg-slate-900 text-stone-300 border-t-4 border-amber-700 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="text-xl font-black text-white">تکنو<span class="text-amber-500">کلاسیک</span></span>
+                    </div>
+                    <p class="text-xs text-stone-400 leading-relaxed">
+                        مرجع تخصصی عرضه لپ‌تاپ‌های مهندسی، ایستگاه‌های کاری و قطعات سخت‌افزاری با اصالت تضمین‌شده. هدف ما ارائه تجربه‌ای مطمئن و کلاسیک در خرید تجهیزات دیجیتال است.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">دسترسی سریع</h4>
+                    <ul class="space-y-2 text-xs text-stone-400">
+                        <li><a href="#catalog" onclick="filterCategory('laptop')" class="hover:text-amber-400 transition">لپ‌تاپ‌های مهندسی و رندرینگ</a></li>
+                        <li><a href="#catalog" onclick="filterCategory('gpu')" class="hover:text-amber-400 transition">کارت‌های گرافیک سری RTX</a></li>
+                        <li><a href="#catalog" onclick="filterCategory('storage')" class="hover:text-amber-400 transition">حافظه‌های پرسرعت NVMe</a></li>
+                        <li><a href="#catalog" onclick="filterCategory('peripheral')" class="hover:text-amber-400 transition">تجهیزات جانبی ارگونومیک</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">خدمات مشتریان</h4>
+                    <ul class="space-y-2 text-xs text-stone-400">
+                        <li><a href="#features" class="hover:text-amber-400 transition">شرایط گارانتی و بازگشت کالا</a></li>
+                        <li><a href="#features" class="hover:text-amber-400 transition">استعلام اصالت شماره سریال</a></li>
+                        <li><a href="#features" class="hover:text-amber-400 transition">راهنمای خرید سازمانی</a></li>
+                        <li><a href="#features" class="hover:text-amber-400 transition">حریم خصوصی کاربران</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-4">اطلاعات تماس دفتر مرکزی</h4>
+                    <ul class="space-y-2 text-xs text-stone-400">
+                        <li>تهران، خیابان ولیعصر، بالاتر از تقاطع طالقانی، مجتمع فناوری کلاسیک، واحد ۴۰۲</li>
+                        <li class="text-amber-400 font-semibold pt-1">تلفن فروش: ۰۲۱-۸۸۰۰۰۰۰۰</li>
+                        <li>ایمیل: info@technoclassic.ir</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-500">
+                <p>© ۱۴۰۵ تمامی حقوق برای فروشگاه تخصصی تکنوکلاسیک محفوظ است.</p>
+                <p class="mt-2 sm:mt-0">طراحی شده با معماری تمیز و استانداردهای مدرن وب</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- کشوی سبد خرید (Cart Drawer) -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden">
+        <!-- پس‌زمینه تیره -->
+        <div onclick="toggleCart()" class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity"></div>
+        
+        <!-- پنل سبد خرید -->
+        <div class="absolute inset-y-0 left-0 max-w-md w-full bg-white shadow-2xl flex flex-col justify-between border-r border-stone-200">
+            <!-- هدر سبد -->
+            <div class="p-5 border-b border-stone-200 flex justify-between items-center bg-stone-50">
+                <div class="flex items-center gap-2">
+                    <h3 class="font-bold text-slate-900 text-lg">سبد خرید شما</h3>
+                    <span id="drawerCartCount" class="bg-amber-700 text-white text-xs font-bold px-2 py-0.5 rounded-md">0</span>
+                </div>
+                <button onclick="toggleCart()" class="p-2 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-stone-200 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- لیست اقلام -->
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4">
+                <!-- اقلام سبد خرید اینجا رندر می‌شوند -->
+            </div>
+
+            <!-- فوتر سبد خرید و تسویه حساب -->
+            <div class="p-5 border-t border-stone-200 bg-stone-50 space-y-4">
+                <div class="flex justify-between items-center text-sm">
+                    <span class="text-slate-600">مبلغ قابل پرداخت:</span>
+                    <span id="cartTotalPrice" class="text-lg font-black text-slate-900">۰ تومان</span>
+                </div>
+                <button onclick="checkout()" class="w-full py-3.5 bg-amber-700 hover:bg-amber-600 text-white font-bold rounded-xl shadow-md transition flex justify-center items-center gap-2">
+                    <span>تکمیل فرآیند خرید</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال جزئیات فنی محصول (Quick View Modal) -->
+    <div id="productModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4">
+        <div onclick="closeModal()" class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
+        <div class="bg-white rounded-2xl max-w-2xl w-full relative z-10 overflow-hidden shadow-2xl border border-stone-200 animate-fade-in">
+            <div id="modalContent">
+                <!-- محتوای مودال توسط جاوااسکریپت پر می‌شود -->
+            </div>
+        </div>
+    </div>
+
+    <!-- اعلان شناور (Toast Notification) -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-5 py-3.5 rounded-xl shadow-xl border border-amber-600/50 flex items-center gap-3 text-sm font-medium">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+            <span id="toastMessage">پیام سیستم</span>
+        </div>
+    </div>
+
+    <!-- منطق برنامه و داده‌های محصولات -->
+    <script>
+        /**
+         * تولیدکننده تصاویر بُرداری اختصاصی (SVG) برای هر دسته محصول
+         * تضمین کیفیت بی‌نهایت در تمام رزولوشن‌ها بدون نیاز به فایل خارجی
+         */
+        const svgArtwork = {
+            laptopPro: `
+                <svg viewBox="0 0 300 200" class="w-full h-44 object-contain" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="45" y="20" width="210" height="130" rx="8" fill="#1e293b" stroke="#334155" stroke-width="3"/>
+                    <rect x="53" y="28" width="194" height="114" rx="3" fill="#0f172a"/>
+                    <circle cx="150" cy="85" r="30" fill="none" stroke="#b45309" stroke-width="2"/>
+                    <path d="M135 85 L145 95 L168 72" fill="none" stroke="#f59e0b" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M25 150 L275 150 L285 164 C286 167 283 170 278 170 L22 170 C17 170 14 167 15 164 Z" fill="#cbd5e1"/>
+                    <rect x="125" y="153" width="50" height="7" rx="2" fill="#94a3b8"/>
+                </svg>`,
+            laptopGaming: `
+                <svg viewBox="0 0 300 200" class="w-full h-44 object-contain" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="45,20 255,20 260,150 40,150" fill="#0f172a" stroke="#b45309" stroke-width="2.5"/>
+                    <rect x="52" y="28" width="196" height="112" fill="#1e293b"/>
+                    <polygon points="150,45 185,115 115,115" fill="none" stroke="#f59e0b" stroke-width="2.5"/>
+                    <circle cx="150" cy="92" r="10" fill="#b45309"/>
+                    <path d="M20 150 L280 150 L290 166 L10 166 Z" fill="#334155"/>
+                    <line x1="40" y1="158" x2="260" y2="158" stroke="#f59e0b" stroke-width="2"/>
+                </svg>`,
+            gpu: `
+                <svg viewBox="0 0 300 200" class="w-full h-44 object-contain" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="35" y="45" width="230" height="105" rx="10" fill="#1e293b" stroke="#475569" stroke-width="3"/>
+                    <rect x="25" y="35" width="12" height="130" rx="2" fill="#94a3b8"/>
+                    <!-- فن اول -->
+                    <circle cx="105" cy="97" r="36" fill="#0f172a" stroke="#b45309" stroke-width="2.5"/>
+                    <circle cx="105" cy="97" r="10" fill="#b45309"/>
+                    <path d="M105 65 L105 129 M73 97 L137 97 M82 74 L128 120 M128 74 L82 120" stroke="#475569" stroke-width="2"/>
+                    <!-- فن دوم -->
+                    <circle cx="200" cy="97" r="36" fill="#0f172a" stroke="#b45309" stroke-width="2.5"/>
+                    <circle cx="200" cy="97" r="10" fill="#b45309"/>
+                    <path d="M200 65 L200 129 M168 97 L232 97 M177 74 L223 120 M223 74 L177 120" stroke="#475569" stroke-width="2"/>
+                    <!-- اسلات PCIe -->
+                    <rect x="70" y="150" width="130" height="10" fill="#f59e0b"/>
+                </svg>`,
+            cpu: `
+                <svg viewBox="0 0 300 200" class="w-full h-44 object-contain" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="85" y="35" width="130" height="130" rx="12" fill="#047857" stroke="#065f46" stroke-width="3"/>
+                    <rect x="102" y="52" width="96" height="96" rx="8" fill="#cbd5e1" stroke="#94a3b8" stroke-width="2"/>
+                    <rect x="122" y="72" width="56" height="56" rx="4" fill="#1e293b"/>
+                    <text x="150" y="104" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f59e0b" text-anchor="middle">CORE i9</text>
+                    <circle cx="95" cy="155" r="4" fill="#f59e0b"/>
+                </svg>`,
+            ssd: `
+                <svg viewBox="0 0 300 200" class="w-full h-44 object-contain" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="45" y="70" width="210" height="60" rx="6" fill="#0f172a" stroke="#b45309" stroke-width="2"/>
+                    <rect x="35" y="80" width="12" height="40" fill="#f59e0b"/>
+                    <rect x="70" y="82" width="45" height="36" rx="3" fill="#1e293b" stroke="#475569"/>
+                    <rect x="128" y="82" width="45" height="36" rx="3" fill="#1e293b" stroke="#475569"/>
+                    <rect x="186" y="82" width="50" height="36" rx="3" fill="#b45309"/>
+                    <text x="211" y="104" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">NVMe 2TB</text>
+                </svg>`,
+            keyboard: `
+                <svg viewBox="0 0 300 200" class="w-full h-44 object-contain" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="30" y="55" width="240" height="90" rx="10" fill="#1e293b" stroke="#475569" stroke-width="3"/>
+                    <g fill="#334155">
+                        <rect x="45" y="70" width="18" height="16" rx="3"/>
+                        <rect x="68" y="70" width="18" height="16" rx="3"/>
+                        <rect x="91" y="70" width="18" height="16" rx="3"/>
+                        <rect x="114" y="70" width="18" height="16" rx="3"/>
+                        <rect x="137" y="70" width="18" height="16" rx="3"/>
+                        <rect x="160" y="70" width="18" height="16" rx="3"/>
+                        <rect x="183" y="70" width="18" height="16" rx="3"/>
+                        <rect x="206" y="70" width="18" height="16" rx="3"/>
+                        <rect x="229" y="70" width="26" height="16" rx="3" fill="#b45309"/>
+                        
+                        <rect x="45" y="92" width="26" height="16" rx="3"/>
+                        <rect x="76" y="92" width="18" height="16" rx="3"/>
+                        <rect x="99" y="92" width="18" height="16" rx="3"/>
+                        <rect x="122" y="92" width="18" height="16" rx="3"/>
+                        <rect x="145" y="92" width="18" height="16" rx="3"/>
+                        <rect x="168" y="92" width="18" height="16" rx="3"/>
+                        <rect x="191" y="92" width="18" height="16" rx="3"/>
+                        <rect x="214" y="92" width="41" height="16" rx="3"/>
+
+                        <rect x="45" y="114" width="32" height="16" rx="3"/>
+                        <rect x="85" y="114" width="110" height="16" rx="3" fill="#475569"/>
+                        <rect x="203" y="114" width="24" height="16" rx="3"/>
+                        <rect x="232" y="114" width="23" height="16" rx="3" fill="#f59e0b"/>
+                    </g>
+                </svg>`
+        };
+
+        // پایگاه داده ساختاریافته محصولات
+        const products = [
+            {
+                id: 1,
+                title: "لپ‌تاپ مهندسی ASUS ProArt StudioBook 16",
+                brand: "ASUS",
+                category: "laptop",
+                categoryName: "لپ‌تاپ تخصصی",
+                price: 94500000,
+                rating: 4.9,
+                inStock: true,
+                svg: svgArtwork.laptopPro,
+                badge: "پرفروش‌ترین مهندسی",
+                specs: ["پردازنده: Intel Core i9-13980HX", "حافظه رم: 32GB DDR5", "گرافیک: RTX 4070 8GB", "نمایشگر: 16 اینچ OLED 4K"]
+            },
+            {
+                id: 2,
+                title: "مک‌بوک پرو ۱۶ اینچی Apple M3 Max",
+                brand: "Apple",
+                category: "laptop",
+                categoryName: "لپ‌تاپ تخصصی",
+                price: 148000000,
+                rating: 5.0,
+                inStock: true,
+                svg: svgArtwork.laptopPro,
+                badge: "پرچمدار اپل",
+                specs: ["تراشه: Apple M3 Max 16-Core", "حافظه یکپارچه: 48GB", "حافظه داخلی: 1TB SSD", "باتری: تا ۲۲ ساعت کار مداوم"]
+            },
+            {
+                id: 3,
+                title: "لپ‌تاپ گیمینگ ASUS ROG Strix SCAR 18",
+                brand: "ASUS",
+                category: "laptop",
+                categoryName: "لپ‌تاپ گیمینگ",
+                price: 132000000,
+                rating: 4.8,
+                inStock: true,
+                svg: svgArtwork.laptopGaming,
+                badge: "قدرت مطلق",
+                specs: ["پردازنده: Core i9-14900HX", "گرافیک: RTX 4080 12GB", "نرخ نوسازی: 240Hz QHD+", "خنک‌کننده: فلز مایع سه فنه"]
+            },
+            {
+                id: 4,
+                title: "کارت گرافیک ASUS ROG Strix RTX 4080 Super",
+                brand: "NVIDIA",
+                category: "gpu",
+                categoryName: "قطعات داخلی",
+                price: 68500000,
+                rating: 4.9,
+                inStock: true,
+                svg: svgArtwork.gpu,
+                badge: "موجودی محدود",
+                specs: ["حافظه ویدیویی: 16GB GDDR6X", "رابط: PCI Express 4.0", "خروجی تصویر: 2x HDMI 2.1, 3x DP", "پاور پیشنهادی: 850 وات"]
+            },
+            {
+                id: 5,
+                title: "حافظه SSD سامسونگ مدل 990 PRO ظرفیت 2 ترابایت",
+                brand: "Samsung",
+                category: "storage",
+                categoryName: "حافظه و ذخیره‌سازی",
+                price: 11800000,
+                rating: 4.9,
+                inStock: true,
+                svg: svgArtwork.ssd,
+                badge: "سرعت فوق‌العاده",
+                specs: ["سرعت خواندن: 7450 مگابایت بر ثانیه", "سرعت نوشتن: 6900 مگابایت بر ثانیه", "فرم فاکتور: M.2 2280", "مناسب لپ‌تاپ و PS5"]
+            },
+            {
+                id: 6,
+                title: "کیبورد مکانیکال بی‌سیم Logitech MX Mechanical",
+                brand: "Logitech",
+                category: "peripheral",
+                categoryName: "تجهیزات جانبی",
+                price: 9400000,
+                rating: 4.7,
+                inStock: true,
+                svg: svgArtwork.keyboard,
+                badge: "ارگونومی کلاسیک",
+                specs: ["نوع سوییچ: Tactile Quiet کم‌صدا", "اتصال: بلوتوث و دانگل Logi Bolt", "نور پس‌زمینه: هوشمند با سنسور حرکت", "بدنه: آلومینیوم برس‌خورده"]
+            },
+            {
+                id: 7,
+                title: "پردازنده مرکزی Intel Core i9-14900K Box",
+                brand: "ASUS",
+                category: "gpu",
+                categoryName: "قطعات داخلی",
+                price: 34200000,
+                rating: 4.8,
+                inStock: false,
+                svg: svgArtwork.cpu,
+                badge: "نسل چهاردهم",
+                specs: ["تعداد هسته: ۲۴ هسته (8P + 16E)", "فرکانس بوست: تا 6.0 گیگاهرتز", "حافظه کش: 36MB Intel Smart Cache", "سوکت: LGA 1700"]
+            },
+            {
+                id: 8,
+                title: "حافظه اکسترنال ضدضربه Samsung T7 Shield 2TB",
+                brand: "Samsung",
+                category: "storage",
+                categoryName: "حافظه و ذخیره‌سازی",
+                price: 9900000,
+                rating: 4.8,
+                inStock: true,
+                svg: svgArtwork.ssd,
+                badge: "مقاوم در برابر آب و ضربه",
+                specs: ["استاندارد مقاومت: IP65", "سرعت انتقال: 1050MB/s", "درگاه: USB 3.2 Gen 2 Type-C", "وزن: تنها ۹۸ گرم"]
+            }
+        ];
+
+        // وضعیت سبد خرید
+        let cart = [];
+
+        // فرمت‌دهی اعداد به تومان فارسی
+        function formatPrice(price) {
+            return price.toLocaleString('fa-IR') + ' تومان';
+        }
+
+        // نمایش اعلان (Toast)
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // رندر کارت‌های محصول در گرید
+        function renderProducts(list) {
+            const grid = document.getElementById('productsGrid');
+            const emptyState = document.getElementById('emptyState');
+
+            if (list.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+            grid.innerHTML = list.map(product => `
+                <article class="bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-amber-700/40 transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <!-- بخش تصویر SVG و نشانگرها -->
+                        <div class="relative bg-stone-50 p-4 border-b border-stone-100 flex items-center justify-center overflow-hidden">
+                            <span class="absolute top-3 right-3 bg-slate-900 text-amber-400 text-[11px] font-bold px-2.5 py-1 rounded-lg z-10">
+                                ${product.badge}
+                            </span>
+                            <span class="absolute top-3 left-3 bg-white/90 text-slate-700 text-xs font-bold px-2 py-1 rounded-lg border border-stone-200 flex items-center gap-1 z-10">
+                                <span class="text-amber-500">★</span> ${product.rating}
+                            </span>
+                            <div class="transform group-hover:scale-105 transition duration-500 w-full">
+                                ${product.svg}
+                            </div>
+                        </div>
+
+                        <!-- اطلاعات محصول -->
+                        <div class="p-5">
+                            <div class="flex items-center justify-between text-xs text-slate-400 mb-1.5">
+                                <span>${product.categoryName}</span>
+                                <span class="font-semibold text-slate-600">${product.brand}</span>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-base leading-snug mb-3 line-clamp-2 min-h-[44px]">
+                                ${product.title}
+                            </h3>
+                            <ul class="space-y-1 text-xs text-slate-500 mb-4 border-t border-stone-100 pt-3">
+                                <li class="truncate">• ${product.specs[0]}</li>
+                                <li class="truncate">• ${product.specs[1]}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- قیمت و دکمه‌های عملیاتی -->
+                    <div class="px-5 pb-5 pt-2 border-t border-stone-100 bg-stone-50/50">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-xs text-slate-500">قیمت نهایی:</span>
+                            ${product.inStock 
+                                ? `<span class="text-base font-black text-slate-900">${formatPrice(product.price)}</span>`
+                                : `<span class="text-sm font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-md">ناموجود</span>`
+                            }
+                        </div>
+
+                        <div class="flex gap-2">
+                            <button onclick="openProductModal(${product.id})" class="px-3 py-2.5 bg-white hover:bg-stone-100 text-slate-700 border border-stone-300 rounded-xl text-xs font-bold transition">
+                                مشخصات فنی
+                            </button>
+                            <button onclick="addToCart(${product.id})" ${!product.inStock ? 'disabled' : ''} 
+                                class="flex-1 py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5
+                                ${product.inStock 
+                                    ? 'bg-slate-900 hover:bg-amber-700 text-white shadow-sm' 
+                                    : 'bg-stone-200 text-stone-400 cursor-not-allowed'}">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                <span>افزودن به سبد</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // فیلتر سریع از نوار دسته‌بندی بالای صفحه
+        function filterCategory(cat) {
+            const radios = document.querySelectorAll('input[name="category"]');
+            radios.forEach(r => {
+                if (r.value === cat) r.checked = true;
+            });
+            applyFilters();
+            document.getElementById('catalog').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // اعمال تمامی فیلترها و جستجو
+        function applyFilters() {
+            const searchQuery = (document.getElementById('searchInput').value || document.getElementById('mobileSearchInput').value).trim().toLowerCase();
+            const selectedCategory = document.querySelector('input[name="category"]:checked').value;
+            const checkedBrands = Array.from(document.querySelectorAll('#brandFilters input:checked')).map(cb => cb.value);
+            const inStockOnly = document.getElementById('inStockOnly').checked;
+            const sortBy = document.getElementById('sortSelect').value;
+
+            let filtered = products.filter(p => {
+                const matchesSearch = p.title.toLowerCase().includes(searchQuery) || p.brand.toLowerCase().includes(searchQuery) || p.specs.some(s => s.toLowerCase().includes(searchQuery));
+                const matchesCategory = selectedCategory === 'all' || p.category === selectedCategory;
+                const matchesBrand = checkedBrands.length === 0 || checkedBrands.includes(p.brand);
+                const matchesStock = !inStockOnly || p.inStock;
+                return matchesSearch && matchesCategory && matchesBrand && matchesStock;
+            });
+
+            if (sortBy === 'price-asc') {
+                filtered.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'price-desc') {
+                filtered.sort((a, b) => b.price - a.price);
+            } else if (sortBy === 'rating') {
+                filtered.sort((a, b) => b.rating - a.rating);
+            }
+
+            renderProducts(filtered);
+        }
+
+        // بازنشانی فیلترها
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('mobileSearchInput').value = '';
+            document.querySelector('input[name="category"][value="all"]').checked = true;
+            document.querySelectorAll('#brandFilters input').forEach(cb => cb.checked = false);
+            document.getElementById('inStockOnly').checked = false;
+            document.getElementById('sortSelect').value = 'default';
+            applyFilters();
+        }
+
+        // افزودن به سبد خرید
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product || !product.inStock) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            updateCartUI();
+            showToast(`«${product.title}» به سبد خرید اضافه شد.`);
+        }
+
+        // تغییر تعداد کالا در سبد
+        function updateQty(productId, delta) {
+            const index = cart.findIndex(item => item.id === productId);
+            if (index === -1) return;
+
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        // بروزرسانی رابط کاربری سبد خرید
+        function updateCartUI() {
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            document.getElementById('cartBadge').textContent = totalItems.toLocaleString('fa-IR');
+            document.getElementById('drawerCartCount').textContent = totalItems.toLocaleString('fa-IR');
+            document.getElementById('cartTotalPrice').textContent = formatPrice(totalPrice);
+
+            const container = document.getElementById('cartItemsContainer');
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-slate-400">
+                        <svg class="w-12 h-12 mx-auto mb-3 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        <p class="text-sm font-medium">سبد خرید شما در حال حاضر خالی است.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-3 bg-stone-50 p-3 rounded-xl border border-stone-200">
+                    <div class="w-16 h-16 bg-white rounded-lg border border-stone-200 p-1 shrink-0 flex items-center justify-center">
+                        ${item.svg}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="text-xs font-bold text-slate-900 truncate">${item.title}</h4>
+                        <span class="text-xs text-amber-700 font-bold block mt-1">${formatPrice(item.price)}</span>
+                        <div class="flex items-center gap-2 mt-2">
+                            <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 rounded bg-white border border-stone-300 text-slate-700 font-bold hover:bg-stone-100">+</button>
+                            <span class="text-xs font-bold px-1">${item.qty.toLocaleString('fa-IR')}</span>
+                            <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 rounded bg-white border border-stone-300 text-slate-700 font-bold hover:bg-stone-100">-</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // باز و بسته کردن کشوی سبد خرید
+        function toggleCart() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        // نهایی کردن خرید
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('سبد خرید شما خالی است!');
+                return;
+            }
+            cart = [];
+            updateCartUI();
+            toggleCart();
+            showToast('سفارش شما با موفقیت ثبت شد! کد رهگیری پیامک گردید.');
+        }
+
+        // باز کردن مودال مشخصات فنی محصول
+        function openProductModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const modalContent = document.getElementById('modalContent');
+            modalContent.innerHTML = `
+                <div class="p-6 border-b border-stone-200 flex justify-between items-center bg-stone-50">
+                    <span class="text-xs font-bold text-amber-700 bg-amber-50 px-3 py-1 rounded-lg border border-amber-200">${product.categoryName} | برند ${product.brand}</span>
+                    <button onclick="closeModal()" class="text-slate-400 hover:text-slate-800 p-1">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                    <div class="bg-stone-50 rounded-2xl p-6 border border-stone-200 flex items-center justify-center">
+                        ${product.svg}
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-xl font-black text-slate-900 leading-snug">${product.title}</h3>
+                        <div class="flex items-center gap-2 text-sm">
+                            <span class="text-amber-500 font-bold">★ ${product.rating}</span>
+                            <span class="text-slate-400">|</span>
+                            <span class="text-emerald-700 font-semibold">گارانتی ۱۸ ماهه شرکتی</span>
+                        </div>
+                        <div class="bg-stone-50 p-4 rounded-xl border border-stone-200 space-y-2">
+                            <h4 class="text-xs font-bold text-slate-400 uppercase">مشخصات کلیدی سخت‌افزار:</h4>
+                            <ul class="space-y-1.5 text-xs text-slate-700 font-medium">
+                                ${product.specs.map(s => `<li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>${s}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="pt-2 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-500 block">قیمت مصرف‌کننده:</span>
+                                <span class="text-lg font-black text-slate-900">${formatPrice(product.price)}</span>
+                            </div>
+                            <button onclick="addToCart(${product.id}); closeModal();" ${!product.inStock ? 'disabled' : ''}
+                                class="px-6 py-3 bg-amber-700 hover:bg-amber-600 text-white text-sm font-bold rounded-xl shadow transition disabled:bg-stone-300">
+                                ${product.inStock ? 'افزودن به سبد خرید' : 'ناموجود'}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('productModal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('productModal').classList.add('hidden');
+        }
+
+        // رویدادهای جستجوی زنده
+        document.getElementById('searchInput').addEventListener('input', applyFilters);
+        document.getElementById('mobileSearchInput').addEventListener('input', applyFilters);
+
+        // اجرای اولیه هنگام بارگذاری صفحه
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            updateCartUI();
+        });
+    </script>
+</body>
+</html>
+
+```
